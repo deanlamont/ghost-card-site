@@ -30,9 +30,9 @@
 
   /* ── NAV ─────────────────────────────────────────────────── */
   nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,20,38,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
-  .nav-logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
-  .nav-logo svg{width:20px;height:22px}
-  .nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:3.5px;display:flex;line-height:1}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo svg{width:26px;height:29px;flex-shrink:0}
+  .nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:18px;letter-spacing:4px;display:flex;line-height:1}
   .nav-wordmark .ghost-part{color:var(--cream)}
   .nav-wordmark .card-part{color:var(--harvest)}
   .nav-links{display:flex;align-items:center;gap:2rem}
@@ -45,7 +45,7 @@
   .btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
 
   /* ── HAMBURGER MOBILE MENU ───────────────────────────────── */
-  .hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210}
+  .hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210;flex-shrink:0}
   .hamburger span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all 0.3s ease}
   .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
   .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
@@ -63,33 +63,44 @@
   .mobile-menu-cta .m-primary:hover{background:var(--lantern)}
 
   @media(max-width:768px){
+    nav{padding:0 1.25rem}
     .nav-links,.nav-cta{display:none}
     .hamburger{display:flex}
+    /* Keep logo visible and readable on mobile */
+    .nav-wordmark{font-size:16px;letter-spacing:3px}
+    .nav-logo svg{width:22px;height:25px}
   }
 
   /* ── HERO ─────────────────────────────────────────────────── */
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 2rem 320px;text-align:center}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 2rem 280px;text-align:center}
   .hero-sky{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);z-index:0}
   #stars-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
   .moon-glow{position:absolute;top:88px;right:17%;width:74px;height:74px;border-radius:50%;background:var(--moon-inner);box-shadow:0 0 0 9px rgba(237,232,192,0.13),0 0 0 26px rgba(237,232,192,0.07),0 0 70px 30px rgba(237,232,192,0.05);z-index:2}
   .treeline{position:absolute;bottom:0;left:0;right:0;z-index:4}
   .hero-content{position:relative;z-index:5;max-width:720px}
-  .hero-ghost-svg{width:80px;height:90px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(240,232,208,0.28));margin-bottom:20px}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  .hero-tagline{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:20px}
-  .hero-headline{font-size:clamp(26px,5vw,52px);font-weight:300;letter-spacing:1.5px;line-height:1.15;color:var(--moonlight);margin-bottom:12px}
+
+  /* Big logo lockup — the hero IS the brand introduction */
+  .hero-lockup{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:28px}
+  .hero-lockup svg{width:72px;height:81px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(240,232,208,0.32))}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero-lockup-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(32px,8vw,52px);letter-spacing:10px;display:flex;line-height:1;text-transform:uppercase}
+  .hero-lockup-wm .ghost-part{color:var(--cream)}
+  .hero-lockup-wm .card-part{color:var(--harvest)}
+
+  .hero-tagline{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:16px}
+  .hero-headline{font-size:clamp(22px,4.5vw,44px);font-weight:300;letter-spacing:1px;line-height:1.2;color:var(--moonlight);margin-bottom:14px}
   .hero-headline em{font-style:normal;color:var(--lantern)}
-  .hero-sub{font-size:clamp(14px,1.9vw,18px);font-weight:400;color:var(--fog);margin-bottom:32px;line-height:1.6;max-width:540px;margin-left:auto;margin-right:auto}
+  .hero-sub{font-size:clamp(14px,1.8vw,17px);font-weight:400;color:var(--fog);margin-bottom:32px;line-height:1.65;max-width:520px;margin-left:auto;margin-right:auto}
   .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
   .btn-lg{padding:14px 32px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;border:none}
   .btn-lp{background:var(--harvest);color:#0D1426}
   .btn-lp:hover{background:var(--lantern);transform:translateY(-1px)}
-  .btn-lo{background:transparent;border:1px solid var(--dusk);color:var(--moonlight)}
+  .btn-lo{background:transparent;border:1px solid var(--fog);color:var(--moonlight)}
   .btn-lo:hover{border-color:var(--lantern);color:var(--lantern)}
-  .hero-stats{display:flex;gap:40px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:40px;justify-content:center;margin-top:36px;flex-wrap:wrap}
   .hero-stat{text-align:center}
   .hero-stat-num{font-size:22px;font-weight:300;color:var(--lantern);letter-spacing:1px}
-  .hero-stat-label{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);margin-top:4px}
+  .hero-stat-label{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--fog);margin-top:4px}
 
   /* ── SECTIONS ─────────────────────────────────────────────── */
   section{padding:90px 2rem;position:relative}
@@ -98,61 +109,86 @@
   .section-title{font-size:clamp(24px,4.2vw,42px);font-weight:300;letter-spacing:1.2px;line-height:1.2;color:var(--moonlight);margin-bottom:12px}
   .section-desc{font-size:15px;line-height:1.65;color:var(--fog);max-width:520px;margin-bottom:48px}
 
-  /* ── HOW IT WORKS ─────────────────────────────────────────── */
+  /* ── HOW IT WORKS ──────────────────────────────────────────── */
   .how-bg{background:var(--midnight)}
-  .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--dusk)}
-  .step-card{background:var(--midnight);padding:32px 24px}
+  .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--dusk)}
+  .step-card{background:var(--midnight);padding:32px 26px}
   .step-num{font-size:11px;font-weight:500;letter-spacing:3px;color:var(--lantern);text-transform:uppercase;margin-bottom:12px}
-  .step-title{font-size:17px;font-weight:400;letter-spacing:1px;color:var(--moonlight);margin-bottom:8px}
+  .step-title{font-size:17px;font-weight:400;letter-spacing:0.5px;color:var(--moonlight);margin-bottom:8px}
   .step-body{font-size:13.5px;line-height:1.65;color:var(--fog)}
 
   /* ── FEATURES ─────────────────────────────────────────────── */
-  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--dusk)}
-  .feat-card{background:var(--deep-navy);padding:30px 24px;transition:background 0.2s}
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--dusk)}
+  .feat-card{background:var(--deep-navy);padding:32px 26px;transition:background 0.2s}
   .feat-card:hover{background:#192844}
-  .feat-icon{width:40px;height:40px;margin-bottom:14px}
-  .feat-title{font-size:15px;font-weight:500;letter-spacing:.5px;color:var(--moonlight);margin-bottom:6px}
+  .feat-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .feat-title{font-size:16px;font-weight:500;letter-spacing:.5px;color:var(--moonlight);margin-bottom:6px}
   .feat-body{font-size:13.5px;line-height:1.65;color:var(--fog)}
   .feat-tag{display:inline-block;margin-top:12px;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--lantern);font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
-
-  /* ── BAG TAGS RARITY ──────────────────────────────────────── */
   .rarity{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-  .rc{background:rgba(84,96,130,0.2);color:var(--shadow)}
+  .rc{background:rgba(84,96,130,0.2);color:var(--fog)}
   .ru{background:rgba(143,164,196,0.2);color:var(--fog)}
   .rr{background:rgba(201,168,76,0.2);color:var(--lantern)}
   .rl{background:rgba(207,145,32,0.2);color:var(--harvest)}
 
-  /* ── TESTIMONIALS ─────────────────────────────────────────── */
+  /* ── SOCIAL PROOF ─────────────────────────────────────────── */
   .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
   .testi-card{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:10px;padding:26px 22px}
-  .testi-quote{font-size:14px;line-height:1.7;color:var(--moonlight);margin-bottom:18px;font-style:italic}
+  .testi-quote{font-size:14px;line-height:1.7;color:var(--moonlight);margin-bottom:16px;font-style:italic}
   .testi-byline{font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--fog)}
 
-  /* ── CTA BAND ─────────────────────────────────────────────── */
-  .cta-band{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:12px;padding:56px 40px;text-align:center}
-  .cta-band h2{font-size:clamp(20px,3.5vw,32px);font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:10px}
-  .cta-band p{font-size:15px;color:var(--fog);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65}
+  /* ── CTA BAND ──────────────────────────────────────────────── */
+  .cta-band{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:12px;padding:60px 40px;text-align:center;max-width:680px;margin:0 auto}
+  .cta-band h2{font-size:clamp(22px,4vw,38px);font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:14px}
+  .cta-band p{font-size:15px;color:var(--fog);line-height:1.65;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
 
   /* ── FOOTER ──────────────────────────────────────────────── */
   footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
-  .footer-logo{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;gap:6px}
-  .footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:22px;letter-spacing:7px;display:flex}
-  .footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:32px}
-  .footer-links a{color:var(--shadow);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
-  .footer-links a:hover{color:var(--fog)}
-  .footer-copy{font-size:12px;color:var(--shadow);letter-spacing:1px}
+  .footer-logo{margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:10px}
+  .footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:20px;letter-spacing:5px;display:flex}
+  .footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:28px}
+  .footer-links a{color:var(--fog);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+  .footer-links a:hover{color:var(--moonlight)}
+  .footer-copy{font-size:12px;color:var(--fog);letter-spacing:1px}
   .footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
-  .divider{height:1px;background:linear-gradient(90deg,var(--abyss),var(--dusk) 50%,var(--abyss))}
 
-  /* ── RESPONSIVE ──────────────────────────────────────────── */
+  /* ── MOBILE LOGIN BAR ─────────────────────────────────────── */
+  /* Sticky bottom bar on mobile — visible immediately, no digging through menu */
+  .mobile-login-bar{display:none}
+  @media(max-width:768px){
+    .mobile-login-bar{
+      display:flex;gap:10px;
+      position:fixed;bottom:0;left:0;right:0;z-index:190;
+      background:rgba(9,21,37,0.97);
+      border-top:1px solid var(--dusk);
+      padding:12px 1.25rem calc(12px + env(safe-area-inset-bottom, 0px));
+    }
+    .mobile-login-bar a{
+      flex:1;display:block;text-align:center;
+      padding:12px 8px;border-radius:6px;
+      font-family:'Inter',sans-serif;font-weight:600;
+      font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
+      text-decoration:none;transition:all 0.2s;
+    }
+    .mobile-login-bar .mlb-login{
+      background:transparent;border:1px solid var(--fog);color:var(--moonlight);
+    }
+    .mobile-login-bar .mlb-signup{
+      background:var(--harvest);color:#0D1426;border:none;
+    }
+  }
+
+  /* ── MOBILE ────────────────────────────────────────────────── */
   @media(max-width:640px){
-    nav{padding:0 1rem}
+    .hero{padding:90px 1.25rem 260px}
     section{padding:70px 1.25rem}
-    .hero{padding:100px 1.25rem 260px}
-    .steps-grid,.features-grid{grid-template-columns:1fr}
+    section:last-of-type{padding-bottom:110px} /* clear mobile login bar */
+    .steps-grid{grid-template-columns:1fr}
+    .features-grid{grid-template-columns:1fr}
     .testi-grid{grid-template-columns:1fr}
-    .cta-band{padding:32px 20px}
+    .cta-band{padding:40px 24px;margin-bottom:80px} /* clear sticky bar */
     .hero-stats{gap:24px}
+    .hero-lockup-wm{font-size:clamp(28px,9vw,42px);letter-spacing:7px}
   }
 </style>
 </head>
@@ -177,7 +213,6 @@
     <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
     <button class="btn-primary" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button>
   </div>
-  <!-- Hamburger for mobile -->
   <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -231,18 +266,24 @@
   </svg>
 
   <div class="hero-content">
-    <svg class="hero-ghost-svg" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ghost Card ghost icon">
-      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
-      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
-      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
-    </svg>
+    <!-- Ghost + wordmark as the hero identity — the actual brand name, large -->
+    <div class="hero-lockup" aria-label="Ghost Card">
+      <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+        <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+        <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+      </svg>
+      <div class="hero-lockup-wm">
+        <span class="ghost-part">GHOST</span><span class="card-part">CARD</span>
+      </div>
+    </div>
 
-    <p class="hero-tagline">Disc Golf Scoring App</p>
+    <p class="hero-tagline">Disc Golf Scoring App · Haunt the Leaderboard</p>
     <h1 class="hero-headline" id="hero-heading">
-      Score rounds.<br><em>Play against the pros.</em>
+      Nobody showed up.<br><em>The ghosts did.</em>
     </h1>
     <p class="hero-sub">
-      Ghost Card puts you head-to-head with ghost versions of the world's best disc golfers — Paul McBeth, Ricky Wysocki, Kristin Tattar — across 7,008 US courses. Live leaderboard. Horror bag tags. No mercy.
+      Play against ghost versions of Gannon Buhr, Paul McBeth, and 132 other pros who will beat you cleanly, say nothing, and feel absolutely fine about it. Live leaderboard. Horror bag tags. 7,008 courses. No group of nine blocking hole 4.
     </p>
     <div class="hero-cta">
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Start playing Ghost Card for free">Play Free</button>
@@ -260,29 +301,29 @@
 <section class="how-bg" id="how" aria-labelledby="how-heading">
   <div class="section-inner">
     <p class="section-label">How It Works</p>
-    <h2 class="section-title" id="how-heading">Four steps. Even the guy with the Bluetooth speaker can handle it.</h2>
-    <p class="section-desc">Pick a course. Add your players. Keep score. Try not to blame the wind.</p>
+    <h2 class="section-title" id="how-heading">Four steps. The guy explaining his disc flight path on hole 3 can manage it.</h2>
+    <p class="section-desc">No tutorial. No onboarding. No seven-screen walkthrough explaining what a birdie is. You know what a birdie is. The ghosts know what a birdie is. Let's go.</p>
 
     <div class="steps-grid" role="list">
       <div class="step-card" role="listitem">
         <div class="step-num">Step 01</div>
-        <h3 class="step-title">Pick your battlefield</h3>
-        <p class="step-body">7,008 US disc golf courses, searchable by name or zip. Par data is verified — or you can submit a correction and haunt the Bone Collector tag.</p>
+        <h3 class="step-title">Pick your course</h3>
+        <p class="step-body">7,008 US disc golf courses. Search by name or zip. Par data is verified where possible — and community-corrected everywhere else, because someone always knows a course better than the internet does.</p>
       </div>
       <div class="step-card" role="listitem">
         <div class="step-num">Step 02</div>
         <h3 class="step-title">Build your card</h3>
-        <p class="step-body">Add real players, invite friends, or drop in a ghost pro. Ricky Wysocki has a 1044 rating. He will destroy your dad. We've seen it.</p>
+        <p class="step-body">Add real players, invite friends, or drop in ghost pros. Gannon Buhr rates a 1027. He will birdie holes you didn't think were birdie-able. He will not apologize. He is a ghost. He has no concept of feelings.</p>
       </div>
       <div class="step-card" role="listitem">
         <div class="step-num">Step 03</div>
         <h3 class="step-title">Score hole by hole</h3>
-        <p class="step-body">One-hand input. Live leaderboard reshuffles every hole. Watch your lead evaporate in real time. Very motivating, clinically speaking.</p>
+        <p class="step-body">One-handed input. Live leaderboard rearranges itself after every hole like a horror film cast list — people you thought were safe suddenly aren't. The feeling of watching your lead evaporate on hole 14 is character-building, probably.</p>
       </div>
       <div class="step-card" role="listitem">
         <div class="step-num">Step 04</div>
         <h3 class="step-title">Haunt your history</h3>
-        <p class="step-body">Every round saved. Every bad lie documented. The app does not forget. The ghosts do not forget. Hole 7 is on permanent record.</p>
+        <p class="step-body">Every round saved. Every hole documented. The app keeps a perfect record of every decision you've ever made on a disc golf course, which is either motivating or deeply haunting depending on how hole 7 went.</p>
       </div>
     </div>
   </div>
@@ -292,8 +333,8 @@
 <section id="features" aria-labelledby="features-heading">
   <div class="section-inner">
     <p class="section-label">Features</p>
-    <h2 class="section-title" id="features-heading">Everything a disc golf scoring app needs. Plus ghosts.</h2>
-    <p class="section-desc">Built for real rounds, real competition, and the occasional existential crisis on hole 12.</p>
+    <h2 class="section-title" id="features-heading">Everything a disc golf scoring app needs.<br>Plus ghosts that will actually show up on time.</h2>
+    <p class="section-desc">Built for real rounds, real competition, and the very real moment when you realize Gannon Buhr just birdied hole 11 and you're still on the tee.</p>
 
     <div class="features-grid" role="list">
 
@@ -306,7 +347,7 @@
           </svg>
         </div>
         <h3 class="feat-title">Ghost Opponents</h3>
-        <p class="feat-body">Play against 134 ghost pros rated by their real PDGA scores. Stroke Play or Best Disc Scramble.</p>
+        <p class="feat-body">134 ghost pros rated by real PDGA scores. They play statistically. They don't trash talk, regrip for four minutes, or ask if you saw their hyzer flip. They just throw and haunt.</p>
         <span class="feat-tag">MPO · FPO</span>
       </article>
 
@@ -318,7 +359,7 @@
           </svg>
         </div>
         <h3 class="feat-title">Live Leaderboard</h3>
-        <p class="feat-body">Running +/− from par updates after every hole. Rankings shift in real time. The tension is real.</p>
+        <p class="feat-body">Running +/− from par updates after every single hole. Rankings shift in real time. The feeling of being passed by a ghost on hole 16 is a specific kind of suffering we are proud to offer.</p>
         <span class="feat-tag">Hole by Hole</span>
       </article>
 
@@ -329,7 +370,7 @@
           </svg>
         </div>
         <h3 class="feat-title">Horror Bag Tags</h3>
-        <p class="feat-body">30 horror-themed collectible bag tags across four rarity tiers. Earn them by playing. Some are harder to find than others.</p>
+        <p class="feat-body">30 horror-themed collectible bag tags across four rarity tiers. Earn them in-round by doing things — some obvious, some not. The Legendary tags are not handed out. They are survived.</p>
         <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
           <span class="rarity rc">Common</span>
           <span class="rarity ru">Uncommon</span>
@@ -346,7 +387,7 @@
           </svg>
         </div>
         <h3 class="feat-title">Tour Mode</h3>
-        <p class="feat-body">Run multi-round tournaments with DGPT-style points. Standard events, Majors, season standings.</p>
+        <p class="feat-body">Multi-round tournaments with DGPT-style points. Run a full season. Standard events, Majors, standings. The format where you can't blame one bad round, which is exactly what disc golfers need and hate.</p>
         <span class="feat-tag">3–5 Round Events</span>
       </article>
 
@@ -358,7 +399,7 @@
           </svg>
         </div>
         <h3 class="feat-title">Round History</h3>
-        <p class="feat-body">Full hole-by-hole archives. Every score. Every bad lie. Share your round badge when you survive.</p>
+        <p class="feat-body">Full hole-by-hole archives. Every score, every round, forever. Share your badge when you beat a pro. Use it as evidence when no one believes you. The app has receipts. The ghosts have receipts.</p>
         <span class="feat-tag">Full Archive</span>
       </article>
 
@@ -370,7 +411,7 @@
           </svg>
         </div>
         <h3 class="feat-title">Community Par Fixes</h3>
-        <p class="feat-body">Spot a wrong par? Fix it. Submit 5 corrections and unlock the Bone Collector bag tag.</p>
+        <p class="feat-body">Wrong par data? Fix it. Submit 5 corrections and unlock the Bone Collector bag tag. It's the closest disc golf gets to civic virtue, and the app takes it extremely seriously.</p>
         <span class="feat-tag">7,008 Courses</span>
       </article>
 
@@ -382,19 +423,19 @@
 <section style="background:var(--midnight)" aria-labelledby="testimonials-heading">
   <div class="section-inner">
     <p class="section-label">From the Field</p>
-    <h2 class="section-title" id="testimonials-heading">Disc golfers who haunt the leaderboard.</h2>
+    <h2 class="section-title" id="testimonials-heading">People who haunt the leaderboard.<br>And survived to talk about it.</h2>
 
     <div class="testi-grid" role="list">
       <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"I put in ghost Ricky Wysocki and now I understand what humility feels like. 10/10 would recommend to anyone I dislike."</blockquote>
+        <blockquote class="testi-quote">"Ghost Gannon Buhr birdied the first seven holes. I bogey'd five of them. He didn't even acknowledge me. That's the most realistic disc golf experience I've ever had."</blockquote>
         <p class="testi-byline">— MPO Amateur, Colorado</p>
       </div>
       <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"My group has been using this for Tour Mode all season. The points system makes every round mean something."</blockquote>
+        <blockquote class="testi-quote">"We've been using Tour Mode all season. It's the only reason anyone in my group takes a Tuesday morning round seriously. The points system is genuinely ruthless."</blockquote>
         <p class="testi-byline">— Club Organizer, Texas</p>
       </div>
       <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"Finally found the Bone Collector tag after fixing par data on three courses near me. Worth it."</blockquote>
+        <blockquote class="testi-quote">"Fixed par data on three courses near me. Got the Bone Collector tag. My wife doesn't know what that means. I know what it means. That's enough."</blockquote>
         <p class="testi-byline">— FPO Recreational, Oregon</p>
       </div>
     </div>
@@ -405,8 +446,8 @@
 <section>
   <div class="section-inner">
     <div class="cta-band">
-      <h2>The ghosts are already on hole 1.</h2>
-      <p>Ghost Card is free to play. No downloads. No Bluetooth speaker required. Just you, a disc, and the collected scoring average of everyone better than you.</p>
+      <h2>The ghosts are already on hole 1.<br>They've been warming up for 20 minutes.</h2>
+      <p>Ghost Card is free to play. No downloads. No Bluetooth speaker. No guy explaining for six minutes why he throws a Destroyer on a 200-foot par 3. Just you, a disc, and the entire collected scoring average of everyone who's better than you — rendered as a silent, patient ghost.</p>
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Start playing Ghost Card">Start Haunting — It's Free</button>
     </div>
   </div>
@@ -416,7 +457,7 @@
 <!-- ── FOOTER ─────────────────────────────────────────────────── -->
 <footer>
   <div class="footer-logo">
-    <svg viewBox="0 0 20 22.4" width="36" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg viewBox="0 0 20 22.4" width="30" height="34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
       <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
       <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
@@ -432,6 +473,12 @@
   <p class="footer-copy">Ghost Card &copy; 2026 &bull; <a href="https://ghostcard.live" style="color:var(--shadow);text-decoration:none">ghostcard.live</a></p>
   <p class="footer-tagline">Haunt the Leaderboard</p>
 </footer>
+
+<!-- ── MOBILE LOGIN BAR — sticky bottom, mobile only ──────── -->
+<div class="mobile-login-bar" aria-label="Sign in or sign up">
+  <a href="https://app.ghostcard.live" class="mlb-login">Log In</a>
+  <a href="https://app.ghostcard.live" class="mlb-signup">Sign Up Free</a>
+</div>
 
 <script>
 /* ── Stars canvas ─────────────────────────────────────────── */
@@ -460,28 +507,16 @@
   const btn=document.getElementById('hamburger');
   const menu=document.getElementById('mobileMenu');
   if(!btn||!menu)return;
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
   btn.addEventListener('click',function(){
     const open=menu.classList.toggle('open');
     btn.classList.toggle('open',open);
     btn.setAttribute('aria-expanded',open);
     document.body.style.overflow=open?'hidden':'';
   });
-  // Close on link click
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    menu.classList.remove('open');
-    btn.classList.remove('open');
-    btn.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  }));
-  // Close on outside click
-  document.addEventListener('click',function(e){
-    if(!menu.contains(e.target)&&!btn.contains(e.target)){
-      menu.classList.remove('open');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-      document.body.style.overflow='';
-    }
-  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!btn.contains(e.target))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
 </body>
