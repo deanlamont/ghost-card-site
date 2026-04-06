@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Building a Card — Ghost Card Docs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
+    --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,20,38,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
+  .nav-logo svg{width:20px;height:22px}
+  .nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:3.5px;display:flex;line-height:1}
+  .ghost-part{color:#EDE9DC}.card-part{color:#CF9120}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--lantern)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+  .btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
+
+  .page-hero{padding:130px 2rem 64px;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);border-bottom:1px solid var(--dusk)}
+  .hero-inner{max-width:760px;margin:0 auto}
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+  .breadcrumb a{color:var(--shadow);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:color .2s}
+  .breadcrumb a:hover{color:var(--lantern)}
+  .breadcrumb-sep{color:var(--shadow);font-size:12px}
+  .breadcrumb-current{color:var(--fog);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+  .doc-num-label{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:12px}
+  .page-title{font-size:clamp(26px,4.5vw,48px);font-weight:300;letter-spacing:1px;line-height:1.15;color:var(--moonlight);margin-bottom:14px}
+  .page-title em{font-style:normal;color:var(--lantern)}
+  .page-sub{font-size:15px;color:var(--fog);line-height:1.65;max-width:600px}
+
+  .doc-layout{max-width:1080px;margin:0 auto;padding:72px 2rem;display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start}
+  .doc-sidebar{position:sticky;top:88px}
+  .sidebar-label{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--shadow);margin-bottom:16px}
+  .sidebar-nav{list-style:none}
+  .sidebar-nav li{margin-bottom:2px}
+  .sidebar-nav a{display:block;padding:7px 12px;border-radius:5px;font-size:13px;color:var(--fog);text-decoration:none;letter-spacing:.3px;transition:all .2s;border-left:2px solid transparent}
+  .sidebar-nav a:hover{color:var(--moonlight);border-left-color:var(--lantern);background:rgba(201,168,76,0.06)}
+  .sidebar-divider{height:1px;background:var(--dusk);margin:20px 0}
+  .sidebar-nav-docs{list-style:none}
+  .sidebar-nav-docs li{margin-bottom:2px}
+  .sidebar-nav-docs a{display:block;padding:6px 12px;border-radius:5px;font-size:12px;color:var(--shadow);text-decoration:none;transition:color .2s}
+  .sidebar-nav-docs a:hover{color:var(--fog)}
+  .sidebar-nav-docs a.current{color:var(--fog)}
+
+  .doc-content h2{font-size:22px;font-weight:300;letter-spacing:.8px;color:var(--moonlight);margin:52px 0 14px;padding-top:8px}
+  .doc-content h2:first-child{margin-top:0}
+  .doc-content h3{font-size:15px;font-weight:500;letter-spacing:.5px;color:var(--moonlight);margin:28px 0 10px}
+  .doc-content p{font-size:15px;color:var(--fog);line-height:1.75;margin-bottom:14px}
+  .doc-content a{color:var(--lantern);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);transition:border-color .2s}
+  .doc-content a:hover{border-bottom-color:var(--lantern)}
+
+  .step-list{list-style:none;margin:20px 0 28px}
+  .step-list li{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--dusk)}
+  .step-list li:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .step-n{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--lantern);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .step-body strong{display:block;font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:4px;letter-spacing:.3px}
+  .step-body span{font-size:14px;color:var(--fog);line-height:1.65}
+
+  .callout{background:var(--midnight);border:1px solid var(--dusk);border-left:3px solid var(--lantern);border-radius:0 8px 8px 0;padding:20px 24px;margin:24px 0}
+  .callout-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--lantern);margin-bottom:6px}
+  .callout p{font-size:14px;color:var(--fog);line-height:1.65;margin:0}
+
+  .info-box{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:8px;padding:20px 24px;margin:24px 0}
+  .info-box p{font-size:14px;color:var(--fog);line-height:1.65;margin:0}
+
+  .ghost-table{width:100%;border-collapse:collapse;margin:24px 0}
+  .ghost-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);border-bottom:1px solid var(--dusk)}
+  .ghost-table td{padding:12px 14px;font-size:14px;color:var(--fog);border-bottom:1px solid rgba(30,46,74,0.5);line-height:1.5}
+  .ghost-table tr:last-child td{border-bottom:none}
+  .ghost-table tr:hover td{background:rgba(20,32,53,0.4)}
+  .rating-badge{display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);color:var(--lantern);font-size:12px;font-weight:500}
+
+  .format-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+  .format-card{background:var(--midnight);border:1px solid var(--dusk);border-radius:8px;padding:24px}
+  .format-card h3{font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px}
+  .format-card p{font-size:13px;color:var(--fog);line-height:1.6;margin:0}
+  .format-badge{display:inline-block;margin-bottom:12px;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--lantern);font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
+
+  .nav-footer{display:flex;justify-content:space-between;margin-top:72px;padding-top:40px;border-top:1px solid var(--dusk)}
+  .nav-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--dusk);border-radius:8px;color:var(--fog);font-size:13px;text-decoration:none;letter-spacing:.5px;transition:all .2s}
+  .nav-btn:hover{border-color:var(--lantern);color:var(--lantern)}
+  .nav-btn-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--shadow);display:block;margin-bottom:2px}
+  .nav-btn-title{font-size:13px;font-weight:500}
+
+  footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
+  .footer-logo{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:22px;letter-spacing:7px;display:flex}
+  .footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:32px}
+  .footer-links a{color:var(--shadow);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+  .footer-links a:hover{color:var(--fog)}
+  .footer-copy{font-size:12px;color:var(--shadow);letter-spacing:1px}
+  .footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+
+  @media(max-width:800px){
+    nav{padding:0 1rem}.nav-links{display:none}
+    .page-hero{padding:100px 1.25rem 52px}
+    .doc-layout{grid-template-columns:1fr;padding:52px 1.25rem}
+    .doc-sidebar{display:none}
+    .format-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../features.html">Features</a>
+    <a href="index.html" class="active">Docs</a>
+  </div>
+  <div class="nav-cta">
+    <a href="https://app.ghostcard.live" class="btn-nav-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="btn-primary">Sign Up</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Docs</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Building a Card</span>
+    </div>
+    <p class="doc-num-label">02 — Building a Card</p>
+    <h1 class="page-title">Who's on your card.<br><em>Choose carefully. They'll remember.</em></h1>
+    <p class="page-sub">Course selection, real players, ghost opponents, formats, and divisions. Everything that happens before hole 1.</p>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <aside class="doc-sidebar">
+    <p class="sidebar-label">On this page</p>
+    <ul class="sidebar-nav">
+      <li><a href="#courses">Picking a course</a></li>
+      <li><a href="#real-players">Real players</a></li>
+      <li><a href="#ghost-opponents">Ghost opponents</a></li>
+      <li><a href="#formats">Formats</a></li>
+      <li><a href="#divisions">Divisions</a></li>
+      <li><a href="#mixed-cards">Mixed cards</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <p class="sidebar-label">All docs</p>
+    <ul class="sidebar-nav-docs">
+      <li><a href="getting-started.html">01 Getting Started</a></li>
+      <li><a href="building-a-card.html" class="current">02 Building a Card</a></li>
+      <li><a href="scoring.html">03 Scoring a Round</a></li>
+      <li><a href="history.html">04 Round History</a></li>
+      <li><a href="bag-tags.html">05 Bag Tags</a></li>
+      <li><a href="tour-mode.html">06 Tour Mode</a></li>
+      <li><a href="par-corrections.html">07 Par Corrections</a></li>
+      <li><a href="account.html">08 Account &amp; Profile</a></li>
+    </ul>
+  </aside>
+
+  <div class="doc-content">
+
+    <h2 id="courses">Picking a course</h2>
+    <p>Ghost Card has 7,008 US courses in its database, sourced and community-corrected via Supabase. Search by course name, city, or zip code from the Home screen. Results populate as you type.</p>
+
+    <p>Each course in the picker shows one of two badges:</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-n" style="background:rgba(107,180,107,0.12);border-color:rgba(107,180,107,0.3);color:#7bc87b;font-size:9px;font-weight:600;letter-spacing:0">✓</div>
+        <div class="step-body"><strong>Verified</strong><span> — Par data has been confirmed by the community. At least one correction has been submitted and accepted. Trust it.</span></div>
+      </li>
+      <li>
+        <div class="step-n" style="background:rgba(138,116,60,0.12);border-color:rgba(138,116,60,0.3);color:#a8894c;font-size:9px">?</div>
+        <div class="step-body"><strong>Unverified</strong><span> — Par data comes from the original dataset. It's usually right. Hole 4 is a par 4. Probably. The sign might be wrong. The sign is always wrong.</span></div>
+      </li>
+    </ul>
+
+    <p>If you find a wrong par during your round, you can submit a correction afterward. See <a href="par-corrections.html">Community Par Corrections</a>.</p>
+
+    <h2 id="real-players">Real players</h2>
+    <p>To add a real player to your card, search by their Ghost Card username. They need a Ghost Card account — you can't add someone by email or full name, only by username. This is intentional. The ghosts value specificity.</p>
+
+    <p>Real players score manually: you (or they, in multiplayer) enter scores hole-by-hole. Real players appear on the live leaderboard alongside ghost opponents and update every hole like everyone else.</p>
+
+    <div class="callout">
+      <p class="callout-label">Multiplayer</p>
+      <p>When real players are on your card, they receive a round invite. They can follow along and enter their own scores from their device. The host controls the card. Everyone watches the leaderboard deteriorate together.</p>
+    </div>
+
+    <h2 id="ghost-opponents">Ghost opponents</h2>
+    <p>Ghost opponents are pro disc golfers who play alongside you based on real PDGA rating data. They don't cancel. They don't explain their bad throws. They simply score and haunt.</p>
+
+    <p>The pro field includes 80 MPO players and an FPO field. Ghost scores are calculated from each player's actual PDGA rating, adjusted for course difficulty and format. Notable ghosts:</p>
+
+    <table class="ghost-table">
+      <thead>
+        <tr>
+          <th>Ghost</th>
+          <th>Rating</th>
+          <th>Personality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Ricky Wysocki</td><td><span class="rating-badge">1044</span></td><td>Doesn't sleep. Simply haunts. Will beat you by 11.</td></tr>
+        <tr><td>Paul McBeth</td><td><span class="rating-badge">1041</span></td><td>Methodical. Silent. Your dad thinks he's great. He is.</td></tr>
+        <tr><td>Calvin Heimburg</td><td><span class="rating-badge">1036</span></td><td>Powerful. Consistent. Will birdie hole 7 when you make a 6.</td></tr>
+        <tr><td>Adam Hammes</td><td><span class="rating-badge">1029</span></td><td>Shoots 47s without expression. Makes eye contact. Classic villain.</td></tr>
+      </tbody>
+    </table>
+
+    <p>Each ghost is represented by a colored FlatGhost SVG icon on the scorecard. No generic emoji. The ghosts have standards.</p>
+
+    <div class="info-box">
+      <p>Ghost scores vary slightly each round based on statistical modeling — they don't shoot the exact same round every time. Ricky has bad days. Not many. But some.</p>
+    </div>
+
+    <h2 id="formats" class="formats">Formats</h2>
+    <p>Ghost Card supports two scoring formats:</p>
+
+    <div class="format-grid">
+      <div class="format-card">
+        <span class="format-badge">Stroke Play</span>
+        <h3>Standard</h3>
+        <p>Every throw counts. Running +/- from par. The default. The classic. The format that documents every mistake with clinical precision.</p>
+      </div>
+      <div class="format-card">
+        <span class="format-badge">Best Disc Scramble</span>
+        <h3>Scramble</h3>
+        <p>All players throw from the same spot — the best lie from the previous throw. Good for groups, good for fun, good for the card member who had a rough back nine.</p>
+      </div>
+    </div>
+
+    <p>Scramble mode activates the DoublesScorecard view — a side-by-side grid layout showing both players' scores per hole. Ghost opponents adapt to scramble format automatically.</p>
+
+    <h2 id="divisions">Divisions</h2>
+    <p>Choose MPO (Mixed Pro Open) or FPO (Female Pro Open). Division affects which ghost field you draw from and how ghost scores are modeled. FPO ghost ratings are sourced from the women's pro tour field.</p>
+
+    <p>Your division choice doesn't lock you out of anything. It calibrates the competition. Choosing MPO doesn't mean you need a 1000-rated game — it means you're playing against the men's pro field. They'll still beat you. Respectfully.</p>
+
+    <h2 id="mixed-cards">Mixed cards</h2>
+    <p>You can mix real players and ghost opponents on the same card freely. Your dad and a ghost Paul McBeth. You, a friend, and Ricky Wysocki. Whatever configuration makes sense for the round. The leaderboard handles all of them together.</p>
+
+    <p>The only requirement: at least one player on the card before you can start. A card of only ghost opponents is valid. A card of only real players is valid. A card with no one on it is not a card — it's an empty form, which is a different kind of horror.</p>
+
+    <div class="nav-footer">
+      <a href="getting-started.html" class="nav-btn">
+        <div>
+          <span class="nav-btn-label">Previous</span>
+          <span class="nav-btn-title">← Getting Started</span>
+        </div>
+      </a>
+      <a href="scoring.html" class="nav-btn">
+        <div>
+          <span class="nav-btn-label">Next</span>
+          <span class="nav-btn-title">Scoring a Round →</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 20 22.4" width="36" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="footer-wm"><span style="color:#EDE9DC">GHOST</span><span style="color:#CF9120">CARD</span></div>
+  </div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../features.html">Features</a>
+    <a href="index.html">Docs</a>
+  </div>
+  <p class="footer-copy">Ghost Card © 2026 • Haunt responsibly</p>
+  <p class="footer-tagline">HAUNT THE LEADERBOARD</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* SHARED DOC PAGE STYLES — included inline in each doc page */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
+  --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,20,38,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
+.nav-logo svg{width:20px;height:22px}
+.nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:3.5px;display:flex;line-height:1}
+.ghost-part{color:#EDE9DC}.card-part{color:#CF9120}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--lantern)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+.btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bag Tags — Ghost Card Docs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
+    --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,20,38,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
+  .nav-logo svg{width:20px;height:22px}
+  .nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:3.5px;display:flex;line-height:1}
+  .ghost-part{color:#EDE9DC}.card-part{color:#CF9120}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--lantern)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+  .btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
+
+  .page-hero{padding:130px 2rem 64px;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);border-bottom:1px solid var(--dusk)}
+  .hero-inner{max-width:760px;margin:0 auto}
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+  .breadcrumb a{color:var(--shadow);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:color .2s}
+  .breadcrumb a:hover{color:var(--lantern)}
+  .breadcrumb-sep{color:var(--shadow);font-size:12px}
+  .breadcrumb-current{color:var(--fog);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+  .doc-num-label{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:12px}
+  .page-title{font-size:clamp(26px,4.5vw,48px);font-weight:300;letter-spacing:1px;line-height:1.15;color:var(--moonlight);margin-bottom:14px}
+  .page-title em{font-style:normal;color:var(--lantern)}
+  .page-sub{font-size:15px;color:var(--fog);line-height:1.65;max-width:600px}
+
+  .doc-layout{max-width:1080px;margin:0 auto;padding:72px 2rem;display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start}
+  .doc-sidebar{position:sticky;top:88px}
+  .sidebar-label{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--shadow);margin-bottom:16px}
+  .sidebar-nav{list-style:none}
+  .sidebar-nav li{margin-bottom:2px}
+  .sidebar-nav a{display:block;padding:7px 12px;border-radius:5px;font-size:13px;color:var(--fog);text-decoration:none;letter-spacing:.3px;transition:all .2s;border-left:2px solid transparent}
+  .sidebar-nav a:hover{color:var(--moonlight);border-left-color:var(--lantern);background:rgba(201,168,76,0.06)}
+  .sidebar-divider{height:1px;background:var(--dusk);margin:20px 0}
+  .sidebar-nav-docs{list-style:none}
+  .sidebar-nav-docs li{margin-bottom:2px}
+  .sidebar-nav-docs a{display:block;padding:6px 12px;border-radius:5px;font-size:12px;color:var(--shadow);text-decoration:none;transition:color .2s}
+  .sidebar-nav-docs a:hover{color:var(--fog)}
+  .sidebar-nav-docs a.current{color:var(--fog)}
+
+  .doc-content h2{font-size:22px;font-weight:300;letter-spacing:.8px;color:var(--moonlight);margin:52px 0 14px;padding-top:8px}
+  .doc-content h2:first-child{margin-top:0}
+  .doc-content h3{font-size:15px;font-weight:500;letter-spacing:.5px;color:var(--moonlight);margin:28px 0 10px}
+  .doc-content p{font-size:15px;color:var(--fog);line-height:1.75;margin-bottom:14px}
+  .doc-content a{color:var(--lantern);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);transition:border-color .2s}
+  .doc-content a:hover{border-bottom-color:var(--lantern)}
+
+  .callout{background:var(--midnight);border:1px solid var(--dusk);border-left:3px solid var(--lantern);border-radius:0 8px 8px 0;padding:20px 24px;margin:24px 0}
+  .callout-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--lantern);margin-bottom:6px}
+  .callout p{font-size:14px;color:var(--fog);line-height:1.65;margin:0}
+
+  .rarity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}
+  .rarity-card{border-radius:8px;padding:20px 16px;text-align:center}
+  .rarity-card.common{background:rgba(100,120,160,0.1);border:1px solid rgba(100,120,160,0.25)}
+  .rarity-card.uncommon{background:rgba(107,180,107,0.1);border:1px solid rgba(107,180,107,0.25)}
+  .rarity-card.rare{background:rgba(107,140,220,0.1);border:1px solid rgba(107,140,220,0.25)}
+  .rarity-card.legendary{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3)}
+  .rarity-name{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+  .rarity-card.common .rarity-name{color:var(--fog)}
+  .rarity-card.uncommon .rarity-name{color:#7bc87b}
+  .rarity-card.rare .rarity-name{color:#7b9cde}
+  .rarity-card.legendary .rarity-name{color:var(--lantern)}
+  .rarity-count{font-size:22px;font-weight:200;color:var(--moonlight);margin-bottom:4px}
+  .rarity-desc{font-size:11px;color:var(--shadow);line-height:1.4}
+
+  .tag-list{margin:24px 0}
+  .tag-entry{padding:20px 0;border-bottom:1px solid var(--dusk);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+  .tag-entry:last-child{border-bottom:none}
+  .tag-rarity-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex-shrink:0}
+  .tag-rarity-dot.common{background:var(--fog)}
+  .tag-rarity-dot.uncommon{background:#7bc87b}
+  .tag-rarity-dot.rare{background:#7b9cde}
+  .tag-rarity-dot.legendary{background:var(--lantern)}
+  .tag-name{font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:4px;letter-spacing:.3px}
+  .tag-how{font-size:13px;color:var(--fog);line-height:1.6}
+  .tag-rarity-label{display:inline-block;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+  .tag-rarity-label.legendary{color:var(--lantern)}
+  .tag-rarity-label.rare{color:#7b9cde}
+  .tag-rarity-label.uncommon{color:#7bc87b}
+  .tag-rarity-label.common{color:var(--shadow)}
+
+  .step-list{list-style:none;margin:20px 0 28px}
+  .step-list li{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--dusk)}
+  .step-list li:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .step-n{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--lantern);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .step-body strong{display:block;font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:4px;letter-spacing:.3px}
+  .step-body span{font-size:14px;color:var(--fog);line-height:1.65}
+
+  .nav-footer{display:flex;justify-content:space-between;margin-top:72px;padding-top:40px;border-top:1px solid var(--dusk)}
+  .nav-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--dusk);border-radius:8px;color:var(--fog);font-size:13px;text-decoration:none;letter-spacing:.5px;transition:all .2s}
+  .nav-btn:hover{border-color:var(--lantern);color:var(--lantern)}
+  .nav-btn-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--shadow);display:block;margin-bottom:2px}
+  .nav-btn-title{font-size:13px;font-weight:500}
+
+  footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
+  .footer-logo{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:22px;letter-spacing:7px;display:flex}
+  .footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:32px}
+  .footer-links a{color:var(--shadow);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+  .footer-links a:hover{color:var(--fog)}
+  .footer-copy{font-size:12px;color:var(--shadow);letter-spacing:1px}
+  .footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+
+  @media(max-width:800px){
+    nav{padding:0 1rem}.nav-links{display:none}
+    .page-hero{padding:100px 1.25rem 52px}
+    .doc-layout{grid-template-columns:1fr;padding:52px 1.25rem}
+    .doc-sidebar{display:none}
+    .rarity-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../features.html">Features</a>
+    <a href="index.html" class="active">Docs</a>
+  </div>
+  <div class="nav-cta">
+    <a href="https://app.ghostcard.live" class="btn-nav-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="btn-primary">Sign Up</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Docs</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Bag Tags</span>
+    </div>
+    <p class="doc-num-label">05 — Bag Tags</p>
+    <h1 class="page-title">30 tags.<br><em>Every one earned. None of them purchased.</em></h1>
+    <p class="page-sub">The horror bag tag system — how rarity tiers work, how tags are unlocked in-round, how to equip one, and what The Haunting actually requires of you.</p>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <aside class="doc-sidebar">
+    <p class="sidebar-label">On this page</p>
+    <ul class="sidebar-nav">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#rarity">Rarity tiers</a></li>
+      <li><a href="#earning">How to earn tags</a></li>
+      <li><a href="#notable">Notable tags</a></li>
+      <li><a href="#bone-collector">Bone Collector</a></li>
+      <li><a href="#the-haunting">The Haunting</a></li>
+      <li><a href="#equipping">Equipping a tag</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <p class="sidebar-label">All docs</p>
+    <ul class="sidebar-nav-docs">
+      <li><a href="getting-started.html">01 Getting Started</a></li>
+      <li><a href="building-a-card.html">02 Building a Card</a></li>
+      <li><a href="scoring.html">03 Scoring a Round</a></li>
+      <li><a href="history.html">04 Round History</a></li>
+      <li><a href="bag-tags.html" class="current">05 Bag Tags</a></li>
+      <li><a href="tour-mode.html">06 Tour Mode</a></li>
+      <li><a href="par-corrections.html">07 Par Corrections</a></li>
+      <li><a href="account.html">08 Account &amp; Profile</a></li>
+    </ul>
+  </aside>
+
+  <div class="doc-content">
+
+    <h2 id="overview">Overview</h2>
+    <p>Ghost Card has 30 collectible bag tags, each referencing a horror film archetype, trope, or specific cinematic moment. Tags are earned exclusively through gameplay — unlocked by specific in-round conditions. They cannot be purchased, gifted, or granted through any mechanism other than doing the thing that unlocks them.</p>
+
+    <p>The tone is A24, not Spirit Halloween. The tags reference real cinema. They have custom SVG illustrations. They take the genre seriously, which is exactly why they're worth earning.</p>
+
+    <div class="callout">
+      <p class="callout-label">Account required</p>
+      <p>Bag tags require a signed-in account to unlock and store. Tags earned during a guest session are lost when the session ends. Create an account before you try for The Wraith — it only appears once.</p>
+    </div>
+
+    <h2 id="rarity">Rarity tiers</h2>
+    <p>All 30 tags fall into one of four rarity tiers:</p>
+
+    <div class="rarity-grid">
+      <div class="rarity-card common">
+        <div class="rarity-name">Common</div>
+        <div class="rarity-count">12</div>
+        <div class="rarity-desc">Achievable by most players within a handful of rounds</div>
+      </div>
+      <div class="rarity-card uncommon">
+        <div class="rarity-name">Uncommon</div>
+        <div class="rarity-count">9</div>
+        <div class="rarity-desc">Requires consistent play or specific conditions to appear</div>
+      </div>
+      <div class="rarity-card rare">
+        <div class="rarity-name">Rare</div>
+        <div class="rarity-count">6</div>
+        <div class="rarity-desc">Hard to achieve, linked to strong performance or unusual events</div>
+      </div>
+      <div class="rarity-card legendary">
+        <div class="rarity-name">Legendary</div>
+        <div class="rarity-count">3</div>
+        <div class="rarity-desc">Demanding unlock conditions. People whisper about these.</div>
+      </div>
+    </div>
+
+    <p>Rarity reflects difficulty to unlock, not arbitrary scarcity. There's no random drop rate. Every tag has a specific, deterministic condition — you either met it or you didn't.</p>
+
+    <h2 id="earning">How tags are earned</h2>
+    <p>All tags unlock automatically during or after a round when their conditions are met. You don't need to track or claim them — the app recognizes the condition and adds the tag to your collection. You'll see a notification when a tag unlocks.</p>
+
+    <p>Unlock conditions include things like: shooting a specific score on a specific hole number, achieving a run of birdies, completing a round under certain circumstances, playing at unusual times of day, finishing above or below a ghost opponent, and community contributions like par corrections.</p>
+
+    <p>The conditions are not published in-app. This is intentional. Figuring out what unlocks a tag is part of the experience. The ghosts know. They just won't tell you directly.</p>
+
+    <h2 id="notable">Notable tags</h2>
+
+    <div class="tag-list">
+      <div class="tag-entry">
+        <div class="tag-rarity-dot legendary"></div>
+        <div>
+          <div class="tag-name">The Haunting <span class="tag-rarity-label legendary">Legendary</span></div>
+          <div class="tag-how">The app's most demanding tag. Unlock conditions are intentionally obscure — completing specific in-round events under specific circumstances. The Haunting doesn't care about your feelings. It cares about what you did on hole 11.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot legendary"></div>
+        <div>
+          <div class="tag-name">Bone Collector <span class="tag-rarity-label legendary">Legendary</span></div>
+          <div class="tag-how">Submit 5 community par corrections. The Bone Collector is watching your corrections. It knows which holes you flagged. Five corrections makes you a legend. See <a href="par-corrections.html">Par Corrections</a>.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot legendary"></div>
+        <div>
+          <div class="tag-name" id="the-haunting">The Wraith <span class="tag-rarity-label legendary">Legendary</span></div>
+          <div class="tag-how">Appears only once — under conditions that may not repeat. If you see the unlock notification for The Wraith and don't have an account, the tag is gone. Sign in before you try for it. You've been warned.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot rare"></div>
+        <div>
+          <div class="tag-name">The Entity <span class="tag-rarity-label rare">Rare</span></div>
+          <div class="tag-how">Unlocked by outscoring a specific ghost opponent on their best hole type. Strong performance required.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot rare"></div>
+        <div>
+          <div class="tag-name">Final Girl <span class="tag-rarity-label rare">Rare</span></div>
+          <div class="tag-how">Complete a round in which every other player on the card — real and ghost — finishes over par while you finish under. Survive when no one else does.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot uncommon"></div>
+        <div>
+          <div class="tag-name">Jumpscared <span class="tag-rarity-label uncommon">Uncommon</span></div>
+          <div class="tag-how">Score three consecutive birdies immediately after a double bogey or worse. The comeback after the collapse.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot uncommon"></div>
+        <div>
+          <div class="tag-name">The Séance <span class="tag-rarity-label uncommon">Uncommon</span></div>
+          <div class="tag-how">Complete a round with exactly four ghost opponents on the card — no real players other than yourself. You called them. They answered.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot common"></div>
+        <div>
+          <div class="tag-name">First Blood <span class="tag-rarity-label common">Common</span></div>
+          <div class="tag-how">Save your first round to history. The archive begins.</div>
+        </div>
+      </div>
+      <div class="tag-entry">
+        <div class="tag-rarity-dot common"></div>
+        <div>
+          <div class="tag-name">The Fog <span class="tag-rarity-label common">Common</span></div>
+          <div class="tag-how">Play a round starting before 7am. The woods are watching either way. At 6am, they're just watching harder.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>The remaining 21 tags follow similar patterns — specific conditions tied to performance, timing, round composition, or community activity. Explore the Bag Tags tab in-app to see which ones you've unlocked and which remain locked.</p>
+
+    <h2 id="bone-collector">Bone Collector in detail</h2>
+    <p>The Bone Collector is one of the three legendary tags and the only one tied entirely to community contribution rather than in-round performance. Submit 5 valid par corrections to Supabase — across any courses, at any point — and the tag unlocks automatically.</p>
+
+    <p>The app tracks your correction count. It doesn't reset. Corrections from any round count, not just recent ones. If you've already submitted 3 and submit 2 more, the tag triggers on the 5th.</p>
+
+    <p>See the full process in <a href="par-corrections.html">Community Par Corrections</a>.</p>
+
+    <h2 id="equipping">Equipping a tag</h2>
+    <p>Once unlocked, tags appear in your collection in the Bag Tags tab. Tap any unlocked tag to set it as your active (equipped) tag. Your active tag displays on your profile and appears as a badge on your round history entries.</p>
+
+    <p>You can only equip one tag at a time. Switching your equipped tag is free and unlimited — swap it whenever you want. Equipping is display only; it doesn't change unlock conditions or grant any other advantage. It just tells everyone what you've done.</p>
+
+    <div class="nav-footer">
+      <a href="history.html" class="nav-btn">
+        <div>
+          <span class="nav-btn-label">Previous</span>
+          <span class="nav-btn-title">← Round History</span>
+        </div>
+      </a>
+      <a href="tour-mode.html" class="nav-btn">
+        <div>
+          <span class="nav-btn-label">Next</span>
+          <span class="nav-btn-title">Tour Mode →</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 20 22.4" width="36" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="footer-wm"><span style="color:#EDE9DC">GHOST</span><span style="color:#CF9120">CARD</span></div>
+  </div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../features.html">Features</a>
+    <a href="index.html">Docs</a>
+  </div>
+  <p class="footer-copy">Ghost Card © 2026 • Haunt responsibly</p>
+  <p class="footer-tagline">HAUNT THE LEADERBOARD</p>
+</footer>
+</body>
+</html>

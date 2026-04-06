@@ -44,7 +44,6 @@
   .footer-links a:hover{color:var(--fog)}
   .footer-copy{font-size:12px;color:var(--shadow);letter-spacing:1px}
   .footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
-  @media(max-width:640px){nav{padding:0 1rem}.nav-links{display:none}.page-body{padding:60px 1.25rem}}
 
   .steps-full{display:grid;grid-template-columns:1fr;gap:1px;background:var(--dusk);margin-bottom:80px}
   .step-row{background:var(--midnight);padding:48px 40px;display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start}
@@ -53,19 +52,20 @@
   .step-content p{font-size:15px;line-height:1.75;color:var(--fog)}
   .step-content p+p{margin-top:10px}
   .step-tag{display:inline-block;margin-top:16px;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--lantern);font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
+  .step-doc-link{display:inline-flex;align-items:center;gap:5px;margin-top:14px;margin-left:10px;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--shadow);text-decoration:none;transition:color .2s}
+  .step-doc-link:hover{color:var(--lantern)}
+  .step-doc-link::after{content:'→';font-size:12px}
   .cta-band{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:12px;padding:48px;text-align:center;margin-top:80px}
   .cta-band h2{font-size:28px;font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:10px}
   .cta-band p{font-size:15px;color:var(--fog);margin-bottom:28px}
   .btn-xl{padding:14px 36px;border-radius:8px;font-family:"Inter",sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .25s;border:none;background:var(--harvest);color:#0D1426}
   .btn-xl:hover{background:var(--lantern);transform:translateY(-1px)}
+  .btn-docs{display:inline-block;margin-top:16px;padding:10px 24px;border:1px solid var(--dusk);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--fog);text-decoration:none;transition:all .2s}
+  .btn-docs:hover{border-color:var(--lantern);color:var(--lantern)}
   @media(max-width:640px){
     nav{padding:0 1rem}
     .nav-links{display:none}
     .page-body{padding:60px 1.25rem}
-    .steps-grid{grid-template-columns:1fr}
-    .features-grid,.features-full{grid-template-columns:1fr}
-    .why-grid{grid-template-columns:1fr}
-    .testimonials-grid{grid-template-columns:1fr}
     .cta-band{padding:32px 20px}
     .page-hero{padding:100px 1.25rem 60px}
     .step-row{grid-template-columns:1fr;gap:16px;padding:32px 24px}
@@ -80,8 +80,9 @@
     <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
   </a>
   <div class="nav-links">
-    <a href="how-it-works.html">How It Works</a>
+    <a href="how-it-works.html" class="active">How It Works</a>
     <a href="features.html">Features</a>
+    <a href="docs/index.html">Docs</a>
   </div>
   <div class="nav-cta">
     <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
@@ -104,6 +105,7 @@
         <p>7,008 US courses. Search by name, city, or zip. Like the opening scene of a horror film — you pick the location, and then you have to live with that decision for 18 holes.</p>
         <p>Par data is verified where we have it, community-corrected where we don't. Submit a correction and you're on the path to the Bone Collector tag. Hole 4 is a par 4. The sign is wrong. It's always been wrong. The sign is the villain.</p>
         <span class="step-tag">7,008 Courses</span>
+        <a href="docs/par-corrections.html" class="step-doc-link">Par correction docs</a>
       </div>
     </div>
     <div class="step-row">
@@ -113,6 +115,7 @@
         <p>Add real players or drop in ghost opponents from the pro field — real PDGA ratings, real names. Adam Hammes is on the list. He shoots clean 47s without breaking a sweat, never speaks, and makes eye contact the entire round. Like a horror villain, but with better form.</p>
         <p>Stroke Play or Best Disc Scramble. MPO or FPO. Mix real players with ghosts. Your dad and a ghost Simon Lizotte is not weird. Your dad and a ghost Ricky Wysocki is a bad idea. Ricky will destroy him. We've seen it.</p>
         <span class="step-tag">Stroke Play · Scramble · MPO · FPO</span>
+        <a href="docs/building-a-card.html" class="step-doc-link">Card builder docs</a>
       </div>
     </div>
     <div class="step-row">
@@ -122,6 +125,7 @@
         <p>Hole-by-hole input designed for one hand — the other one's holding your disc, your coffee, or whatever's left of your dignity after hole 6. The leaderboard updates live. Every. Single. Hole.</p>
         <p>Running +/- from par updates live. The leaderboard reshuffles after every hole. Watch your position deteriorate in real time. Very motivating, clinically speaking.</p>
         <span class="step-tag">Live Leaderboard</span>
+        <a href="docs/scoring.html" class="step-doc-link">Scoring docs</a>
       </div>
     </div>
     <div class="step-row">
@@ -131,6 +135,7 @@
         <p>Every round saved. Full hole-by-hole breakdown. Every score, every bad lie, every "the wind got it" that nobody believed. All on record. Forever. The app does not forget. The ghosts do not forget. You will try to forget.</p>
         <p>Share your round badge. Review any previous card. In horror films, the evidence is always there if you look. That's what round history is. You already know what happened on hole 7. You just need to see it in writing.</p>
         <span class="step-tag">Full Round Archive</span>
+        <a href="docs/history.html" class="step-doc-link">History docs</a>
       </div>
     </div>
   </div>
@@ -139,6 +144,8 @@
     <h2>You made it to the end. Most people don't.</h2>
     <p>The ghosts have been ready since you opened this page. Ricky Wysocki already finished. Adam Hammes is waiting on the tee. The group of nine blocking hole 3 will be there regardless.</p>
     <button class="btn-xl" onclick="window.location.href='https://app.ghostcard.live'">Start Haunting</button>
+    <br>
+    <a href="docs/index.html" class="btn-docs">Read the docs</a>
   </div>
 </div>
 
@@ -151,8 +158,7 @@
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How It Works</a>
     <a href="features.html">Features</a>
-    <a href="https://github.com/deanlamont/ghost-card">GitHub</a>
-    <a href="https://app.ghostcard.live">App</a>
+    <a href="docs/index.html">Docs</a>
   </div>
   <p class="footer-copy">Ghost Card © 2026 • Haunt responsibly</p>
   <p class="footer-tagline">HAUNT THE LEADERBOARD</p>
