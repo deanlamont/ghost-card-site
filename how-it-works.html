@@ -58,7 +58,19 @@
   .cta-band p{font-size:15px;color:var(--fog);margin-bottom:28px}
   .btn-xl{padding:14px 36px;border-radius:8px;font-family:"Inter",sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .25s;border:none;background:var(--harvest);color:#0D1426}
   .btn-xl:hover{background:var(--lantern);transform:translateY(-1px)}
-  @media(max-width:640px){.step-row{grid-template-columns:1fr;gap:16px;padding:32px 24px}.step-num{font-size:32px}}
+  @media(max-width:640px){
+    nav{padding:0 1rem}
+    .nav-links{display:none}
+    .page-body{padding:60px 1.25rem}
+    .steps-grid{grid-template-columns:1fr}
+    .features-grid,.features-full{grid-template-columns:1fr}
+    .why-grid{grid-template-columns:1fr}
+    .testimonials-grid{grid-template-columns:1fr}
+    .cta-band{padding:32px 20px}
+    .page-hero{padding:100px 1.25rem 60px}
+    .step-row{grid-template-columns:1fr;gap:16px;padding:32px 24px}
+    .step-num{font-size:32px}
+  }
 </style>
 </head>
 <body>
