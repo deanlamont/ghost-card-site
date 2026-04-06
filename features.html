@@ -59,8 +59,6 @@
   .ru{background:rgba(143,164,196,0.2);color:#8FA4C4}
   .rr{background:rgba(201,168,76,0.2);color:#C9A84C}
   .rl{background:rgba(207,145,32,0.2);color:#CF9120}
-  .coming-soon{opacity:.5;position:relative}
-  .coming-soon::after{content:"COMING SOON";position:absolute;top:16px;right:16px;font-size:9px;font-weight:600;letter-spacing:2px;color:var(--shadow);background:var(--midnight);padding:3px 8px;border-radius:3px;border:1px solid var(--dusk)}
   .cta-band{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:12px;padding:48px;text-align:center;margin-top:80px}
   .cta-band h2{font-size:28px;font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:10px}
   .cta-band p{font-size:15px;color:var(--fog);margin-bottom:28px}
@@ -174,23 +172,28 @@
       </div>
     </div>
 
-    <div class="feat-card coming-soon">
+    <div class="feat-card">
       <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 20V10M12 20V4M6 20v-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <h3 class="feat-title">Tour Mode</h3>
-      <p class="feat-body">Multi-round tournaments. 3-round standard, 5-round Major, DGPT-style points. Every great horror franchise has a sequel. Tour Mode is yours. The ghosts are already seeded.</p>
+      <p class="feat-body">Multi-round tournaments with DGPT-calibrated points. Regular events, Elite+, Majors, and a Finale tier. Create a season, run events across any courses, watch standings update after every round. The ghosts are seeded. They are not nervous.</p>
       <div class="feat-footer">
-        <span class="feat-tag">In Development</span>
+        <span class="feat-tag">Live</span>
         <a href="docs/tour-mode.html" class="feat-doc-link">Tour mode docs</a>
       </div>
     </div>
 
-    <div class="feat-card coming-soon">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-      <h3 class="feat-title">Supabase Profiles</h3>
-      <p class="feat-body">Persistent accounts, full stats history, cross-device. Coming soon. Like the final scene of a horror film — you think it's over, then the lights flicker. The ghosts are almost ready.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">In Development</span>
-        <a href="docs/account.html" class="feat-doc-link">Account docs</a>
+    <div class="feat-card">
+      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke="#A668C4" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <h3 class="feat-title">Horror Mode</h3>
+      <p class="feat-body">A 50-card card game overlay you can add to any multiplayer round. Four card types — Haunt your opponents, play Spirit cards on yourself, hold Reckoning cards until the final hole, and burn Wild cards when things get desperate. Skins run alongside. The card game ends when the round does. Whatever happened on hole 9 stays on hole 9.</p>
+      <div class="rarity-row" style="margin-top:14px">
+        <span class="r" style="background:rgba(166,104,196,0.2);color:#A668C4">Haunt</span>
+        <span class="r" style="background:rgba(0,208,210,0.15);color:#7BC8C8">Spirit</span>
+        <span class="r" style="background:rgba(201,168,76,0.2);color:#C9A84C">Reckoning</span>
+        <span class="r" style="background:rgba(224,80,80,0.2);color:#E05050">Wild</span>
+      </div>
+      <div class="feat-footer" style="margin-top:12px">
+        <span class="feat-tag">2+ Players</span>
       </div>
     </div>
 
@@ -198,7 +201,7 @@
 
   <div class="cta-band">
     <h2>Still reading? The ghosts are impressed.</h2>
-    <p>Most people get scared off by hole 3. You made it to the feature list. Ricky finished his round 20 minutes ago. Adam Hammes is just standing there. Waiting.</p>
+    <p>Most people get scared off by hole 3. You made it to the feature list. Ricky finished his round 20 minutes ago. Adam Hammes is just standing there. Waiting. And someone on hole 9 just played The Possession on their playing partner.</p>
     <button class="btn-xl" onclick="window.location.href='https://app.ghostcard.live'">Start Haunting</button>
     <br>
     <a href="docs/index.html" class="btn-docs">Read the docs</a>
