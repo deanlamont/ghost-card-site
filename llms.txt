@@ -1,0 +1,59 @@
+# Ghost Card
+
+> Ghost Card is a free disc golf scoring app. Play against ghost versions of real PDGA-rated pros, track round history, earn horror-themed bag tags, and run multi-round Tour Mode tournaments across 7,008 US courses.
+
+## What Ghost Card does
+
+Ghost Card lets disc golfers:
+- Score rounds hole-by-hole with a live leaderboard
+- Play against ghost opponents drawn from 134 real PDGA-rated pros (MPO and FPO)
+- Run multi-round Tour Mode events with DGPT-style points and season standings
+- Earn 30 horror-themed collectible bag tags across four rarity tiers (Common, Uncommon, Rare, Legendary)
+- Save and review full round history with hole-by-hole breakdowns
+- Submit community par corrections for any of 7,008 US disc golf courses
+- Play Horror Mode — a 50-card overlay game on top of a normal round (2+ players)
+
+## App
+
+The app lives at: https://app.ghostcard.live
+It is a React + Vite single-page app, deployed on Vercel, with Supabase for auth and data.
+No download required. Free to use.
+
+## Ghost opponents
+
+Pros are sourced from PDGA ratings. Ghost scores are simulated using each pro's rating against the course SSA. The top-rated MPO pros include Gannon Buhr (1027), Ricky Wysocki (1044), Paul McBeth (1041), Calvin Heimburg (1036), and Eagle McMahon (1033). FPO field is led by Missy Gannon (1000) and Catrina Allen (988).
+
+## Bag tags
+
+30 collectible horror-themed tags. Earned by in-round performance and actions — not purchased. The Bone Collector tag unlocks after submitting 5 community par corrections. Legendary tags are the rarest and hardest to earn.
+
+## Tour Mode
+
+Supports Standard events (3 rounds), Elite+ events, Majors (5 rounds), and Finale events. Points are DGPT-calibrated. Season standings track across events.
+
+## Horror Mode
+
+A 50-card card game overlay played on top of a normal disc golf round. Requires 2+ players. Cards fall into four categories: Haunt (played on opponents), Spirit (played on yourself), Reckoning (held until round end), and Wild. Skins are tracked per hole.
+
+## Documentation
+
+Full documentation: https://ghostcard.live/docs/
+- Getting Started: https://ghostcard.live/docs/getting-started.html
+- Building a Card: https://ghostcard.live/docs/building-a-card.html
+- Scoring: https://ghostcard.live/docs/scoring.html
+- Round History: https://ghostcard.live/docs/history.html
+- Bag Tags: https://ghostcard.live/docs/bag-tags.html
+- Tour Mode: https://ghostcard.live/docs/tour-mode.html
+- Par Corrections: https://ghostcard.live/docs/par-corrections.html
+- Account & Profile: https://ghostcard.live/docs/account.html
+- Horror Mode: https://ghostcard.live/docs/horror-mode.html
+
+## Brand
+
+Name: Ghost Card
+Tagline: Haunt the Leaderboard
+Vibe: Horror-themed disc golf. A24 horror meets real sport. Dark, cinematic, competitive — not campy.
+Primary color: #0D1426 (Void navy)
+Accent: #C9A84C (Lantern Gold), #CF9120 (Harvest Gold)
+Font: Inter only
+GitHub: https://github.com/deanlamont/ghost-card
