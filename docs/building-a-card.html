@@ -148,6 +148,8 @@
       <li><a href="#courses">Picking a course</a></li>
       <li><a href="#real-players">Real players</a></li>
       <li><a href="#ghost-opponents">Ghost opponents</a></li>
+      <li><a href="#field-presets">Field presets</a></li>
+      <li><a href="#field-difficulty">Field difficulty</a></li>
       <li><a href="#formats">Formats</a></li>
       <li><a href="#divisions">Divisions</a></li>
       <li><a href="#mixed-cards">Mixed cards</a></li>
@@ -163,6 +165,7 @@
       <li><a href="tour-mode.html">06 Tour Mode</a></li>
       <li><a href="par-corrections.html">07 Par Corrections</a></li>
       <li><a href="account.html">08 Account &amp; Profile</a></li>
+      <li><a href="horror-mode.html">09 Horror Mode</a></li>
     </ul>
   </aside>
 
@@ -250,6 +253,62 @@
     <p>You can mix real players and ghost opponents on the same card freely. Your dad and a ghost Paul McBeth. You, a friend, and Ricky Wysocki. Whatever configuration makes sense for the round. The leaderboard handles all of them together.</p>
 
     <p>The only requirement: at least one player on the card before you can start. A card of only ghost opponents is valid. A card of only real players is valid. A card with no one on it is not a card — it's an empty form, which is a different kind of horror.</p>
+
+    <h2 id="field-presets">Field presets</h2>
+    <p>When selecting ghost opponents, Ghost Card offers six field presets that determine which pros from the division's field appear on your card:</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-n" style="font-size:9px;letter-spacing:0;font-weight:700">T5</div>
+        <div class="step-body"><strong>Top 5 — The murderers' row</strong><span> — The five highest-rated pros in the selected division. For people who enjoy suffering specifically.</span></div>
+      </li>
+      <li>
+        <div class="step-n" style="font-size:9px;letter-spacing:0;font-weight:700">T10</div>
+        <div class="step-body"><strong>Top 10 — Tournament-level challenge</strong><span> — Ten pros. Still brutal, slightly more survivable than Top 5.</span></div>
+      </li>
+      <li>
+        <div class="step-n" style="font-size:9px;letter-spacing:0;font-weight:700">T25</div>
+        <div class="step-body"><strong>Top 25 — Competitive but beatable</strong><span> — A field you can realistically place in. A good default for most rounds.</span></div>
+      </li>
+      <li>
+        <div class="step-n" style="font-size:9px;letter-spacing:0;font-weight:700">ALL</div>
+        <div class="step-body"><strong>Full Field — The complete tour experience</strong><span> — All 80 MPO pros (or 54 FPO, or 134 Mixed). The full field. Your place in it will be humbling and accurate.</span></div>
+      </li>
+      <li>
+        <div class="step-n" style="font-size:9px;letter-spacing:0;font-weight:700">RIV</div>
+        <div class="step-body"><strong>Rivals — Pros closest to your rating</strong><span> — 10 pros whose PDGA rating is closest to yours. The fairest fight in the app. The ghosts still win half the time.</span></div>
+      </li>
+      <li>
+        <div class="step-n" style="font-size:9px;letter-spacing:0;font-weight:700">✎</div>
+        <div class="step-body"><strong>Custom — Hand-pick your ghosts</strong><span> — Browse the full division field and select exactly which pros appear on your card. Remove anyone who isn't competing at the event you're simulating.</span></div>
+      </li>
+    </ul>
+
+    <h2 id="field-difficulty">Field difficulty</h2>
+    <p>Field difficulty controls how the ghost pro scores are modeled — it adjusts the course's Scratch Scoring Average (SSA), which shifts the score distribution for the entire field. It does not change which pros are on the card.</p>
+
+    <div class="format-grid">
+      <div class="format-card">
+        <span class="format-badge">Rookie</span>
+        <h3>Friendly ghosts</h3>
+        <p>The field plays like a casual round. Good for learning how the scoring system works without the ghosts being oppressive.</p>
+      </div>
+      <div class="format-card">
+        <span class="format-badge">Amateur</span>
+        <h3>Means business</h3>
+        <p>The default. A real challenge. Ghost scores reflect what a competitive field would actually shoot on a typical course setup.</p>
+      </div>
+      <div class="format-card">
+        <span class="format-badge">Pro Tour</span>
+        <h3>Only the brave</h3>
+        <p>Tour-level course conditions. The field plays tight. Beating a ghost is a genuine accomplishment at this difficulty.</p>
+      </div>
+      <div class="format-card">
+        <span class="format-badge" style="border-color:rgba(201,168,76,0.4);color:var(--lantern)">Ghost King</span>
+        <h3>Maximum haunting</h3>
+        <p>You asked for this. The field plays like a championship event on a championship setup. The ghosts are merciless. You were warned.</p>
+      </div>
+    </div>
 
     <div class="nav-footer">
       <a href="getting-started.html" class="nav-btn">

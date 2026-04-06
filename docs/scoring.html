@@ -148,6 +148,7 @@
       <li><a href="#running-total">Running +/- from par</a></li>
       <li><a href="#scramble-view">Scramble view</a></li>
       <li><a href="#complete">Round Complete</a></li>
+      <li><a href="#gc-rating">GC Rating</a></li>
     </ul>
     <div class="sidebar-divider"></div>
     <p class="sidebar-label">All docs</p>
@@ -160,6 +161,7 @@
       <li><a href="tour-mode.html">06 Tour Mode</a></li>
       <li><a href="par-corrections.html">07 Par Corrections</a></li>
       <li><a href="account.html">08 Account &amp; Profile</a></li>
+      <li><a href="horror-mode.html">09 Horror Mode</a></li>
     </ul>
   </aside>
 
@@ -225,6 +227,11 @@
 
     <p>Ghost opponents adapt to scramble format automatically. Their scoring model adjusts based on format selection at round start.</p>
 
+    <h2 id="ob">OB &amp; penalty strokes</h2>
+    <p>Each hole has an OB toggle in the scoring interface. Tap <strong>MARK OB / PENALTY STROKE</strong> to add a penalty stroke to your score for that hole. Once marked, the button shows <strong>OB / PENALTY STROKE MARKED</strong> to confirm it's been applied. Tap again to remove it.</p>
+
+    <p>OB strokes are tracked separately from your scored total and are included in the final hole score. They affect your to-par running total and feed into GC Rating calculation. Ghost opponents are not subject to OB — their scores are simulation-based and already account for typical field performance including mishaps.</p>
+
     <h2 id="complete">Round Complete</h2>
     <p>After the final hole is scored, the Round Complete state activates. A gold FlatGhost SVG appears — the app's closest thing to a standing ovation. Final standings are displayed for all players.</p>
 
@@ -245,6 +252,32 @@
       <p class="callout-label">Par corrections</p>
       <p>If you noticed a hole par that seemed wrong during your round, the Round Complete screen is a good time to submit a correction. You'll be prompted if corrections are available. See <a href="par-corrections.html">Community Par Corrections</a>.</p>
     </div>
+
+    <h2 id="gc-rating">GC Rating</h2>
+    <p>Every saved round generates a GC Rating — Ghost Card's own performance metric, modeled on the PDGA's rating system. It measures how you performed relative to the field on that course setup.</p>
+
+    <p>The calculation is based on the round's Scratch Scoring Average (SSA) — a number that represents what a scratch-level player would be expected to shoot on that course at the selected field difficulty. Your score relative to SSA produces your GC Rating for that round.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-n">~</div>
+        <div class="step-body"><strong>Rookie difficulty</strong><span> — SSA = course par. The field plays at par-level expectations.</span></div>
+      </li>
+      <li>
+        <div class="step-n">~</div>
+        <div class="step-body"><strong>Amateur difficulty</strong><span> — SSA = course par + 2. Standard competitive setup.</span></div>
+      </li>
+      <li>
+        <div class="step-n">~</div>
+        <div class="step-body"><strong>Pro Tour difficulty</strong><span> — SSA = course par + 5. Tour-level course conditions.</span></div>
+      </li>
+      <li>
+        <div class="step-n">~</div>
+        <div class="step-body"><strong>Ghost King difficulty</strong><span> — SSA = course par + 8. Championship setup. Ratings will be lower here — that is intentional.</span></div>
+      </li>
+    </ul>
+
+    <p>Your average GC Rating across all saved rounds is shown on your Profile. It trends upward as you improve and downward if you play significantly harder courses. A rating above 1000 displays in gold. Above 980 displays in green. The ghosts are always rated higher. That is also intentional.</p>
 
     <div class="nav-footer">
       <a href="building-a-card.html" class="nav-btn">

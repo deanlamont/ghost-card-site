@@ -162,6 +162,7 @@
       <li><a href="tour-mode.html" class="current">06 Tour Mode</a></li>
       <li><a href="par-corrections.html">07 Par Corrections</a></li>
       <li><a href="account.html">08 Account &amp; Profile</a></li>
+      <li><a href="horror-mode.html">09 Horror Mode</a></li>
     </ul>
   </aside>
 
@@ -178,46 +179,59 @@
     </div>
 
     <h2 id="event-types">Event types</h2>
-    <p>Ghost Card has two Tour Mode event formats:</p>
+    <p>Ghost Card has four Tour Mode event tiers, each with different round counts, point multipliers, and stakes. A full season uses all four.</p>
 
     <div class="event-grid">
       <div class="event-card">
-        <span class="event-badge standard">Standard</span>
-        <h3>Standard Event</h3>
-        <p>3 rounds. Standard points awarded per finish position. The baseline tournament format. Long enough to matter, short enough to finish in a weekend.</p>
+        <span class="event-badge standard">Regular</span>
+        <h3>Regular Event</h3>
+        <p>3 rounds. 100 points for 1st. The baseline. Most events in a season are Regular events. The ghosts take them seriously anyway.</p>
+      </div>
+      <div class="event-card">
+        <span class="event-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--lantern)">Elite+</span>
+        <h3>Elite+ Event</h3>
+        <p>3 rounds. 125 points for 1st. A 1.25&times; multiplier on all positions. Higher stakes, same round count. Mid-season inflection point.</p>
       </div>
       <div class="event-card">
         <span class="event-badge major">Major</span>
         <h3>Major Event</h3>
-        <p>5 rounds. Elevated points multiplier. Majors carry more weight in season standings. Winning a Major means something. Losing a Major over 5 rounds means something specific about hole 7.</p>
+        <p>5 rounds. 150 points for 1st. A 1.5&times; multiplier. The season&#8217;s marquee event. Winning a Major means something specific.</p>
+      </div>
+      <div class="event-card" style="border-color:rgba(0,208,210,0.25);background:rgba(0,208,210,0.05)">
+        <span class="event-badge" style="background:rgba(0,208,210,0.12);border:1px solid rgba(0,208,210,0.3);color:#7BC8C8">Finale</span>
+        <h3>Season Finale</h3>
+        <p>5 rounds. 200 points for 1st. A 2&times; multiplier. The final event &#8212; worth double. Standings can flip entirely.</p>
       </div>
     </div>
 
-    <p>You can mix courses across rounds in an event — each round can be at a different course. The event tracks cumulative scores and finish positions across all rounds.</p>
+    <p>A default Ghost Card season runs 10 events: Events 1&#8211;5 and 8&#8211;9 are Regular, Event 6 is Elite+, Event 7 is the Major, and Event 10 is the Season Finale. You can mix courses across rounds &#8212; each round in an event can be played at a different course.</p>
 
     <h2 id="points">Points structure</h2>
-    <p>Points are awarded per event based on finish position. The structure is DGPT-style — top finishes earn significantly more points than mid-field, creating meaningful separation at the top of the standings.</p>
+    <p>Points are awarded per event based on finish position with a DGPT-calibrated structure. Each event tier multiplies these base values. Ghost opponents compete in the standings alongside real players.</p>
 
     <table class="points-table">
       <thead>
         <tr>
           <th>Position</th>
-          <th>Standard Event</th>
-          <th>Major Event</th>
+          <th>Regular</th>
+          <th>Elite+ (1.25&times;)</th>
+          <th>Major (1.5&times;)</th>
+          <th>Finale (2&times;)</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td class="place-num">1st</td><td class="pts-val">500</td><td class="pts-val">1,000</td></tr>
-        <tr><td class="place-num">2nd</td><td class="pts-val">380</td><td class="pts-val">760</td></tr>
-        <tr><td class="place-num">3rd</td><td class="pts-val">290</td><td class="pts-val">580</td></tr>
-        <tr><td class="place-num">4th</td><td class="pts-val">220</td><td class="pts-val">440</td></tr>
-        <tr><td class="place-num">5th</td><td class="pts-val">165</td><td class="pts-val">330</td></tr>
-        <tr><td class="place-num">6th–10th</td><td class="pts-val">90–130</td><td class="pts-val">180–260</td></tr>
-        <tr><td class="place-num">11th+</td><td class="pts-val">25–85</td><td class="pts-val">50–170</td></tr>
+        <tr><td class="place-num">1st</td><td class="pts-val">100</td><td class="pts-val">125</td><td class="pts-val">150</td><td class="pts-val">200</td></tr>
+        <tr><td class="place-num">2nd</td><td class="pts-val">85</td><td class="pts-val">106</td><td class="pts-val">127</td><td class="pts-val">170</td></tr>
+        <tr><td class="place-num">3rd</td><td class="pts-val">72</td><td class="pts-val">90</td><td class="pts-val">108</td><td class="pts-val">144</td></tr>
+        <tr><td class="place-num">4th</td><td class="pts-val">62</td><td class="pts-val">77</td><td class="pts-val">93</td><td class="pts-val">124</td></tr>
+        <tr><td class="place-num">5th</td><td class="pts-val">54</td><td class="pts-val">67</td><td class="pts-val">80</td><td class="pts-val">107</td></tr>
+        <tr><td class="place-num">10th</td><td class="pts-val">28</td><td class="pts-val">35</td><td class="pts-val">42</td><td class="pts-val">56</td></tr>
+        <tr><td class="place-num">20th</td><td class="pts-val">9</td><td class="pts-val">11</td><td class="pts-val">13</td><td class="pts-val">17</td></tr>
+        <tr><td class="place-num">30th</td><td class="pts-val">2</td><td class="pts-val">3</td><td class="pts-val">3</td><td class="pts-val">4</td></tr>
       </tbody>
     </table>
 
-    <p>Ghost opponents compete in Tour Mode events and earn points alongside real players. If Ricky Wysocki is on your card, he's in the standings. He will finish high in the standings. Prepare for this information.</p>
+    <p>Ghost opponents compete in Tour Mode events and earn points alongside real players. If Ricky Wysocki is on your card, he&#8217;s in the standings. He will finish high in the standings. Prepare for this information.</p>
 
     <h2 id="seasons">Seasons</h2>
     <p>Events belong to seasons. A season is a named collection of events — you create a season, add events to it, play through them, and track standings across the full season schedule.</p>
