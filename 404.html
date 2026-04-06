@@ -88,6 +88,25 @@
     .step-row{grid-template-columns:1fr;gap:16px;padding:32px 24px}
     .step-num{font-size:32px}
   }
+
+  /* ── HAMBURGER MOBILE MENU ───────────────────────────────── */
+  .hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210}
+  .hamburger span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all 0.3s ease}
+  .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(9,21,37,0.98);border-bottom:1px solid var(--dusk);padding:24px 2rem 32px;z-index:199;flex-direction:column;gap:0}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:var(--fog);font-size:14px;font-weight:500;letter-spacing:2px;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(30,46,74,0.5);transition:color 0.2s}
+  .mobile-menu a:hover{color:var(--lantern)}
+  .mobile-menu a:last-of-type{border-bottom:none}
+  .mobile-menu-cta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .mobile-menu-cta a{width:100%;text-align:center;padding:12px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:block;border-bottom:none !important}
+  .m-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog)}
+  .m-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+  .m-primary{background:var(--harvest);border:none;color:#0D1426}
+  .m-primary:hover{background:var(--lantern)}
+  @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}}
 </style>
 </head>
 <body>
@@ -106,7 +125,21 @@
     <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
     <button class="btn-primary" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="features.html">Features</a>
+  <a href="docs/index.html">Docs</a>
+  <div class="mobile-menu-cta">
+    <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="m-primary">Sign Up Free</a>
+  </div>
+</div>
 
 <div class="scene">
   <div class="hero-sky"></div>
