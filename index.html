@@ -136,50 +136,80 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 /* moon-glow removed */
 
 
-/* ── FOG ─────────────────────────────────────────────────── */
-.fog-layer{
-  position:absolute;
-  bottom:0;left:-20%;right:-20%;
-  pointer-events:none;
-  z-index:5;
-}
-.fog-layer-1{
-  height:140px;
-  background:radial-gradient(ellipse 80% 100% at 50% 100%,
-    rgba(143,164,196,0.13) 0%,
-    rgba(143,164,196,0.07) 45%,
-    transparent 100%);
-  animation:fogDrift1 28s ease-in-out infinite alternate;
-}
-.fog-layer-2{
-  height:100px;
-  background:radial-gradient(ellipse 70% 100% at 35% 100%,
-    rgba(237,232,192,0.08) 0%,
-    rgba(143,164,196,0.05) 40%,
-    transparent 100%);
-  animation:fogDrift2 22s ease-in-out infinite alternate;
-}
-.fog-layer-3{
-  height:70px;
-  background:radial-gradient(ellipse 90% 100% at 65% 100%,
-    rgba(143,164,196,0.09) 0%,
-    transparent 70%);
-  animation:fogDrift3 35s ease-in-out infinite alternate;
-}
-@keyframes fogDrift1{
-  0%  {transform:translateX(-8%) scaleX(1.0);opacity:0.7;}
-  50% {opacity:1.0;}
-  100%{transform:translateX(8%) scaleX(1.08);opacity:0.75;}
-}
-@keyframes fogDrift2{
-  0%  {transform:translateX(10%) scaleX(1.05);opacity:0.6;}
-  50% {opacity:0.9;}
-  100%{transform:translateX(-10%) scaleX(0.97);opacity:0.65;}
-}
-@keyframes fogDrift3{
-  0%  {transform:translateX(-5%) scaleX(0.98);opacity:0.5;}
   50% {opacity:0.8;}
   100%{transform:translateX(5%) scaleX(1.04);opacity:0.55;}
+}
+
+
+/* ── FLOATING GHOSTS ─────────────────────────────────────── */
+.ghost-float{
+  position:absolute;
+  pointer-events:none;
+  z-index:6;
+  opacity:0;
+}
+.ghost-float svg{ display:block; }
+
+/* each ghost: drift across + gentle bob */
+@keyframes ghostDrift1{
+  0%  {transform:translateX(-120px) translateY(0px);   opacity:0;}
+  5%  {opacity:0.22;}
+  92% {opacity:0.22;}
+  100%{transform:translateX(calc(100vw + 120px)) translateY(-18px); opacity:0;}
+}
+@keyframes ghostDrift2{
+  0%  {transform:translateX(calc(100vw + 100px)) translateY(0px); opacity:0;}
+  5%  {opacity:0.17;}
+  92% {opacity:0.17;}
+  100%{transform:translateX(-100px) translateY(14px); opacity:0;}
+}
+@keyframes ghostDrift3{
+  0%  {transform:translateX(-80px) translateY(0px);    opacity:0;}
+  5%  {opacity:0.28;}
+  92% {opacity:0.28;}
+  100%{transform:translateX(calc(100vw + 80px)) translateY(-22px);  opacity:0;}
+}
+@keyframes ghostDrift4{
+  0%  {transform:translateX(calc(100vw + 140px)) translateY(0px); opacity:0;}
+  5%  {opacity:0.15;}
+  92% {opacity:0.15;}
+  100%{transform:translateX(-140px) translateY(10px); opacity:0;}
+}
+@keyframes ghostDrift5{
+  0%  {transform:translateX(-60px) translateY(0px);    opacity:0;}
+  5%  {opacity:0.20;}
+  92% {opacity:0.20;}
+  100%{transform:translateX(calc(100vw + 60px)) translateY(-12px);  opacity:0;}
+}
+@keyframes ghostBob{
+  0%,100%{margin-top:0px;}
+  50%    {margin-top:-8px;}
+}
+
+.ghost-float-1{
+  bottom:260px; left:0;
+  width:22px; height:24px;
+  animation:ghostDrift1 38s linear 2s infinite, ghostBob 4.2s ease-in-out 2s infinite;
+}
+.ghost-float-2{
+  bottom:230px; left:0;
+  width:18px; height:20px;
+  animation:ghostDrift2 44s linear 8s infinite, ghostBob 5.1s ease-in-out 8s infinite;
+}
+.ghost-float-3{
+  bottom:280px; left:0;
+  width:26px; height:29px;
+  animation:ghostDrift3 31s linear 15s infinite, ghostBob 3.8s ease-in-out 15s infinite;
+}
+.ghost-float-4{
+  bottom:245px; left:0;
+  width:20px; height:22px;
+  animation:ghostDrift4 52s linear 4s infinite, ghostBob 6.0s ease-in-out 4s infinite;
+}
+.ghost-float-5{
+  bottom:268px; left:0;
+  width:16px; height:18px;
+  animation:ghostDrift5 36s linear 22s infinite, ghostBob 4.6s ease-in-out 22s infinite;
 }
 
 .treeline-photo{
@@ -806,10 +836,43 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 <section class="hero" aria-labelledby="hero-heading">
   <div class="hero-sky"></div>
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
+  <!-- Floating ghosts -->
+  <div class="ghost-float ghost-float-1" aria-hidden="true">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+    </svg>
+  </div>
+  <div class="ghost-float ghost-float-2" aria-hidden="true">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+    </svg>
+  </div>
+  <div class="ghost-float ghost-float-3" aria-hidden="true">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+    </svg>
+  </div>
+  <div class="ghost-float ghost-float-4" aria-hidden="true">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+    </svg>
+  </div>
+  <div class="ghost-float ghost-float-5" aria-hidden="true">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.35)"/>
+    </svg>
+  </div>
   <div class="treeline-photo"></div>
-  <div class="fog-layer fog-layer-1" aria-hidden="true"></div>
-  <div class="fog-layer fog-layer-2" aria-hidden="true"></div>
-  <div class="fog-layer fog-layer-3" aria-hidden="true"></div>
 
   <div class="hero-content">
     <div class="hero-lockup" aria-label="Ghost Card logo">
