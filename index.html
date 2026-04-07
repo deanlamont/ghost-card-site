@@ -105,7 +105,7 @@
   .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 2rem 280px;text-align:center}
   .hero-sky{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);z-index:0}
   #stars-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-  .moon-glow{position:absolute;top:88px;right:17%;width:74px;height:74px;border-radius:50%;background:var(--moon-inner);box-shadow:0 0 0 9px rgba(237,232,192,0.13),0 0 0 26px rgba(237,232,192,0.07),0 0 70px 30px rgba(237,232,192,0.05);z-index:2}
+  .moon-glow{position:absolute;top:-22px;right:-22px;width:88px;height:88px;border-radius:50%;background:var(--moon-inner);box-shadow:0 0 0 7px rgba(237,232,192,0.1),0 0 0 18px rgba(237,232,192,0.05),0 0 50px 20px rgba(237,232,192,0.04);z-index:2}
   .treeline-photo{
     position:absolute;
     bottom:0;left:0;right:0;
@@ -262,6 +262,8 @@
     #features [style*="border-left"]{
       border-left:none!important;border-top:1px solid var(--dusk)
     }
+    .tour-standings,.tour-progress-wrap{display:none}
+    .tour-graphic-header{display:none}
   }
 
   /* ── LIVE SCORE TICKER ──────────────────────────────────── */
@@ -929,6 +931,38 @@
     .clipping.full-width .clipping-body{column-count:1}
   }
 
+
+  /* ── REVIEWS ─────────────────────────────────────────────── */
+  .review-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--dusk);border:1px solid var(--dusk);
+    border-radius:12px;overflow:hidden;
+    max-width:1080px;margin:0 auto;
+  }
+  .review-card{
+    background:var(--deep-navy);
+    padding:36px 32px;
+    display:flex;flex-direction:column;
+  }
+  .review-stars{
+    display:flex;gap:4px;margin-bottom:20px;
+    color:var(--lantern);font-size:13px;letter-spacing:2px;
+  }
+  .review-quote{
+    font-size:15px;line-height:1.7;
+    color:var(--moonlight);font-weight:300;
+    flex:1;margin-bottom:24px;
+  }
+  .review-quote em{font-style:normal;color:var(--lantern)}
+  .review-byline{
+    font-size:11px;font-weight:600;letter-spacing:2px;
+    text-transform:uppercase;color:var(--shadow);
+    border-top:1px solid var(--dusk);padding-top:16px;
+  }
+  @media(max-width:700px){
+    .review-grid{grid-template-columns:1fr}
+  }
+
 </style>
 </head>
 <body>
@@ -991,7 +1025,7 @@
       134 NPCs.<br>Real courses.<br><em>Your move.</em>
     </h1>
     <p class="hero-sub">
-      Ghost pros. Real PDGA ratings. A full tour season, a career arc, multiplayer invites, and a 50-card horror card game. The NPCs always show up. The group of nine on hole 4 does not.
+      Ghost pros. Real PDGA ratings. A full tour season, a career arc, and a 50-card horror card game. Solo or with friends — the ghosts always show up.
     </p>
     <div class="hero-cta">
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Start playing Ghost Card for free">Play Free</button>
@@ -1029,15 +1063,7 @@
         <div class="ticker-row r4">
           <div><span class="ticker-pos">99</span><span class="ticker-name you"><span class="ticker-name-inner">You</span></span></div>
           <div class="ticker-score over">+6</div>
-          <div class="ticker-thru">14</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── TOUR MODE / CAREER STORY SECTION ─────────────────────── -->
+          <d<!-- ── TOUR MODE / CAREER STORY SECTION ─────────────────────── -->
 <section id="tour" style="background:var(--midnight);border-top:1px solid var(--dusk);overflow:hidden;position:relative" aria-labelledby="tour-heading">
 
   <!-- background accent: ghost tour trophy SVG, faint -->
@@ -1060,11 +1086,8 @@
         <h2 class="section-title" id="tour-heading" style="max-width:480px">
           A full season.<br>A career on the line.<br><span style="color:var(--lantern)">The tour remembers everything.</span>
         </h2>
-        <p style="font-size:15px;line-height:1.7;color:var(--fog);margin-bottom:28px;max-width:440px">
-          Tour Mode runs a 10-event season — Regular events, Elite+, a Major, and a Season Finale worth double points — using a DGPT-calibrated points structure. Standings update after every event. The ghosts compete in the standings alongside real players. Ricky Wysocki is in the standings. He is fine with this.
-        </p>
         <p style="font-size:15px;line-height:1.7;color:var(--fog);margin-bottom:36px;max-width:440px">
-          Your career narrative runs underneath it all. First season, you're nobody. The leaderboard doesn't know your name. Win events — win seasons — and the story changes. By Season 5, the field has heard of you. The ghost card is yours to lose.
+          10-event seasons. Regular events, Elite+, a Major, and a Season Finale worth double points. Ghost pros compete in the standings alongside you. Your career arc runs underneath it all — from Newcomer to Legend, one season at a time.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" style="font-size:13px;padding:12px 28px">Start Your Season</button>
@@ -1185,6 +1208,13 @@
   </div>
 </section>
 
+5px;text-transform:uppercase">Your Name</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── MULTIPLAYER + FRIENDS SECTION ──────────────────────────── -->
 <section id="multiplayer" style="background:var(--void);border-top:1px solid var(--dusk);overflow:hidden;position:relative" aria-labelledby="multi-heading">
 
@@ -1206,7 +1236,7 @@
       Real players. Ghost pros.<br><span style="color:var(--lantern)">Your round, your group, your rules.</span>
     </h2>
     <p style="font-size:15px;line-height:1.7;color:var(--fog);margin-bottom:60px;max-width:560px">
-      Ghost Card is not just a solo game. Invite real Ghost Card users into your round, mix them with ghost pros however you want, and optionally turn the whole thing into a horror card game. Your group's leaderboard is live. The ghosts don't care who you brought. They're keeping score regardless.
+      Invite real players, drop in ghost pros, run Scramble or stroke play. One live leaderboard for everyone — real and ghost.
     </p>
 
     <!-- Three pillars -->
@@ -1223,7 +1253,7 @@
           </svg>
         </div>
         <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:10px;letter-spacing:.3px">Invite Real Players</h3>
-        <p style="font-size:14px;line-height:1.7;color:var(--fog)">Invite signed-in Ghost Card users to your round by name. They see the invite on their end and jump straight into the shared scorecard. You score your holes, they score theirs — one live leaderboard for everyone. Up to 4 players per card, including ghost pros.</p>
+        <p style="font-size:14px;line-height:1.7;color:var(--fog)">Invite signed-in Ghost Card users by name. One shared scorecard, one live leaderboard. Up to 4 players per card.</p>
         <div style="margin-top:18px">
           <span style="display:inline-block;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--lantern);font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase">Up to 4 Players</span>
         </div>
@@ -1239,7 +1269,7 @@
           </svg>
         </div>
         <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:10px;letter-spacing:.3px">Ghost Pros in the Mix</h3>
-        <p style="font-size:14px;line-height:1.7;color:var(--fog)">Real players and ghost pros live on the same card, same leaderboard. You and your dad vs. ghost Gannon Buhr and ghost Paul McBeth is a completely legitimate group. The ghosts play statistically. They don't slow the group down. They don't explain their lines. They throw and they score. That's it.</p>
+        <p style="font-size:14px;line-height:1.7;color:var(--fog)">Real players and ghost pros on the same card, same leaderboard. Mix and match however you want. The ghosts throw and score. No slow play. No explanations.</p>
         <div style="margin-top:18px">
           <span style="display:inline-block;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--lantern);font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase">MPO · FPO</span>
         </div>
@@ -1293,7 +1323,7 @@
     <div class="horror-text">
       <p class="horror-label">Horror Mode</p>
       <h2 class="horror-title" id="horror-heading">A card game.<br>Inside your round.<br>Against your friends.</h2>
-      <p class="horror-desc">Enable Horror Mode on any multiplayer round and a 50-card deck enters the game. Draw cards when you lose a hole. Play them when it hurts the most.</p>
+      <p class="horror-desc">A 50-card deck runs alongside your round. Draw when you lose a hole. Play them when it hurts most.</p>
 
       <div class="horror-cards">
         <div class="horror-card-row hc1">
@@ -1365,7 +1395,7 @@
           </svg>
         </div>
         <h3 class="built-title">134 Ghost Pros</h3>
-        <p class="built-body">Rated by real PDGA scores. They play statistically, show up on time, and have never once asked what disc you threw on hole 6.</p>
+        <p class="built-body">Rated by real PDGA scores. They play statistically, show up on time, and never ask what disc you threw.</p>
         <div class="built-tags"><span class="built-tag">MPO</span><span class="built-tag">FPO</span></div>
       </div>
 
@@ -1383,7 +1413,7 @@
           </svg>
         </div>
         <h3 class="built-title">Live Leaderboard</h3>
-        <p class="built-body">Running +/− from par after every hole. Rankings shift in real time. Being passed by a ghost on hole 16 is a specific kind of suffering.</p>
+        <p class="built-body">Running +/− from par after every hole. Rankings shift in real time. No waiting.</p>
         <div class="built-tags"><span class="built-tag">Hole by hole</span></div>
       </div>
 
@@ -1396,7 +1426,7 @@
           </svg>
         </div>
         <h3 class="built-title">30 Bag Tags</h3>
-        <p class="built-body">Horror-themed collectibles earned in-round by doing specific things. Four rarity tiers. Never purchased. The Legendary tags are not handed out — they're survived.</p>
+        <p class="built-body">Collectibles earned in-round. Four rarity tiers. Never purchased. The Legendary ones are survived, not unlocked.</p>
         <div class="built-tags"><span class="built-tag">Common</span><span class="built-tag bc-tag-rare">Legendary</span></div>
         <a href="docs/bag-tags.html" class="built-link">See all 30 →</a>
       </div>
@@ -1411,7 +1441,7 @@
           </svg>
         </div>
         <h3 class="built-title">GC Rating</h3>
-        <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it to or not.</p>
+        <p class="built-body">How you scored relative to the ghost pros. Not a handicap — a mirror. Lives on your profile.</p>
         <a href="docs/scoring.html" class="built-link">How it's calculated →</a>
       </div>
 
@@ -1426,82 +1456,38 @@
           </svg>
         </div>
         <h3 class="built-title">Scramble Mode</h3>
-        <p class="built-body">Team format — everyone throws, best lie wins. Ghost teams get horror names like "The Disc Reapers" and "Bogey or Die." Cumulative leaderboard updates after every round. A completely different game.</p>
-        <div class="built-tags"><span class="built-tag">Teams</span><span class="built-tag">Best lie</span></div>
+        <p class="built-body">Team format — everyone throws, best lie plays. Ghost teams get horror names. A completely different game.</p>
+        <div class="built-tags"><span cl<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
+<section style="background:var(--midnight);border-top:1px solid var(--dusk);padding:90px 2rem" aria-labelledby="reviews-heading">
+  <div style="max-width:1080px;margin:0 auto">
+    <p class="section-label" style="margin-bottom:12px">Definitely Real Reviews</p>
+    <h2 class="section-title" id="reviews-heading" style="margin-bottom:48px">Five stars.<br>From people who may or may not exist.</h2>
+
+    <div class="review-grid" role="list">
+
+      <div class="review-card" role="listitem">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"Ghost Gannon Buhr birdied hole 1 while I was still explaining why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had <em>accepted my life.</em>"</p>
+        <div class="review-byline">Chad, 41 · Owns 340 discs, uses 7</div>
       </div>
 
-      <!-- Live Invites -->
-      <div class="built-card bc-shadow">
-        <div class="built-icon">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M22 16.5a5.5 5.5 0 0 1-5.5 5.5H7a5 5 0 0 1 0-10h.5" stroke="#546082" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M14 4l4 4-4 4M18 8H9" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="built-title">Live Invites</h3>
-        <p class="built-body">Invite real Ghost Card users into your round before you tee off. They join your card, your leaderboard, your misery. Mix with ghost pros however you want. No Bluetooth. No handshake. Just a code.</p>
-        <div class="built-tags"><span class="built-tag">Real players</span><span class="built-tag">Any mix</span></div>
+      <div class="review-card" role="listitem">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"Ghost Joey Buckets drained a 60-footer on hole 12. I was six feet away and missed. My playing partner said 'at least you're consistent.' <em>I have not recovered.</em>"</p>
+        <div class="review-byline">Recovering, slowly · Tennessee</div>
+      </div>
+
+      <div class="review-card" role="listitem">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"A group of eleven people was camped on hole 4. I opened Ghost Card. The ghosts played through immediately. <em>The ghosts understand me in a way real people don't.</em>"</p>
+        <div class="review-byline">Solo player · Always · Everywhere</div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
-<section class="newspaper-section" aria-labelledby="testimonials-heading">
-
-  <div class="newspaper-header">
-    <div class="newspaper-masthead">The Ghost Gazette</div>
-    <div class="newspaper-sub">Est. 2026 &nbsp;·&nbsp; Haunted Disc Golf Bureau &nbsp;·&nbsp; All Accounts Verified By Nobody</div>
-    <div class="newspaper-tagline">The Record of Those Who Played Against The Dead &mdash; And Lost</div>
-  </div>
-
-  <div class="clippings-grid" role="list" aria-labelledby="testimonials-heading">
-    <h2 id="testimonials-heading" style="display:none">Player Reviews</h2>
-
-    <!-- Clipping 1 -->
-    <div class="clipping" role="listitem">
-      <div class="clipping-dateline">
-        <span>Ghost Card Dispatch</span>
-        <span>Vol. 1 &nbsp; No. 1</span>
-      </div>
-      <div class="clipping-headline">Local Man Accepts&nbsp;Fate&nbsp;By&nbsp;Hole&nbsp;6</div>
-      <hr class="clipping-rule">
-      <p class="clipping-body">UNNAMED COUNTY — A local disc golfer, identified only as Chad, 41, reported Tuesday that he had "fully accepted his life" by the sixth hole of a round in which he had invited ghost Gannon Buhr onto his card. Buhr, rated 1027, birdied the opening hole while Chad was still mid-sentence explaining to a companion why he throws a Nuke OS on a 180-foot par 3. Authorities confirmed no foul play. The disc was found in the rough.</p>
-      <div class="clipping-byline">Chad, 41 &nbsp;·&nbsp; Owns 340 discs, uses 7 &nbsp;·&nbsp; ★★★★★</div>
-    </div>
-
-    <!-- Clipping 2 -->
-    <div class="clipping" role="listitem">
-      <div class="clipping-dateline">
-        <span>Fairway Chronicle</span>
-        <span>Special Report</span>
-      </div>
-      <div class="clipping-headline">Raptor Legs Eagles Hole 3; Witness Still In Rough</div>
-      <hr class="clipping-rule">
-      <p class="clipping-body">WISCONSIN — Ghost competitor known regionally as Raptor Legs eagled the third hole of a recent round while the real player on his card remained in the rough searching for a disc. The witness, who declined to be named, told this reporter they "didn't say anything" when asked for comment. When pressed, they added: "What would I even say." The round continued. The ghost did not acknowledge the incident.</p>
-      <div class="clipping-byline">Still processing &nbsp;·&nbsp; Wisconsin &nbsp;·&nbsp; ★★★★★</div>
-    </div>
-
-    <!-- Clipping 3 -->
-    <div class="clipping" role="listitem">
-      <div class="clipping-dateline">
-        <span>The Haunted Fairway</span>
-        <span>Eyewitness Account</span>
-      </div>
-      <div class="clipping-headline">Joey Buckets Drains 60-Footer; Player Six Feet Away Misses</div>
-      <hr class="clipping-rule">
-      <p class="clipping-body">TENNESSEE — Ghost pro Joey Buckets converted a 60-foot putt on hole 12 of a competitive round last Saturday. Standing approximately six feet from the basket, the real player on the card missed their own attempt entirely. A nearby playing partner reportedly said "at least you're consistent." The player described their current condition as "recovering, slowly." Ghost Buckets offered no statement, as ghosts do not speak.</p>
-      <div class="clipping-byline">Recovering, slowly &nbsp;·&nbsp; Tennessee &nbsp;·&nbsp; ★★★★★</div>
-    </div>
-
-    <!-- Clipping 4 — full width -->
-    <div class="clipping full-width" role="listitem">
-      <div class="clipping-dateline">
-        <span>Ghost Card Observer &mdash; Saturday Edition</span>
-        <span>Breaking</span>
-      </div>
-      <div class="clipping-headline">Eleven Strangers Camp Hole 4; Ghost Field Plays Through Without Comment</div>
+st Field Plays Through Without Comment</div>
       <hr class="clipping-rule">
       <p class="clipping-body">A group of eleven individuals conducting what sources described as a birthday round occupied hole 4 of a public course at approximately 2pm on a Saturday, blocking play for an estimated duration of "forever, basically." A solo player in the group behind, unable to proceed, opened Ghost Card and added a full ghost field to their card. The ghost pros teed off immediately. They played through the group. They did not ask permission. They did not make eye contact. They simply scored. The solo player, reached for comment, stated only that "the ghosts understand me in a way real people don't." They were given a Ghost Card bag tag for completing the round. The eleven strangers remain unaware of any of this.</p>
       <div class="clipping-byline">Solo player &nbsp;·&nbsp; Always &nbsp;·&nbsp; Everywhere &nbsp;·&nbsp; ★★★★★</div>
