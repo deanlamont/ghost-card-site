@@ -772,7 +772,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     </div>
 
     <p class="hero-tagline">Real Disc Golf. Video Game Soul.</p>
-    <h1 class="hero-headline" id="hero-heading">You’re on tour.<br><em>Your course. Right now.</em></h1>
+    <h1 class="hero-headline" id="hero-heading">Play the pros.<br><em>On your home course.</em></h1>
     <p class="hero-sub">Step onto any of 7,008 US courses and tee off against a full field of rated PDGA pros — as ghosts. Solo, it’s finally a round worth playing: a live leaderboard, a score that means something, Ricky Wysocki breathing down your neck on hole 12. With your crew, it becomes a tournament. String rounds together and you’re in Tour Mode — a full season, standings, and a career arc that remembers everything. The ghosts are already on the tee.</p>
 
     <div class="hero-cta">
@@ -1195,10 +1195,6 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       len:rb(40,90),alpha:0,phase:'in',life:0,maxLife:rb(55,90),r:rb(0.5,1.0),done:false};
   }
 
-  function scheduleNext(){
-    nextShot=performance.now()+rb(8000,20000);
-  }
-
   function resize(){
     c.width=c.offsetWidth;c.height=c.offsetHeight;
 
@@ -1260,13 +1256,11 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   }
 
   resize();window.addEventListener('resize',resize);
-  scheduleNext();
 
   function draw(t){
+    if(!nextShot) nextShot=t+rb(4000,10000);
     ctx.clearRect(0,0,c.width,c.height);
-    /* clouds behind stars */
     clouds.forEach(cl=>drawCloud(cl,t));
-    /* stars */
     stars.forEach(s=>{
       s.a+=s.sp;if(s.a>1)s.a=0;
       const bright=0.4+Math.sin(s.a*Math.PI*2)*0.45;
@@ -1274,8 +1268,10 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       ctx.fillStyle=s.gold?`rgba(201,168,76,${bright})`:`rgba(232,237,246,${bright})`;
       ctx.fill();
     });
-    /* shooting stars — one at a time */
-    if(t>=nextShot&&shooters.length===0){shooters.push(mkShooter());scheduleNext();}
+    if(t>=nextShot&&shooters.length===0){
+      shooters.push(mkShooter());
+      nextShot=t+rb(8000,20000);
+    }
     shooters=shooters.filter(s=>{drawShooter(s);return !s.done;});
     requestAnimationFrame(draw);
   }
