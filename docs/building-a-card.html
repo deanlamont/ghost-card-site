@@ -184,6 +184,7 @@
       <li><a href="#field-presets">Field presets</a></li>
       <li><a href="#field-difficulty">Field difficulty</a></li>
       <li><a href="#formats">Formats</a></li>
+      <li><a href="#custom-tournament">Custom Tournament</a></li>
       <li><a href="#divisions">Divisions</a></li>
       <li><a href="#mixed-cards">Mixed cards</a></li>
     </ul>
@@ -260,22 +261,58 @@
     </div>
 
     <h2 id="formats" class="formats">Formats</h2>
-    <p>Ghost Card supports two scoring formats:</p>
+    <p>Ghost Card supports three scoring formats:</p>
 
     <div class="format-grid">
       <div class="format-card">
-        <span class="format-badge">Stroke Play</span>
-        <h3>Standard</h3>
-        <p>Every throw counts. Running +/- from par. The default. The classic. The format that documents every mistake with clinical precision.</p>
+        <span class="format-badge">Solo</span>
+        <h3>1 player vs field</h3>
+        <p>Just you against the full ghost pro field. The canonical Ghost Card experience. Chet approves.</p>
       </div>
       <div class="format-card">
-        <span class="format-badge">Best Disc Scramble</span>
-        <h3>Scramble</h3>
-        <p>All players throw from the same spot — the best lie from the previous throw. Good for groups, good for fun, good for the card member who had a rough back nine.</p>
+        <span class="format-badge">Stroke Play</span>
+        <h3>Individual scores</h3>
+        <p>Every throw counts. Running +/- from par. Each player has their own score and leaderboard position. The classic format that documents every mistake with clinical precision.</p>
+      </div>
+      <div class="format-card">
+        <span class="format-badge">Scramble</span>
+        <h3>Team score per hole</h3>
+        <p>All players throw from the same spot — the best lie from the previous throw. One score per hole for the whole team. Enter a team name before you start — it goes on the scorecard and leaderboard. Player names appear as a subtitle on the results card.</p>
       </div>
     </div>
 
-    <p>Scramble mode activates the DoublesScorecard view — a side-by-side grid layout showing both players' scores per hole. Ghost opponents adapt to scramble format automatically.</p>
+    <div class="callout">
+      <p class="callout-label">Scramble team name</p>
+      <p>In Scramble mode, the scorecard and leaderboard display your team name, not individual player names. The team name is required before you can start — pick something that strikes fear into the ghost pros. Or doesn't. The ghosts don't care what you call yourselves.</p>
+    </div>
+
+    <p>Scramble mode activates team scoring — a single score per hole for the group. Ghost opponents adapt to scramble format automatically, forming their own teams seeded by course.</p>
+
+    <h2 id="custom-tournament">Custom Tournament Mode</h2>
+    <p>Custom Tournament Mode is a multi-round event you create yourself — not part of the pre-built Tour season. Access it from the Play tab, under the Format section.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-body"><strong>Name your tournament</strong><span> — "Uekman Classic," "Cedar-Mossy Invitational," whatever you want. It shows on every scorecard and the cumulative standings.</span></div>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-body"><strong>Pick your settings</strong><span> — 1 to 5 rounds, Stroke Play or Scramble, division (MPO / FPO / Mixed for Scramble), players, and field difficulty. These carry through every round — you set them once.</span></div>
+      </li>
+      <li>
+        <div class="step-n">3</div>
+        <div class="step-body"><strong>Pick a course before each round</strong><span> — After finishing round 1 and saving it, you're prompted to pick the course for round 2. Different course every round if you want.</span></div>
+      </li>
+      <li>
+        <div class="step-n">4</div>
+        <div class="step-body"><strong>Cumulative leaderboard updates</strong><span> — After saving each round, tap "View Tournament Standings" on the finished screen. Scores are tracked round by round with a running total — like a real golf tournament scoreboard.</span></div>
+      </li>
+    </ul>
+
+    <div class="info-box">
+      <p>In Scramble tournaments, ghost pro teams get randomised horror/disc golf team names — "The Disc Reapers," "Bogey or Die," "The Unholy Rollers." Names are stable per tournament (same teams each round) but different across tournaments.</p>
+    </div>
 
     <h2 id="divisions">Divisions</h2>
     <p>Choose MPO (Mixed Pro Open) or FPO (Female Pro Open). Division affects which ghost field you draw from and how ghost scores are modeled. FPO ghost ratings are sourced from the women's pro tour field.</p>
