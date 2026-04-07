@@ -785,6 +785,149 @@
     .pullquote-item{padding:44px 0}
   }
 
+
+  /* ── NEWSPAPER CLIPPINGS ────────────────────────────────────── */
+  @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:wght@700;900&family=IM+Fell+English:ital@0;1&display=swap');
+
+  .newspaper-section{
+    background:var(--abyss);
+    border-top:1px solid var(--dusk);
+    padding:100px 2rem;
+  }
+  .newspaper-header{
+    text-align:center;margin-bottom:72px;
+  }
+  .newspaper-masthead{
+    font-family:'UnifrakturMaguntia',cursive;
+    font-size:clamp(28px,5vw,52px);
+    color:var(--cream);
+    letter-spacing:2px;
+    margin-bottom:4px;
+    text-shadow:0 0 40px rgba(201,168,76,0.15);
+  }
+  .newspaper-sub{
+    font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;
+    color:var(--shadow);border-top:1px solid var(--dusk);border-bottom:1px solid var(--dusk);
+    padding:5px 0;margin:0 auto 4px;max-width:500px;
+  }
+  .newspaper-tagline{
+    font-size:9px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--shadow);font-style:italic;
+  }
+  .clippings-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    max-width:1000px;
+    margin:0 auto;
+  }
+  .clipping{
+    background:#f4efe6;
+    border-radius:2px;
+    padding:28px 26px 24px;
+    position:relative;
+    box-shadow:
+      2px 3px 12px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(0,0,0,0.15),
+      inset 0 0 60px rgba(0,0,0,0.04);
+    transform:rotate(0deg);
+    transition:transform 0.2s,box-shadow 0.2s;
+    overflow:hidden;
+  }
+  .clipping:nth-child(1){transform:rotate(-0.8deg)}
+  .clipping:nth-child(2){transform:rotate(0.6deg)}
+  .clipping:nth-child(3){transform:rotate(0.4deg)}
+  .clipping:nth-child(4){transform:rotate(-0.5deg)}
+  .clipping:hover{
+    transform:rotate(0deg) translateY(-4px) scale(1.01);
+    box-shadow:4px 8px 24px rgba(0,0,0,0.6),0 0 0 1px rgba(0,0,0,0.2);
+    z-index:2;
+  }
+  /* Paper texture overlay */
+  .clipping::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 22px,
+      rgba(0,0,0,0.025) 22px,
+      rgba(0,0,0,0.025) 23px
+    );
+    pointer-events:none;
+  }
+  /* Tape effect top center */
+  .clipping::after{
+    content:'';position:absolute;
+    top:-6px;left:50%;transform:translateX(-50%);
+    width:60px;height:22px;
+    background:rgba(255,255,220,0.55);
+    border:1px solid rgba(200,190,150,0.4);
+    border-radius:1px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.15);
+  }
+  .clipping-dateline{
+    font-family:'IM Fell English',serif;
+    font-size:9px;color:#5a4a3a;
+    letter-spacing:2px;text-transform:uppercase;
+    border-bottom:2px solid #2a1a0a;
+    padding-bottom:6px;margin-bottom:10px;
+    display:flex;justify-content:space-between;
+  }
+  .clipping-headline{
+    font-family:'Playfair Display',Georgia,serif;
+    font-size:clamp(16px,2.2vw,22px);
+    font-weight:900;
+    color:#1a0f05;
+    line-height:1.15;
+    margin-bottom:12px;
+    letter-spacing:-0.3px;
+    text-transform:uppercase;
+  }
+  .clipping-rule{
+    height:2px;
+    background:#2a1a0a;
+    margin-bottom:10px;
+    border:none;
+  }
+  .clipping-rule.thin{height:1px;background:#8a7a6a;margin-bottom:8px}
+  .clipping-body{
+    font-family:'IM Fell English',Georgia,serif;
+    font-size:13px;
+    color:#2a1a0a;
+    line-height:1.65;
+    column-count:2;
+    column-gap:16px;
+    column-rule:1px solid #c8b89a;
+    margin-bottom:14px;
+  }
+  .clipping-byline{
+    font-family:'IM Fell English',serif;
+    font-size:9.5px;
+    color:#5a4a3a;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    border-top:1px solid #c8b89a;
+    padding-top:8px;
+    font-style:italic;
+  }
+  /* Clipping 4 — full width */
+  .clipping.full-width{
+    grid-column:1/-1;
+  }
+  .clipping.full-width .clipping-body{
+    column-count:3;
+  }
+  @media(max-width:700px){
+    .clippings-grid{grid-template-columns:1fr}
+    .clipping.full-width .clipping-body{column-count:2}
+    .clipping-body{column-count:1}
+    .clipping{transform:none!important}
+    .clipping:hover{transform:translateY(-4px)!important}
+  }
+  @media(max-width:420px){
+    .clipping.full-width .clipping-body{column-count:1}
+  }
+
 </style>
 </head>
 <body>
@@ -1268,82 +1411,65 @@
         </div>
         <h3 class="built-title">GC Rating</h3>
         <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it t<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
-<section class="pullquote-section" aria-labelledby="testimonials-heading">
-  <div class="pullquote-header">
-    <p class="section-label">Definitely Real Reviews</p>
-    <h2 id="testimonials-heading">Five stars. From people who may or may not exist.</h2>
+<section class="newspaper-section" aria-labelledby="testimonials-heading">
+
+  <div class="newspaper-header">
+    <div class="newspaper-masthead">The Ghost Gazette</div>
+    <div class="newspaper-sub">Est. 2026 &nbsp;·&nbsp; Haunted Disc Golf Bureau &nbsp;·&nbsp; All Accounts Verified By Nobody</div>
+    <div class="newspaper-tagline">The Record of Those Who Played Against The Dead &mdash; And Lost</div>
   </div>
 
-  <div class="pullquote-stack" role="list">
+  <div class="clippings-grid" role="list" aria-labelledby="testimonials-heading">
+    <h2 id="testimonials-heading" style="display:none">Player Reviews</h2>
 
-    <div class="pullquote-item" role="listitem">
-      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
-      <p class="pq-quote">I added ghost Gannon Buhr and he birdied the first hole while I was still explaining to my friend why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had <em>accepted my life.</em></p>
-      <div class="pq-byline">
-        Chad, 41, owns 340 discs, uses 7
-        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+    <!-- Clipping 1 -->
+    <div class="clipping" role="listitem">
+      <div class="clipping-dateline">
+        <span>Ghost Card Dispatch</span>
+        <span>Vol. 1 &nbsp; No. 1</span>
       </div>
+      <div class="clipping-headline">Local Man Accepts&nbsp;Fate&nbsp;By&nbsp;Hole&nbsp;6</div>
+      <hr class="clipping-rule">
+      <p class="clipping-body">UNNAMED COUNTY — A local disc golfer, identified only as Chad, 41, reported Tuesday that he had "fully accepted his life" by the sixth hole of a round in which he had invited ghost Gannon Buhr onto his card. Buhr, rated 1027, birdied the opening hole while Chad was still mid-sentence explaining to a companion why he throws a Nuke OS on a 180-foot par 3. Authorities confirmed no foul play. The disc was found in the rough.</p>
+      <div class="clipping-byline">Chad, 41 &nbsp;·&nbsp; Owns 340 discs, uses 7 &nbsp;·&nbsp; ★★★★★</div>
     </div>
 
-    <div class="pullquote-item" role="listitem">
-      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
-      <p class="pq-quote">I put ghost Raptor Legs on my card. He eagled hole 3 while I was still trying to find my disc in the rough. I didn't say anything. <em>What would I even say.</em></p>
-      <div class="pq-byline">
-        Still processing, Wisconsin
-        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+    <!-- Clipping 2 -->
+    <div class="clipping" role="listitem">
+      <div class="clipping-dateline">
+        <span>Fairway Chronicle</span>
+        <span>Special Report</span>
       </div>
+      <div class="clipping-headline">Raptor Legs Eagles Hole 3; Witness Still In Rough</div>
+      <hr class="clipping-rule">
+      <p class="clipping-body">WISCONSIN — Ghost competitor known regionally as Raptor Legs eagled the third hole of a recent round while the real player on his card remained in the rough searching for a disc. The witness, who declined to be named, told this reporter they "didn't say anything" when asked for comment. When pressed, they added: "What would I even say." The round continued. The ghost did not acknowledge the incident.</p>
+      <div class="clipping-byline">Still processing &nbsp;·&nbsp; Wisconsin &nbsp;·&nbsp; ★★★★★</div>
     </div>
 
-    <div class="pullquote-item" role="listitem">
-      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
-      <p class="pq-quote">A group of eleven people was camped on hole 4 doing a birthday round at 2pm on a Saturday. I opened Ghost Card. The ghosts played through immediately. <em>The ghosts understand me in a way real people don't.</em></p>
-      <div class="pq-byline">
-        Solo player, always, everywhere
-        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+    <!-- Clipping 3 -->
+    <div class="clipping" role="listitem">
+      <div class="clipping-dateline">
+        <span>The Haunted Fairway</span>
+        <span>Eyewitness Account</span>
       </div>
+      <div class="clipping-headline">Joey Buckets Drains 60-Footer; Player Six Feet Away Misses</div>
+      <hr class="clipping-rule">
+      <p class="clipping-body">TENNESSEE — Ghost pro Joey Buckets converted a 60-foot putt on hole 12 of a competitive round last Saturday. Standing approximately six feet from the basket, the real player on the card missed their own attempt entirely. A nearby playing partner reportedly said "at least you're consistent." The player described their current condition as "recovering, slowly." Ghost Buckets offered no statement, as ghosts do not speak.</p>
+      <div class="clipping-byline">Recovering, slowly &nbsp;·&nbsp; Tennessee &nbsp;·&nbsp; ★★★★★</div>
     </div>
 
-    <div class="pullquote-item" role="listitem">
-      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
-      <p class="pq-quote">Ghost Joey Buckets drained a 60-foot putt on hole 12. I was standing six feet away and missed. My playing partner said &ldquo;at least you're consistent.&rdquo; <em>I have not recovered.</em></p>
-      <div class="pq-byline">
-        Recovering, slowly, Tennessee
-        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+    <!-- Clipping 4 — full width -->
+    <div class="clipping full-width" role="listitem">
+      <div class="clipping-dateline">
+        <span>Ghost Card Observer &mdash; Saturday Edition</span>
+        <span>Breaking</span>
       </div>
+      <div class="clipping-headline">Eleven Strangers Camp Hole 4; Ghost Field Plays Through Without Comment</div>
+      <hr class="clipping-rule">
+      <p class="clipping-body">A group of eleven individuals conducting what sources described as a birthday round occupied hole 4 of a public course at approximately 2pm on a Saturday, blocking play for an estimated duration of "forever, basically." A solo player in the group behind, unable to proceed, opened Ghost Card and added a full ghost field to their card. The ghost pros teed off immediately. They played through the group. They did not ask permission. They did not make eye contact. They simply scored. The solo player, reached for comment, stated only that "the ghosts understand me in a way real people don't." They were given a Ghost Card bag tag for completing the round. The eleven strangers remain unaware of any of this.</p>
+      <div class="clipping-byline">Solo player &nbsp;·&nbsp; Always &nbsp;·&nbsp; Everywhere &nbsp;·&nbsp; ★★★★★</div>
     </div>
 
-  </div>
-</section>
-
-08 courses means crowdsourced accuracy. Submit 5 corrections and unlock the Bone Collector bag tag — disc golf's closest equivalent to civic virtue.</p>
-        <div class="built-tags"><span class="built-tag">7,008 courses</span></div>
-        <a href="docs/par-corrections.html" class="built-link">How it works →</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
-<section style="background:var(--midnight)" aria-labelledby="testimonials-heading">
-  <div class="section-inner">
-    <p class="section-label">Definitely Real Reviews</p>
-    <h2 class="section-title" id="testimonials-heading">Five stars.<br>From people who may or may not exist.</h2>
-
-    <div class="testi-grid" role="list">
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"I added ghost Gannon Buhr and he birdied the first hole while I was still explaining to my friend why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had accepted my life."</blockquote>
-        <p class="testi-byline">— Chad, 41, owns 340 discs, uses 7</p>
-      </div>
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"The guy in my group explained the physics of hyzer-flip for the entire back nine. I was +14 by hole 12. Ghost Ricky Wysocki was -9. Neither of us said a word about it. Ricky because he's a ghost. Me because I was in shock."</blockquote>
-        <p class="testi-byline">— Definitely not making this up, Oregon</p>
-      </div>
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"A group of eleven people was camped on hole 4 doing a birthday round at 2pm on a Saturday. I opened Ghost Card. The ghosts played through immediately. The ghosts understand me in a way real people don't."</blockquote>
-        <p class="testi-byline">— Solo player, always, everywhere</p>
-      </div>
-    </div>
   </div>
 </section>
 
