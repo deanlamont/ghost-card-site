@@ -187,7 +187,7 @@
 
   /* ── CTA BAND ──────────────────────────────────────────────── */
   .cta-band{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:12px;padding:60px 40px;text-align:center;max-width:680px;margin:0 auto}
-  .cta-band h2{font-size:clamp(22px,4vw,38px);font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:14px}
+  .cta-band h2{font-size:clamp(20px,3vw,28px);font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:14px}
   .cta-band p{font-size:15px;color:var(--fog);line-height:1.65;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
 
   /* ── FOOTER ──────────────────────────────────────────────── */
@@ -252,6 +252,12 @@
     }
     #multiplayer [style*="grid-template-columns:repeat(3,1fr)"]{
       grid-template-columns:1fr!important
+    }
+    #features [style*="grid-template-columns:repeat(3,1fr)"]{
+      grid-template-columns:1fr!important
+    }
+    #features [style*="border-left"]{
+      border-left:none!important;border-top:1px solid var(--dusk)
     }
   }
 
@@ -433,24 +439,24 @@
           <span>Thru</span>
         </div>
         <div class="ticker-row r1">
-          <div><span class="ticker-pos">1</span><span class="ticker-name">Gannon Buhr <span class="ghost-badge">ghost</span></span></div>
-          <div class="ticker-score under">-7</div>
+          <div><span class="ticker-pos">1</span><span class="ticker-name">Paul McBeth <span class="ghost-badge">ghost</span></span></div>
+          <div class="ticker-score under">-10</div>
           <div class="ticker-thru">14</div>
         </div>
         <div class="ticker-row r2">
-          <div><span class="ticker-pos">2</span><span class="ticker-name">Calvin Heimburg <span class="ghost-badge">ghost</span></span></div>
-          <div class="ticker-score under">-4</div>
+          <div><span class="ticker-pos">2</span><span class="ticker-name">Ricky Wysocki <span class="ghost-badge">ghost</span></span></div>
+          <div class="ticker-score under">-9</div>
           <div class="ticker-thru">14</div>
         </div>
         <div class="ticker-row r3">
-          <div><span class="ticker-pos">3</span><span class="ticker-name you"><span class="ticker-name-inner">You</span></span></div>
-          <div class="ticker-score over">+2</div>
+          <div><span class="ticker-pos">3</span><span class="ticker-name">Gannon Buhr <span class="ghost-badge">ghost</span></span></div>
+          <div class="ticker-score under">-8</div>
           <div class="ticker-thru">14</div>
         </div>
         <div class="ticker-row r4">
-          <div><span class="ticker-pos">4</span><span class="ticker-name">Ricky Wysocki <span class="ghost-badge">ghost</span></span></div>
-          <div class="ticker-score under">-3</div>
-          <div class="ticker-thru">13</div>
+          <div><span class="ticker-pos">99</span><span class="ticker-name you"><span class="ticker-name-inner">You</span></span></div>
+          <div class="ticker-score over">+6</div>
+          <div class="ticker-thru">14</div>
         </div>
       </div>
     </div>
@@ -647,38 +653,6 @@
 </section>
 
 
-<!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
-<section class="how-bg" id="how" aria-labelledby="how-heading">
-  <div class="section-inner">
-    <p class="section-label">How It Works</p>
-    <h2 class="section-title" id="how-heading">Four steps. The guy explaining his disc flight path on hole 3 can manage it.</h2>
-    <p class="section-desc">No tutorial. No onboarding. No seven-screen walkthrough explaining what a birdie is. You know what a birdie is. The ghosts know what a birdie is. Let's go.</p>
-
-    <div class="steps-grid" role="list">
-      <div class="step-card" role="listitem">
-        <div class="step-num">Step 01</div>
-        <h3 class="step-title">Pick your course</h3>
-        <p class="step-body">7,008 US disc golf courses. Search by name or zip. Par data is verified where possible — and community-corrected everywhere else, because someone always knows a course better than the internet does.</p>
-      </div>
-      <div class="step-card" role="listitem">
-        <div class="step-num">Step 02</div>
-        <h3 class="step-title">Build your card</h3>
-        <p class="step-body">Add real players, invite friends, or drop in ghost pros. Gannon Buhr rates a 1027. He will birdie holes you didn't think were birdie-able. He will not apologize. He is a ghost. He has no concept of feelings.</p>
-      </div>
-      <div class="step-card" role="listitem">
-        <div class="step-num">Step 03</div>
-        <h3 class="step-title">Score hole by hole</h3>
-        <p class="step-body">One-handed input. Live leaderboard rearranges itself after every hole like a horror film cast list — people you thought were safe suddenly aren't. The feeling of watching your lead evaporate on hole 14 is character-building, probably.</p>
-      </div>
-      <div class="step-card" role="listitem">
-        <div class="step-num">Step 04</div>
-        <h3 class="step-title">Haunt your history</h3>
-        <p class="step-body">Every round saved. Every hole documented. The app keeps a perfect record of every decision you've ever made on a disc golf course, which is either motivating or deeply haunting depending on how hole 7 went.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── FEATURES ───────────────────────────────────────────────── -->
 <section id="features" aria-labelledby="features-heading">
   <div class="section-inner">
@@ -796,25 +770,67 @@
         <p class="testi-byline">— Chad, 41, owns 340 discs, uses 7</p>
       </div>
       <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"My buddy spent 11 minutes lining up a putt on hole 9. Ghost Paul McBeth had already finished the round, driven home, and was probably making dinner. This app finally gave me something to look at."</blockquote>
-        <p class="testi-byline">— Waiting since 2019, Tennessee</p>
-      </div>
-      <div class="testi-card" role="listitem">
         <blockquote class="testi-quote">"The guy in my group explained the physics of hyzer-flip for the entire back nine. I was +14 by hole 12. Ghost Ricky Wysocki was -9. Neither of us said a word about it. Ricky because he's a ghost. Me because I was in shock."</blockquote>
         <p class="testi-byline">— Definitely not making this up, Oregon</p>
-      </div>
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"I fixed a wrong par on a course near me and unlocked the Bone Collector bag tag. I showed my wife. She said 'oh cool.' That's the most enthusiasm she's shown about disc golf in six years. I'll take it."</blockquote>
-        <p class="testi-byline">— Keith, 38, Bone Collector, Michigan</p>
       </div>
       <div class="testi-card" role="listitem">
         <blockquote class="testi-quote">"A group of eleven people was camped on hole 4 doing a birthday round at 2pm on a Saturday. I opened Ghost Card. The ghosts played through immediately. The ghosts understand me in a way real people don't."</blockquote>
         <p class="testi-byline">— Solo player, always, everywhere</p>
       </div>
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"I've been playing disc golf for three months and someone in my group just called me a 'casual.' I put them on a card with ghost Calvin Heimburg. We don't talk about what happened next."</blockquote>
-        <p class="testi-byline">— Former casual, now haunted, Texas</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT'S IN THE BAG ────────────────────────────────────── -->
+<section style="background:var(--abyss)" id="features" aria-labelledby="features-heading">
+  <div class="section-inner">
+    <p class="section-label">What's In The Bag</p>
+    <h2 class="section-title" id="features-heading">More than a scorecard.</h2>
+    <p class="section-desc">Ghost Card runs deeper than the leaderboard. Three systems worth knowing about before you tee off.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dusk)">
+
+      <!-- Bag Tags -->
+      <div style="background:var(--deep-navy);padding:36px 28px">
+        <div style="width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L8 6H4v4l-2 2 2 2v4h4l4 4 4-4h4v-4l2-2-2-2V6h-4L12 2z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="2" fill="#C9A84C"/>
+          </svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px">30 Bag Tags</h3>
+        <p style="font-size:13.5px;line-height:1.65;color:var(--fog);margin-bottom:16px">Collectible tags earned through gameplay — never purchased. Each one references a horror film archetype and has a specific, deterministic unlock condition. Common to Legendary. You either did the thing or you didn't.</p>
+        <a href="docs/bag-tags.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lantern);text-decoration:none">See all 30 tags →</a>
       </div>
+
+      <!-- Horror Mode -->
+      <div style="background:var(--deep-navy);padding:36px 28px;border-left:1px solid var(--dusk)">
+        <div style="width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="4" y="3" width="11" height="15" rx="1.5" stroke="#A668C4" stroke-width="1.5"/>
+            <rect x="9" y="6" width="11" height="15" rx="1.5" stroke="#A668C4" stroke-width="1.5"/>
+            <path d="M8 9h5M8 12h3" stroke="#A668C4" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px">Horror Mode</h3>
+        <p style="font-size:13.5px;line-height:1.65;color:var(--fog);margin-bottom:16px">A 50-card game that runs alongside your round. Haunt cards punish opponents. Spirit cards protect yourself. Reckoning cards detonate at round end. Requires 2+ real players. Optional. Strongly recommended for groups that talk too much.</p>
+        <a href="docs/horror-mode.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#A668C4;text-decoration:none">How it works →</a>
+      </div>
+
+      <!-- GC Rating -->
+      <div style="background:var(--deep-navy);padding:36px 28px;border-left:1px solid var(--dusk)">
+        <div style="width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polyline points="3,17 8,11 13,14 21,6" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="21" cy="6" r="1.5" fill="#8FA4C4"/>
+            <line x1="3" y1="21" x2="21" y2="21" stroke="#546082" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px">GC Rating</h3>
+        <p style="font-size:13.5px;line-height:1.65;color:var(--fog);margin-bottom:16px">Every completed round generates a Ghost Card Rating — a number that reflects how you scored relative to the ghost pros on your card. It's not a handicap. It's a mirror. It updates after every round and lives on your profile whether you want it to or not.</p>
+        <a href="docs/scoring.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--fog);text-decoration:none">Read the scoring docs →</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -823,7 +839,7 @@
 <section>
   <div class="section-inner">
     <div class="cta-band">
-      <h2>The ghosts are already on hole 1.<br>They've been warming up for 20 minutes.</h2>
+      <h2>The ghosts tee off at dawn.<br>You in?</h2>
       <p>Ghost Card is free to play. No downloads. No Bluetooth speaker. No guy explaining for six minutes why he throws a Destroyer on a 200-foot par 3. Just you, a disc, and the entire collected scoring average of everyone who's better than you — rendered as a silent, patient ghost.</p>
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Start playing Ghost Card">Start Haunting — It's Free</button>
     </div>
