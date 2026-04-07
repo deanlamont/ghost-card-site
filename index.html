@@ -135,6 +135,53 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 /* moon-glow removed */
 
+
+/* ── FOG ─────────────────────────────────────────────────── */
+.fog-layer{
+  position:absolute;
+  bottom:0;left:-20%;right:-20%;
+  pointer-events:none;
+  z-index:5;
+}
+.fog-layer-1{
+  height:140px;
+  background:radial-gradient(ellipse 80% 100% at 50% 100%,
+    rgba(143,164,196,0.13) 0%,
+    rgba(143,164,196,0.07) 45%,
+    transparent 100%);
+  animation:fogDrift1 28s ease-in-out infinite alternate;
+}
+.fog-layer-2{
+  height:100px;
+  background:radial-gradient(ellipse 70% 100% at 35% 100%,
+    rgba(237,232,192,0.08) 0%,
+    rgba(143,164,196,0.05) 40%,
+    transparent 100%);
+  animation:fogDrift2 22s ease-in-out infinite alternate;
+}
+.fog-layer-3{
+  height:70px;
+  background:radial-gradient(ellipse 90% 100% at 65% 100%,
+    rgba(143,164,196,0.09) 0%,
+    transparent 70%);
+  animation:fogDrift3 35s ease-in-out infinite alternate;
+}
+@keyframes fogDrift1{
+  0%  {transform:translateX(-8%) scaleX(1.0);opacity:0.7;}
+  50% {opacity:1.0;}
+  100%{transform:translateX(8%) scaleX(1.08);opacity:0.75;}
+}
+@keyframes fogDrift2{
+  0%  {transform:translateX(10%) scaleX(1.05);opacity:0.6;}
+  50% {opacity:0.9;}
+  100%{transform:translateX(-10%) scaleX(0.97);opacity:0.65;}
+}
+@keyframes fogDrift3{
+  0%  {transform:translateX(-5%) scaleX(0.98);opacity:0.5;}
+  50% {opacity:0.8;}
+  100%{transform:translateX(5%) scaleX(1.04);opacity:0.55;}
+}
+
 .treeline-photo{
     position:absolute;
     bottom:0;left:0;right:0;
@@ -760,6 +807,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   <div class="hero-sky"></div>
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
   <div class="treeline-photo"></div>
+  <div class="fog-layer fog-layer-1" aria-hidden="true"></div>
+  <div class="fog-layer fog-layer-2" aria-hidden="true"></div>
+  <div class="fog-layer fog-layer-3" aria-hidden="true"></div>
 
   <div class="hero-content">
     <div class="hero-lockup" aria-label="Ghost Card logo">
