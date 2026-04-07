@@ -723,7 +723,104 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 <!-- ── NAV ──────────────────────────────────────────────────── -->
 <nav>
-  <a href="/" class="nav-logo" aria<!-- ── TOUR MODE / CAREER STORY SECTION ─────────────────────── -->
+  <a href="/" class="nav-logo" aria-label="Ghost Card home">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+      <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+      <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+    </svg>
+    <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
+  </a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="docs/index.html">Docs</a>
+  </nav>
+  <div class="nav-cta">
+    <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
+    <button class="btn-primary" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ───────────────────────────────────────────── -->
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="docs/index.html">Docs</a>
+  <div class="mobile-menu-cta">
+    <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="m-primary">Sign Up Free</a>
+  </div>
+</div>
+
+
+<main>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-sky"></div>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+  <div class="moon-glow" aria-hidden="true"></div>
+  <div class="treeline-photo"></div>
+
+  <div class="hero-content">
+    <div class="hero-lockup" aria-label="Ghost Card logo">
+      <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/>
+        <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+        <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+      </svg>
+      <div class="hero-lockup-wm"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
+    </div>
+
+    <p class="hero-tagline">Real Disc Golf. Video Game Soul.</p>
+    <h1 class="hero-headline" id="hero-heading">134 NPCs.<br>Real courses.<br>Your move.</h1>
+    <p class="hero-sub">Ghost pros. Real PDGA ratings. A full tour season, a career arc, and a 50-card horror card game. Solo or with friends — the ghosts always show up.</p>
+
+    <div class="hero-cta">
+      <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Play Ghost Card free">Play Free</button>
+      <button class="btn-lg btn-lo" onclick="window.location.href='docs/index.html'">See the Docs</button>
+    </div>
+
+    <!-- ── LIVE SCORE TICKER ── -->
+    <div class="score-ticker" aria-hidden="true">
+      <div class="ticker-label">
+        <span class="ticker-pulse"></span>live · hole 14 of 18
+      </div>
+      <div class="ticker-board">
+        <div class="ticker-header">
+          <span>Player</span>
+          <span>Score</span>
+          <span>Thru</span>
+        </div>
+        <div class="ticker-row r1">
+          <div><span class="ticker-pos">1</span><span class="ticker-name">Paul McBeth <span class="ghost-badge">ghost</span></span></div>
+          <div class="ticker-score under">-10</div>
+          <div class="ticker-thru">14</div>
+        </div>
+        <div class="ticker-row r2">
+          <div><span class="ticker-pos">2</span><span class="ticker-name">Ricky Wysocki <span class="ghost-badge">ghost</span></span></div>
+          <div class="ticker-score under">-9</div>
+          <div class="ticker-thru">14</div>
+        </div>
+        <div class="ticker-row r3">
+          <div><span class="ticker-pos">3</span><span class="ticker-name">Gannon Buhr <span class="ghost-badge">ghost</span></span></div>
+          <div class="ticker-score under">-8</div>
+          <div class="ticker-thru">14</div>
+        </div>
+        <div class="ticker-row r4">
+          <div><span class="ticker-pos">99</span><span class="ticker-name you"><span class="ticker-name-inner">You</span></span></div>
+          <div class="ticker-score over">+6</div>
+          <div class="ticker-thru">14</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ── TOUR MODE / CAREER STORY SECTION ─────────────────────── -->
 <section class="tour-section" id="tour" aria-labelledby="tour-heading">
   <div class="tour-inner">
     <div class="tour-text">
