@@ -1177,12 +1177,13 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 </div>
 
 <script>
-/* ── Stars canvas + cloud wisps + shooting stars ─────────── */
+/* ── Stars canvas + shooting stars ───────────────────────── */
 (function(){
   const c=document.getElementById('stars-canvas');
   if(!c)return;
   const ctx=c.getContext('2d');
-  let stars=[],clouds=[],shoots=[],nextShot=0,lastT=0;
+  let stars=[],shoots=[],nextShot=0;
+  let W=0,H=0;
 
   function rb(a,b){return a+Math.random()*(b-a);}
 
@@ -1192,9 +1193,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     W=c.width =hero.offsetWidth  ||window.innerWidth;
     H=c.height=hero.offsetHeight ||window.innerHeight;
     initStars();
-    initClouds();
   }
-  let W=0,H=0;
 
   /* ── Stars ──────────────────────────────────────────────── */
   function initStars(){
@@ -1206,66 +1205,21 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         y:Math.random()*H*0.74,
         r:Math.random()*1.6+0.3,
         phase:Math.random()*Math.PI*2,
-        sp:Math.random()*0.018+0.004,
+        sp:Math.random()*1.4+0.4,   /* 0.4–1.8 radians/sec, scaled by 0.001 below */
         gold:Math.random()<0.16
       });
     }
   }
 
-  /* ── Clouds ─────────────────────────────────────────────── */
-  function makeCloud(startOnScreen){
-    const w=rb(280,560), h=rb(30,58);
-    return{
-      x: startOnScreen ? rb(-w*0.3,W+w*0.3) : -w-10,
-      y: rb(H*0.04,H*0.44),
-      w, h,
-      a: rb(0.055,0.11),
-      sp: rb(0.05,0.13),
-      gold: Math.random()<0.38,
-      phase: rb(0,Math.PI*2),
-      puffs: Array.from({length:Math.floor(rb(5,9))},(_,i,arr)=>({
-        ox: (i/(arr.length-1))*1,   /* 0..1, scaled by w later */
-        oy: rb(-0.4,0.4),
-        r:  rb(0.38,0.72)
-      }))
-    };
-  }
-
-  function initClouds(){
-    clouds=Array.from({length:5},()=>makeCloud(true));
-  }
-
-  function drawCloud(cl,t){
-    const wobY=Math.sin(t*0.00016+cl.phase)*3.5;
-    ctx.save();
-    const col=cl.gold?'201,168,76':'143,164,196';
-    cl.puffs.forEach(p=>{
-      const px=cl.x+p.ox*cl.w;
-      const py=cl.y+p.oy*cl.h+wobY;
-      const r =p.r*cl.h;
-      const grd=ctx.createRadialGradient(px,py,0,px,py,r*2.8);
-      grd.addColorStop(0,   `rgba(${col},${cl.a})`);
-      grd.addColorStop(0.45,`rgba(${col},${cl.a*0.4})`);
-      grd.addColorStop(1,   `rgba(${col},0)`);
-      ctx.beginPath();
-      ctx.ellipse(px,py,r*2.8,r*0.55,0,0,Math.PI*2);
-      ctx.fillStyle=grd;
-      ctx.fill();
-    });
-    ctx.restore();
-    cl.x+=cl.sp;
-    if(cl.x>W+cl.w*0.6){ Object.assign(cl,makeCloud(false)); }
-  }
-
   /* ── Shooting stars ─────────────────────────────────────── */
   function spawnShoot(){
-    const angle=rb(0.22,0.52);       /* down-right diagonal */
-    const speed=rb(11,18);           /* fast and visible */
+    const angle=rb(0.22,0.52);
+    const speed=rb(11,18);
     shoots.push({
-      x:  rb(W*0.05, W*0.72),
-      y:  rb(H*0.03, H*0.30),
-      vx: Math.cos(angle)*speed,
-      vy: Math.sin(angle)*speed,
+      x:rb(W*0.05,W*0.72),
+      y:rb(H*0.03,H*0.30),
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
       alpha:1,
       trail:[],
       done:false
@@ -1277,40 +1231,30 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       if(s.done)return;
       s.trail.push({x:s.x,y:s.y,a:s.alpha});
       if(s.trail.length>30)s.trail.shift();
-
-      /* trail */
       for(let i=1;i<s.trail.length;i++){
         const t0=s.trail[i-1],t1=s.trail[i];
         const f=i/s.trail.length;
-        ctx.beginPath();
-        ctx.moveTo(t0.x,t0.y);
-        ctx.lineTo(t1.x,t1.y);
+        ctx.beginPath();ctx.moveTo(t0.x,t0.y);ctx.lineTo(t1.x,t1.y);
         ctx.strokeStyle=`rgba(240,236,200,${t0.a*f*0.82})`;
-        ctx.lineWidth=f*2.8;
-        ctx.lineCap='round';
-        ctx.stroke();
+        ctx.lineWidth=f*2.8;ctx.lineCap='round';ctx.stroke();
       }
-      /* head glow */
       const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,5.5);
       g.addColorStop(0,`rgba(255,250,225,${s.alpha})`);
       g.addColorStop(1,'rgba(240,236,200,0)');
       ctx.beginPath();ctx.arc(s.x,s.y,5.5,0,Math.PI*2);
       ctx.fillStyle=g;ctx.fill();
-
-      s.x+=s.vx; s.y+=s.vy; s.alpha-=0.014;
-      if(s.alpha<=0||s.x>W+250||s.y>H+250) s.done=true;
+      s.x+=s.vx;s.y+=s.vy;s.alpha-=0.014;
+      if(s.alpha<=0||s.x>W+250||s.y>H+250)s.done=true;
     });
     shoots=shoots.filter(s=>!s.done);
   }
 
   /* ── Main loop ──────────────────────────────────────────── */
   function draw(t){
-    lastT=t;
-    if(!nextShot) nextShot=t+rb(1500,4000);   /* first shot within 1.5–4 s */
+    if(!nextShot)nextShot=t+rb(1500,4000);
     ctx.clearRect(0,0,W,H);
 
-    clouds.forEach(cl=>drawCloud(cl,t));
-
+    /* stars — brightness never goes negative */
     stars.forEach(s=>{
       const bright=0.28+0.52*((1+Math.sin(t*s.sp*0.001+s.phase))*0.5);
       ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
@@ -1320,15 +1264,12 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
     if(t>=nextShot){
       spawnShoot();
-      /* allow up to 2 concurrent; next shot 3–8 s away */
-      if(shoots.length<2) nextShot=t+rb(3000,8000);
-      else nextShot=t+rb(6000,12000);
+      nextShot=t+(shoots.length<2?rb(3000,8000):rb(6000,12000));
     }
     drawShoots();
     requestAnimationFrame(draw);
   }
 
-  /* kick off after first paint so offsetWidth is real */
   window.addEventListener('resize',()=>{resize();});
   requestAnimationFrame(()=>{ resize(); requestAnimationFrame(draw); });
 })();
