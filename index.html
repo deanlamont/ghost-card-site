@@ -44,9 +44,7 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ghost Card","applicationCategory":"SportsApplication","operatingSystem":"Web","description":"Disc golf game with ghost opponent mode, live leaderboards, horror bag tag collectibles, and multiplayer support across 7,008 US courses.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://ghostcard.live"}
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:wght@700;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<!-- decorative fonts removed - Inter only per brand rules -->
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -712,6 +710,75 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 
 
+
+/* ── MULTIPLAYER SECTION ──────────────────────────────────── */
+.multiplayer-section {
+  background: var(--void);
+  border-top: 1px solid var(--dusk);
+  overflow: hidden;
+  position: relative;
+}
+
+.mp-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.mp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--dusk);
+  margin-bottom: 56px;
+}
+
+.mp-pillar {
+  background: var(--deep-navy);
+  padding: 40px 32px;
+}
+
+/* ── MOBILE BREAKPOINTS ───────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Multiplayer: stack pillars */
+  .mp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mp-pillar {
+    padding: 28px 20px;
+  }
+
+  /* Horror: stack layout, hide floating animation stage */
+  .horror-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .horror-section {
+    padding: 70px 1.25rem;
+  }
+
+  /* Hide the ghost animation stage on mobile - it clips and overflows */
+  .horror-stage {
+    display: none;
+  }
+
+  /* Multiplayer section padding */
+  .multiplayer-section .section-inner {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Horror card desc wraps cleanly */
+  .horror-card-desc {
+    max-width: none;
+    text-align: left;
+    margin-left: 0;
+    font-size: 11px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -881,9 +948,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 </section>
 
 <!-- ── MULTIPLAYER + FRIENDS SECTION ──────────────────────────── -->
-<section id="multiplayer" style="background:var(--void);border-top:1px solid var(--dusk);overflow:hidden;position:relative" aria-labelledby="multi-heading">
+<section id="multiplayer" class="multiplayer-section" aria-labelledby="multi-heading">
 
-  <div class="section-inner" style="position:relative;z-index:2">
+  <div class="section-inner mp-inner">
     <p class="section-label" style="letter-spacing:5px">Multiplayer &amp; Playing With Friends</p>
     <h2 class="section-title" id="multi-heading" style="max-width:680px">
       Real players. Ghost pros.<br><span style="color:var(--lantern)">Your round, your group, your rules.</span>
@@ -892,10 +959,10 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       Invite real players, drop in ghost pros, run Scramble or stroke play. One live leaderboard for everyone — real and ghost.
     </p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dusk);margin-bottom:56px">
+    <div class="mp-grid">
 
       <!-- Pillar 1: Invite Players -->
-      <div style="background:var(--deep-navy);padding:40px 32px">
+      <div class="mp-pillar">
         <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;border-radius:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
           <svg viewBox="0 0 24 24" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
@@ -912,7 +979,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       </div>
 
       <!-- Pillar 2: Ghost Pros in the Mix -->
-      <div style="background:var(--deep-navy);padding:40px 32px;border-left:1px solid var(--dusk)">
+      <div class="mp-pillar">
         <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;border-radius:8px;background:rgba(237,233,220,0.06);border:1px solid rgba(237,233,220,0.1)">
           <svg viewBox="0 0 20 22.4" width="28" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#EDE9DC" opacity="0.7"/>
@@ -929,7 +996,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       </div>
 
       <!-- Pillar 3: Scramble -->
-      <div style="background:var(--deep-navy);padding:40px 32px;border-left:1px solid var(--dusk)">
+      <div class="mp-pillar">
         <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;border-radius:8px;background:rgba(143,164,196,0.08);border:1px solid rgba(143,164,196,0.2)">
           <svg viewBox="0 0 24 24" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="8" cy="8" r="3" stroke="#8FA4C4" stroke-width="1.5"/>
@@ -947,7 +1014,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 </section>
 
 <!-- ── HORROR MODE ──────────────────────────────────────────── -->
-<section class="horror-section" id="horror" aria-labelledby="horror-heading" style="padding:100px 2rem">
+<section class="horror-section" id="horror" aria-labelledby="horror-heading">
   <div class="horror-inner">
 
     <!-- Left: text -->
