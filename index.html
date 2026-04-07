@@ -1312,7 +1312,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     clouds.forEach(cl=>drawCloud(cl,t));
 
     stars.forEach(s=>{
-      const bright=0.32+0.55*Math.sin(t*s.sp+s.phase);
+      const bright=0.28+0.52*((1+Math.sin(t*s.sp*0.001+s.phase))*0.5);
       ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
       ctx.fillStyle=s.gold?`rgba(201,168,76,${bright})`:`rgba(232,237,246,${bright})`;
       ctx.fill();
