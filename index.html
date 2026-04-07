@@ -640,6 +640,75 @@
     .tour-graphic{margin-top:32px}
   }
 
+
+  /* ── BUILT FOR THE ROUND ───────────────────────────────────── */
+  .built-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--dusk);
+    border:1px solid var(--dusk);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .built-card{
+    background:var(--deep-navy);
+    padding:32px 28px;
+    position:relative;
+    transition:background 0.2s;
+    border-left:3px solid transparent;
+  }
+  .built-card:hover{background:#111d35}
+  .bc-gold{border-left-color:var(--lantern)}
+  .bc-harvest{border-left-color:var(--harvest)}
+  .bc-fog{border-left-color:var(--shadow)}
+  .bc-shadow{border-left-color:#354060}
+  .built-icon{
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+    border-radius:8px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .built-title{
+    font-size:16px;font-weight:500;
+    color:var(--moonlight);
+    letter-spacing:.3px;
+    margin-bottom:8px;
+  }
+  .built-body{
+    font-size:13px;line-height:1.7;
+    color:var(--fog);
+    margin-bottom:14px;
+  }
+  .built-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .built-tag{
+    font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+    padding:3px 8px;border-radius:3px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    color:var(--shadow);
+  }
+  .bc-tag-rare{
+    background:rgba(207,145,32,0.1);
+    border-color:rgba(207,145,32,0.3);
+    color:var(--harvest);
+  }
+  .built-link{
+    font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+    color:var(--lantern);text-decoration:none;
+    transition:color 0.2s;
+  }
+  .built-link:hover{color:var(--moonlight)}
+  @media(max-width:900px){
+    .built-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:600px){
+    .built-grid{grid-template-columns:1fr}
+    .built-card{border-left-width:3px;border-top:none}
+  }
+
 </style>
 </head>
 <body>
@@ -996,134 +1065,6 @@
 </section>
 
 
-<!-- ── FEATURES ───────────────────────────────────────────────── -->
-<section id="features" aria-labelledby="features-heading">
-  <div class="section-inner">
-    <p class="section-label">Features</p>
-    <h2 class="section-title" id="features-heading">Everything a disc golf game needs.<br>Plus ghosts that will actually show up on time.</h2>
-    <p class="section-desc">Built for real rounds, real competition, and the very real moment when you realize Gannon Buhr just birdied hole 11 and you're still on the tee.</p>
-
-    <div class="features-grid" role="list">
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 20 22.4" width="36" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/>
-            <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
-            <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Ghost Opponents</h3>
-        <p class="feat-body">134 ghost pros rated by real PDGA scores. They play statistically. They don't trash talk, regrip for four minutes, or ask if you saw their hyzer flip. They just throw and haunt.</p>
-        <span class="feat-tag">MPO · FPO</span>
-      </article>
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 18l5-5 4 4 5-6 4 3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Live Leaderboard</h3>
-        <p class="feat-body">Running +/− from par updates after every single hole. Rankings shift in real time. The feeling of being passed by a ghost on hole 16 is a specific kind of suffering we are proud to offer.</p>
-        <span class="feat-tag">Hole by Hole</span>
-      </article>
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2l2.5 7.5H22l-6.5 4.7 2.5 7.5L12 17l-6 4.7 2.5-7.5L3 9.5h7.5z" stroke="#A668C4" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Horror Bag Tags</h3>
-        <p class="feat-body">30 horror-themed collectible bag tags across four rarity tiers. Earn them in-round by doing things — some obvious, some not. The Legendary tags are not handed out. They are survived.</p>
-        <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
-          <span class="rarity rc">Common</span>
-          <span class="rarity ru">Uncommon</span>
-          <span class="rarity rr">Rare</span>
-          <span class="rarity rl">Legendary</span>
-        </div>
-      </article>
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 7h18M3 12h14M3 17h10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="20" cy="17" r="2.5" stroke="#C9A84C" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Tour Mode</h3>
-        <p class="feat-body">Multi-round tournaments with DGPT-style points. Run a full season. Standard events, Majors, standings. The format where you can't blame one bad round, which is exactly what disc golfers need and hate.</p>
-        <span class="feat-tag">3–5 Round Events</span>
-      </article>
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M8 4H16Q18 4 18 8Q18 13 12 15Q6 13 6 8Q6 4 8 4Z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M6 7Q3 7 3 10Q3 12 6 12" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M18 7Q21 7 21 10Q21 12 18 12" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <rect x="10" y="15" width="4" height="4" fill="#C9A84C" opacity="0.7"/>
-            <rect x="7" y="19" width="10" height="2" rx="1" fill="#C9A84C"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Custom Tournament</h3>
-        <p class="feat-body">Name your tournament, pick 1–5 rounds, choose a different course before each one. Stroke Play or Scramble. Cumulative leaderboard after every round. Ghost pro teams get horror-themed names. The Uekman Classic is a real thing now.</p>
-        <span class="feat-tag">Multi-Round · Your Name</span>
-      </article>
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M12 7v5l3 3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Round History</h3>
-        <p class="feat-body">Full hole-by-hole archives. Every score, every round, forever. Share your badge when you beat a pro. Use it as evidence when no one believes you. The app has receipts. The ghosts have receipts.</p>
-        <span class="feat-tag">Full Archive</span>
-      </article>
-
-      <article class="feat-card" role="listitem">
-        <div class="feat-icon">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M18.5 2.5a2 2 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="feat-title">Community Par Fixes</h3>
-        <p class="feat-body">Wrong par data? Fix it. Submit 5 corrections and unlock the Bone Collector bag tag. It's the closest disc golf gets to civic virtue, and the app takes it extremely seriously.</p>
-        <span class="feat-tag">7,008 Courses</span>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
-<section style="background:var(--midnight)" aria-labelledby="testimonials-heading">
-  <div class="section-inner">
-    <p class="section-label">Definitely Real Reviews</p>
-    <h2 class="section-title" id="testimonials-heading">Five stars.<br>From people who may or may not exist.</h2>
-
-    <div class="testi-grid" role="list">
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"I added ghost Gannon Buhr and he birdied the first hole while I was still explaining to my friend why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had accepted my life."</blockquote>
-        <p class="testi-byline">— Chad, 41, owns 340 discs, uses 7</p>
-      </div>
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"The guy in my group explained the physics of hyzer-flip for the entire back nine. I was +14 by hole 12. Ghost Ricky Wysocki was -9. Neither of us said a word about it. Ricky because he's a ghost. Me because I was in shock."</blockquote>
-        <p class="testi-byline">— Definitely not making this up, Oregon</p>
-      </div>
-      <div class="testi-card" role="listitem">
-        <blockquote class="testi-quote">"A group of eleven people was camped on hole 4 doing a birthday round at 2pm on a Saturday. I opened Ghost Card. The ghosts played through immediately. The ghosts understand me in a way real people don't."</blockquote>
-        <p class="testi-byline">— Solo player, always, everywhere</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── HORROR MODE ──────────────────────────────────────────── -->
 <section class="horror-section" id="horror" aria-labelledby="horror-heading" style="padding:100px 2rem">
   <div class="horror-inner">
@@ -1183,56 +1124,128 @@
   </div>
 </section>
 
-<!-- ── WHAT'S IN THE BAG ────────────────────────────────────── -->
-<section style="background:var(--abyss)" id="features" aria-labelledby="features-heading">
+<!-- ── BUILT FOR THE ROUND ──────────────────────────────────── -->
+<section style="background:var(--abyss);border-top:1px solid var(--dusk)" aria-labelledby="built-heading">
   <div class="section-inner">
-    <p class="section-label">What's In The Bag</p>
-    <h2 class="section-title" id="features-heading">More than a scorecard.</h2>
-    <p class="section-desc">Ghost Card runs deeper than the leaderboard. Three systems worth knowing about before you tee off.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dusk)">
+    <div style="max-width:560px;margin-bottom:56px">
+      <p class="section-label">Built for the Round</p>
+      <h2 class="section-title" id="built-heading">Every piece of the game.<br>None of the fluff.</h2>
+    </div>
 
-      <!-- Bag Tags -->
-      <div style="background:var(--deep-navy);padding:36px 28px">
-        <div style="width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2L8 6H4v4l-2 2 2 2v4h4l4 4 4-4h4v-4l2-2-2-2V6h-4L12 2z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
-            <circle cx="12" cy="12" r="2" fill="#C9A84C"/>
+    <div class="built-grid">
+
+      <!-- Ghost Opponents -->
+      <div class="built-card bc-gold">
+        <div class="built-icon">
+          <svg viewBox="0 0 20 22.4" width="28" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C" opacity="0.9"/>
+            <ellipse cx="7.4" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.5)"/>
+            <ellipse cx="12.6" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.5)"/>
           </svg>
         </div>
-        <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px">30 Bag Tags</h3>
-        <p style="font-size:13.5px;line-height:1.65;color:var(--fog);margin-bottom:16px">Collectible tags earned through gameplay — never purchased. Each one references a horror film archetype and has a specific, deterministic unlock condition. Common to Legendary. You either did the thing or you didn't.</p>
-        <a href="docs/bag-tags.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lantern);text-decoration:none">See all 30 tags →</a>
+        <h3 class="built-title">134 Ghost Pros</h3>
+        <p class="built-body">Rated by real PDGA scores. They play statistically, show up on time, and have never once asked what disc you threw on hole 6.</p>
+        <div class="built-tags"><span class="built-tag">MPO</span><span class="built-tag">FPO</span></div>
       </div>
 
-      <!-- Round History -->
-      <div style="background:var(--deep-navy);padding:36px 28px;border-left:1px solid var(--dusk)">
-        <div style="width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18z" stroke="#8FA4C4" stroke-width="1.5"/>
-            <path d="M12 7v5l3 3" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M5.5 5.5L3 3M18.5 5.5L21 3" stroke="#546082" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- Live Leaderboard -->
+      <div class="built-card bc-fog">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polyline points="3,17 7,10 12,13 17,6 21,8" stroke="#8FA4C4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="3" y1="21" x2="21" y2="21" stroke="#546082" stroke-width="1"/>
+            <circle cx="3" cy="17" r="1.5" fill="#8FA4C4"/>
+            <circle cx="7" cy="10" r="1.5" fill="#8FA4C4"/>
+            <circle cx="12" cy="13" r="1.5" fill="#8FA4C4"/>
+            <circle cx="17" cy="6" r="1.5" fill="#8FA4C4"/>
+            <circle cx="21" cy="8" r="1.5" fill="#8FA4C4"/>
           </svg>
         </div>
-        <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px">Round Archive</h3>
-        <p style="font-size:13.5px;line-height:1.65;color:var(--fog);margin-bottom:16px">Every round saved. Every hole documented. Your GC Rating tracked over time so you can watch yourself improve — or watch yourself plateau at the same score on hole 7 for six consecutive weeks. The ghosts never forget. Neither does the archive.</p>
-        <a href="docs/history.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--fog);text-decoration:none">About the archive →</a>
+        <h3 class="built-title">Live Leaderboard</h3>
+        <p class="built-body">Running +/− from par after every hole. Rankings shift in real time. Being passed by a ghost on hole 16 is a specific kind of suffering.</p>
+        <div class="built-tags"><span class="built-tag">Hole by hole</span></div>
+      </div>
+
+      <!-- Bag Tags -->
+      <div class="built-card bc-harvest">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L8.5 6H4v4.5L2 12l2 1.5V18h4.5L12 22l3.5-4H20v-4.5L22 12l-2-1.5V6h-4.5L12 2z" stroke="#CF9120" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="2" fill="#CF9120"/>
+          </svg>
+        </div>
+        <h3 class="built-title">30 Bag Tags</h3>
+        <p class="built-body">Horror-themed collectibles earned in-round by doing specific things. Four rarity tiers. Never purchased. The Legendary tags are not handed out — they're survived.</p>
+        <div class="built-tags"><span class="built-tag">Common</span><span class="built-tag bc-tag-rare">Legendary</span></div>
+        <a href="docs/bag-tags.html" class="built-link">See all 30 →</a>
       </div>
 
       <!-- GC Rating -->
-      <div style="background:var(--deep-navy);padding:36px 28px;border-left:1px solid var(--dusk)">
-        <div style="width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <polyline points="3,17 8,11 13,14 21,6" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="21" cy="6" r="1.5" fill="#8FA4C4"/>
-            <line x1="3" y1="21" x2="21" y2="21" stroke="#546082" stroke-width="1"/>
+      <div class="built-card bc-fog">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="#8FA4C4" stroke-width="1.5"/>
+            <path d="M12 7v5l3.5 2" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M7.5 7.5L5.5 5.5M16.5 7.5L18.5 5.5" stroke="#546082" stroke-width="1" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3 style="font-size:17px;font-weight:500;color:var(--moonlight);margin-bottom:8px;letter-spacing:.3px">GC Rating</h3>
-        <p style="font-size:13.5px;line-height:1.65;color:var(--fog);margin-bottom:16px">Every completed round generates a Ghost Card Rating — a number that reflects how you scored relative to the ghost pros on your card. It's not a handicap. It's a mirror. It updates after every round and lives on your profile whether you want it to or not.</p>
-        <a href="docs/scoring.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--fog);text-decoration:none">Read the scoring docs →</a>
+        <h3 class="built-title">GC Rating</h3>
+        <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it to or not.</p>
+        <a href="docs/scoring.html" class="built-link">How it's calculated →</a>
       </div>
 
+      <!-- Round Archive -->
+      <div class="built-card bc-shadow">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="4" width="14" height="18" rx="2" stroke="#546082" stroke-width="1.5"/>
+            <rect x="7" y="2" width="14" height="18" rx="2" stroke="#8FA4C4" stroke-width="1.5"/>
+            <path d="M11 9h6M11 12h4" stroke="#8FA4C4" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="built-title">Round Archive</h3>
+        <p class="built-body">Every round saved, every hole documented. Share your badge when you beat a ghost pro. The app has receipts. The ghosts have receipts. Up to 50 rounds stored per account.</p>
+        <a href="docs/history.html" class="built-link">About the archive →</a>
+      </div>
+
+      <!-- Par Corrections -->
+      <div class="built-card bc-gold">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="built-title">Community Par Fixes</h3>
+        <p class="built-body">Wrong par on a course? Fix it. 7,008 courses means crowdsourced accuracy. Submit 5 corrections and unlock the Bone Collector bag tag — disc golf's closest equivalent to civic virtue.</p>
+        <div class="built-tags"><span class="built-tag">7,008 courses</span></div>
+        <a href="docs/par-corrections.html" class="built-link">How it works →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
+<section style="background:var(--midnight)" aria-labelledby="testimonials-heading">
+  <div class="section-inner">
+    <p class="section-label">Definitely Real Reviews</p>
+    <h2 class="section-title" id="testimonials-heading">Five stars.<br>From people who may or may not exist.</h2>
+
+    <div class="testi-grid" role="list">
+      <div class="testi-card" role="listitem">
+        <blockquote class="testi-quote">"I added ghost Gannon Buhr and he birdied the first hole while I was still explaining to my friend why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had accepted my life."</blockquote>
+        <p class="testi-byline">— Chad, 41, owns 340 discs, uses 7</p>
+      </div>
+      <div class="testi-card" role="listitem">
+        <blockquote class="testi-quote">"The guy in my group explained the physics of hyzer-flip for the entire back nine. I was +14 by hole 12. Ghost Ricky Wysocki was -9. Neither of us said a word about it. Ricky because he's a ghost. Me because I was in shock."</blockquote>
+        <p class="testi-byline">— Definitely not making this up, Oregon</p>
+      </div>
+      <div class="testi-card" role="listitem">
+        <blockquote class="testi-quote">"A group of eleven people was camped on hole 4 doing a birthday round at 2pm on a Saturday. I opened Ghost Card. The ghosts played through immediately. The ghosts understand me in a way real people don't."</blockquote>
+        <p class="testi-byline">— Solo player, always, everywhere</p>
+      </div>
     </div>
   </div>
 </section>
