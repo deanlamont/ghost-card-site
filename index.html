@@ -44,6 +44,9 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ghost Card","applicationCategory":"SportsApplication","operatingSystem":"Web","description":"Disc golf game with ghost opponent mode, live leaderboards, horror bag tag collectibles, and multiplayer support across 7,008 US courses.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://ghostcard.live"}
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:wght@700;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -787,8 +790,6 @@
 
 
   /* ── NEWSPAPER CLIPPINGS ────────────────────────────────────── */
-  @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:wght@700;900&family=IM+Fell+English:ital@0;1&display=swap');
-
   .newspaper-section{
     background:var(--abyss);
     border-top:1px solid var(--dusk);
@@ -1410,7 +1411,43 @@
           </svg>
         </div>
         <h3 class="built-title">GC Rating</h3>
-        <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it t<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
+        <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it to or not.</p>
+        <a href="docs/scoring.html" class="built-link">How it's calculated →</a>
+      </div>
+
+      <!-- Scramble Mode -->
+      <div class="built-card bc-fog">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="8" cy="8" r="3" stroke="#8FA4C4" stroke-width="1.5"/>
+            <circle cx="16" cy="8" r="3" stroke="#8FA4C4" stroke-width="1.5"/>
+            <path d="M2 20c0-3.3 2.7-6 6-6h8c3.3 0 6 2.7 6 6" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 14h4" stroke="#546082" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="built-title">Scramble Mode</h3>
+        <p class="built-body">Team format — everyone throws, best lie wins. Ghost teams get horror names like "The Disc Reapers" and "Bogey or Die." Cumulative leaderboard updates after every round. A completely different game.</p>
+        <div class="built-tags"><span class="built-tag">Teams</span><span class="built-tag">Best lie</span></div>
+      </div>
+
+      <!-- Live Invites -->
+      <div class="built-card bc-shadow">
+        <div class="built-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M22 16.5a5.5 5.5 0 0 1-5.5 5.5H7a5 5 0 0 1 0-10h.5" stroke="#546082" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 4l4 4-4 4M18 8H9" stroke="#8FA4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="built-title">Live Invites</h3>
+        <p class="built-body">Invite real Ghost Card users into your round before you tee off. They join your card, your leaderboard, your misery. Mix with ghost pros however you want. No Bluetooth. No handshake. Just a code.</p>
+        <div class="built-tags"><span class="built-tag">Real players</span><span class="built-tag">Any mix</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
 <section class="newspaper-section" aria-labelledby="testimonials-heading">
 
   <div class="newspaper-header">
