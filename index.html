@@ -709,6 +709,82 @@
     .built-card{border-left-width:3px;border-top:none}
   }
 
+
+  /* ── PULL QUOTES ────────────────────────────────────────────── */
+  .pullquote-section{
+    background:var(--midnight);
+    border-top:1px solid var(--dusk);
+    padding:100px 2rem;
+  }
+  .pullquote-header{
+    text-align:center;margin-bottom:80px;
+  }
+  .pullquote-header .section-label{justify-content:center;display:block;text-align:center}
+  .pullquote-header h2{
+    font-size:clamp(20px,3.5vw,32px);font-weight:300;
+    color:var(--moonlight);letter-spacing:1px;margin-top:10px;
+  }
+  .pullquote-stack{
+    display:flex;flex-direction:column;gap:0;
+    max-width:860px;margin:0 auto;
+  }
+  .pullquote-item{
+    position:relative;
+    padding:56px 0 56px 0;
+    border-bottom:1px solid var(--dusk);
+  }
+  .pullquote-item:first-child{border-top:1px solid var(--dusk)}
+  .pq-mark{
+    position:absolute;
+    top:36px;left:-20px;
+    font-size:120px;line-height:1;
+    color:var(--lantern);
+    opacity:0.12;
+    font-family:Georgia,serif;
+    font-weight:700;
+    pointer-events:none;
+    user-select:none;
+    line-height:0.8;
+  }
+  .pq-quote{
+    font-size:clamp(18px,2.8vw,28px);
+    font-weight:300;
+    line-height:1.5;
+    color:var(--moonlight);
+    letter-spacing:0.2px;
+    margin-bottom:24px;
+    padding-left:0;
+  }
+  .pq-quote em{
+    font-style:normal;
+    color:var(--lantern);
+  }
+  .pq-byline{
+    font-size:11px;font-weight:600;
+    letter-spacing:3px;text-transform:uppercase;
+    color:var(--shadow);
+    display:flex;align-items:center;gap:12px;
+  }
+  .pq-byline::before{
+    content:'';display:inline-block;
+    width:24px;height:1px;
+    background:var(--dusk);
+  }
+  .pq-stars{
+    display:flex;gap:3px;margin-left:auto;
+    opacity:0.5;
+  }
+  .pq-star{
+    width:10px;height:10px;
+    color:var(--lantern);font-size:10px;
+  }
+  @media(max-width:640px){
+    .pullquote-section{padding:70px 1.25rem}
+    .pq-mark{font-size:80px;left:-8px}
+    .pq-quote{font-size:clamp(16px,4.5vw,22px)}
+    .pullquote-item{padding:44px 0}
+  }
+
 </style>
 </head>
 <body>
@@ -1191,34 +1267,55 @@
           </svg>
         </div>
         <h3 class="built-title">GC Rating</h3>
-        <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it to or not.</p>
-        <a href="docs/scoring.html" class="built-link">How it's calculated →</a>
-      </div>
+        <p class="built-body">A number generated after every round — how you scored relative to the ghost pros on your card. Not a handicap. A mirror. It lives on your profile whether you want it t<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
+<section class="pullquote-section" aria-labelledby="testimonials-heading">
+  <div class="pullquote-header">
+    <p class="section-label">Definitely Real Reviews</p>
+    <h2 id="testimonials-heading">Five stars. From people who may or may not exist.</h2>
+  </div>
 
-      <!-- Round Archive -->
-      <div class="built-card bc-shadow">
-        <div class="built-icon">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="3" y="4" width="14" height="18" rx="2" stroke="#546082" stroke-width="1.5"/>
-            <rect x="7" y="2" width="14" height="18" rx="2" stroke="#8FA4C4" stroke-width="1.5"/>
-            <path d="M11 9h6M11 12h4" stroke="#8FA4C4" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3 class="built-title">Round Archive</h3>
-        <p class="built-body">Every round saved, every hole documented. Share your badge when you beat a ghost pro. The app has receipts. The ghosts have receipts. Up to 50 rounds stored per account.</p>
-        <a href="docs/history.html" class="built-link">About the archive →</a>
-      </div>
+  <div class="pullquote-stack" role="list">
 
-      <!-- Par Corrections -->
-      <div class="built-card bc-gold">
-        <div class="built-icon">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="built-title">Community Par Fixes</h3>
-        <p class="built-body">Wrong par on a course? Fix it. 7,008 courses means crowdsourced accuracy. Submit 5 corrections and unlock the Bone Collector bag tag — disc golf's closest equivalent to civic virtue.</p>
+    <div class="pullquote-item" role="listitem">
+      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
+      <p class="pq-quote">I added ghost Gannon Buhr and he birdied the first hole while I was still explaining to my friend why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had <em>accepted my life.</em></p>
+      <div class="pq-byline">
+        Chad, 41, owns 340 discs, uses 7
+        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+      </div>
+    </div>
+
+    <div class="pullquote-item" role="listitem">
+      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
+      <p class="pq-quote">I put ghost Raptor Legs on my card. He eagled hole 3 while I was still trying to find my disc in the rough. I didn't say anything. <em>What would I even say.</em></p>
+      <div class="pq-byline">
+        Still processing, Wisconsin
+        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+      </div>
+    </div>
+
+    <div class="pullquote-item" role="listitem">
+      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
+      <p class="pq-quote">A group of eleven people was camped on hole 4 doing a birthday round at 2pm on a Saturday. I opened Ghost Card. The ghosts played through immediately. <em>The ghosts understand me in a way real people don't.</em></p>
+      <div class="pq-byline">
+        Solo player, always, everywhere
+        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+      </div>
+    </div>
+
+    <div class="pullquote-item" role="listitem">
+      <div class="pq-mark" aria-hidden="true">&ldquo;</div>
+      <p class="pq-quote">Ghost Joey Buckets drained a 60-foot putt on hole 12. I was standing six feet away and missed. My playing partner said &ldquo;at least you're consistent.&rdquo; <em>I have not recovered.</em></p>
+      <div class="pq-byline">
+        Recovering, slowly, Tennessee
+        <div class="pq-stars" aria-label="5 stars">★★★★★</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+08 courses means crowdsourced accuracy. Submit 5 corrections and unlock the Bone Collector bag tag — disc golf's closest equivalent to civic virtue.</p>
         <div class="built-tags"><span class="built-tag">7,008 courses</span></div>
         <a href="docs/par-corrections.html" class="built-link">How it works →</a>
       </div>
