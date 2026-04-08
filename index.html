@@ -782,11 +782,11 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 /* ── THREE GHOSTS SECTION RESPONSIVE ──────────────────────────── */
 @media(max-width:768px){
-  #friends .section-inner > div:nth-child(2){grid-template-columns:1fr !important}
-  #friends .section-inner > div:nth-child(3){grid-template-columns:repeat(2,1fr) !important}
+  #ghosts .section-inner > div:nth-child(2){grid-template-columns:1fr !important}
+  #ghosts .section-inner > div:nth-child(3){grid-template-columns:repeat(2,1fr) !important}
 }
 @media(max-width:500px){
-  #friends .section-inner > div:nth-child(3){grid-template-columns:1fr !important}
+  #ghosts .section-inner > div:nth-child(3){grid-template-columns:1fr !important}
 }
 
 
@@ -836,7 +836,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 .gc-svg{position:relative;z-index:2}
 .gc-svg-pro{width:80px;height:90px;filter:drop-shadow(0 0 18px rgba(237,233,220,0.3));animation:ghost-hover1 4.5s ease-in-out infinite}
 .gc-svg-pb{width:68px;height:77px;filter:drop-shadow(0 0 18px rgba(201,168,76,0.35));animation:ghost-hover2 5s ease-in-out 0.4s infinite}
-.gc-svg-friend{width:62px;height:70px;filter:drop-shadow(0 0 18px rgba(123,200,200,0.3));animation:ghost-hover3 4.2s ease-in-out 0.8s infinite}
+.gc-svg-friend{width:62px;height:70px;filter:drop-shadow(0 0 18px rgba(201,168,76,0.2));animation:ghost-hover3 4.2s ease-in-out 0.8s infinite}
 @keyframes ghost-hover1{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes ghost-hover2{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes ghost-hover3{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -917,7 +917,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
   </a>
   <nav class="nav-links" aria-label="Main navigation">
-    <a href="#friends">Friends</a>
+    <a href="#ghosts">Ghosts</a>
     <a href="#tour">Tour</a>
     <a href="#horror">Horror</a>
     <a href="docs/index.html">Docs</a>
@@ -933,7 +933,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 <!-- ── MOBILE MENU ───────────────────────────────────────────── -->
 <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
-  <a href="#friends">Friends</a>
+  <a href="#ghosts">Ghosts</a>
   <a href="#tour">Tour</a>
   <a href="#horror">Horror</a>
   <a href="docs/index.html">Docs</a>
@@ -964,7 +964,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
     <p class="hero-tagline">Real Disc Golf. Video Game Soul.</p>
     <h1 class="hero-headline" id="hero-heading">Play the pros.<br><em>On your home course.</em></h1>
-    <p class="hero-sub">Step onto any of 7,008 US courses and tee off against rated PDGA pros — as ghosts on your live leaderboard. Solo or with friends. Free.</p>
+    <p class="hero-sub">Step onto any of 7,008 US courses and tee off against rated PDGA pros — as ghosts on your live leaderboard. Solo or multiplayer. Free.</p>
 
     <div class="hero-cta">
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Play Ghost Card free">Play Free</button>
@@ -1003,10 +1003,10 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
           <div class="ticker-score under" style="color:var(--lantern)">-2</div>
           <div class="ticker-thru" style="color:var(--lantern);opacity:0.6">14</div>
         </div>
-        <div class="ticker-row" style="opacity:0;animation:row-in 0.4s ease-out 3.0s forwards;background:rgba(123,200,200,0.05)">
-          <div><span class="ticker-pos">—</span><span class="ticker-name" style="color:#7BC8C8">Jake <span class="ghost-badge" style="color:#7BC8C8;opacity:0.6">friend</span></span></div>
-          <div class="ticker-score over" style="color:#7BC8C8">+1</div>
-          <div class="ticker-thru" style="color:#7BC8C8;opacity:0.6">14</div>
+        <div class="ticker-row" style="opacity:0;animation:row-in 0.4s ease-out 3.0s forwards">
+          <div><span class="ticker-pos">72</span><span class="ticker-name">K. Jones</span></div>
+          <div class="ticker-score over">+1</div>
+          <div class="ticker-thru">14</div>
         </div>
         <div class="ticker-row" style="opacity:0;animation:row-in 0.4s ease-out 3.3s forwards">
           <div><span class="ticker-pos">99</span><span class="ticker-name you"><span class="ticker-name-inner">You</span></span></div>
@@ -1021,15 +1021,16 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 
 
-<!-- ── THREE GHOSTS. ONE LEADERBOARD. ────────────────────────────── -->
-<section class="ghosts-section" id="friends" aria-labelledby="ghosts-heading">
+<!-- ── YOUR PAST IS HAUNTING YOU ────────────────────────────── -->
+
+<section class="ghosts-section" id="ghosts" aria-labelledby="ghosts-heading">
   <div class="ghosts-inner">
 
-    <!-- Left: the three ghosts stage -->
+    <!-- Left: the ghost stage -->
     <div class="ghosts-stage" aria-hidden="true">
       <div class="ghosts-stage-bg"></div>
 
-      <!-- Leaderboard line connecting the three ghosts -->
+      <!-- Leaderboard line connecting the ghosts -->
       <div class="lb-line"></div>
 
       <!-- Pro ghost — cream, tallest position -->
@@ -1056,24 +1057,24 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         <div class="gc-score gc-score-gold">−2</div>
       </div>
 
-      <!-- Friend ghost — cyan, lower position -->
+      <!-- Your Past — faded gold, the ghost of who you were -->
       <div class="ghost-col gc-friend">
-        <div class="ghost-glow-ring gc-glow-cyan"></div>
-        <svg class="gc-svg gc-svg-friend" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#7BC8C8"/>
-          <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.4)"/>
-          <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.4)"/>
+        <div class="ghost-glow-ring gc-glow-gold" style="opacity:0.35"></div>
+        <svg class="gc-svg gc-svg-friend" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" style="opacity:0.45">
+          <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/>
+          <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
+          <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
         </svg>
-        <div class="gc-label gc-label-cyan">Friend</div>
-        <div class="gc-score gc-score-cyan">+1</div>
+        <div class="gc-label gc-label-gold" style="opacity:0.45">Your Past</div>
+        <div class="gc-score gc-score-gold" style="opacity:0.45">+4</div>
       </div>
     </div>
 
     <!-- Right: text -->
     <div class="ghosts-text">
-      <p class="ghosts-label">Three Ghosts. One Leaderboard.</p>
-      <h2 class="ghosts-title" id="ghosts-heading">The solo round was<br>never really solo.</h2>
-      <p class="ghosts-desc">Every leaderboard runs three ghost layers alongside you. Each one color-coded. Each one using real hole-by-hole score data. No simulations. No estimates. Just the truth about where you stand.</p>
+      <p class="ghosts-label">Your Past Is Haunting You.</p>
+      <h2 class="ghosts-title" id="ghosts-heading">Every round you've ever played<br>is still out there.</h2>
+      <p class="ghosts-desc">Ghost Card tracks your personal best at every course, hole by hole. That gold row on the leaderboard is the best version of you — and it remembers every birdie. Every ace. Every putt you'll never hit again. Beat it and the app celebrates. Lose to it and, well. You know what you did last Tuesday.</p>
 
       <div class="ghosts-layers">
         <div class="gl-row gl-row-1">
@@ -1082,41 +1083,41 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         </div>
         <div class="gl-row gl-row-2">
           <div class="gl-dot" style="background:var(--lantern)"></div>
-          <div class="gl-info"><span class="gl-name" style="color:var(--lantern)">Your Personal Best</span><span class="gl-detail">Your previous best at this course. Beat it and Round Complete celebrates with a full comparison.</span></div>
+          <div class="gl-info"><span class="gl-name" style="color:var(--lantern)">Your Personal Best</span><span class="gl-detail">The gold ghost. Your best round at this course, hole by hole. It never has a bad day. It never three-putts. It just sits there on the leaderboard, being better than you.</span></div>
         </div>
         <div class="gl-row gl-row-3">
-          <div class="gl-dot" style="background:#7BC8C8"></div>
-          <div class="gl-info"><span class="gl-name" style="color:#7BC8C8">Friend Ghost</span><span class="gl-detail">Your friend’s best round appears on your leaderboard. If they birdied hole 7, you’ll see it on hole 7.</span></div>
+          <div class="gl-dot" style="background:var(--lantern);opacity:0.4"></div>
+          <div class="gl-info"><span class="gl-name" style="color:var(--lantern);opacity:0.55">Your Worst Nightmare</span><span class="gl-detail">You. From three months ago. Still on the leaderboard. Still ahead of you on hole 12. Some ghosts you can't outrun.</span></div>
         </div>
       </div>
 
       <!-- Supporting features -->
       <div class="ghosts-features">
-        <div class="gf-chip"><span class="gf-chip-label">Friends &amp; Feed</span><span class="gf-chip-detail">20 friends · activity feed · scorecards</span></div>
-        <div class="gf-chip"><span class="gf-chip-label">Head-to-Head</span><span class="gf-chip-detail">shared courses · side by side</span></div>
+        <div class="gf-chip"><span class="gf-chip-label">Beat Your Ghost</span><span class="gf-chip-detail">PB comparison · strokes gained</span></div>
         <div class="gf-chip"><span class="gf-chip-label">Rating Trend</span><span class="gf-chip-detail">sparkline · last 20 rounds</span></div>
         <div class="gf-chip"><span class="gf-chip-label">Share Badge</span><span class="gf-chip-detail">exportable · brand treatment</span></div>
+        <div class="gf-chip"><span class="gf-chip-label">Round History</span><span class="gf-chip-detail">every round · every course · forever</span></div>
       </div>
 
       <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:32px">
-        <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" style="font-size:12px;padding:12px 24px">Add Your First Friend</button>
-        <a href="docs/friends-and-feed.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--fog);text-decoration:none" onmouseover="this.style.color='var(--lantern)'" onmouseout="this.style.color='var(--fog)'">Friends &amp; Feed docs →</a>
+        <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" style="font-size:12px;padding:12px 24px">Start Your First Round</button>
+        <a href="docs/scoring.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--fog);text-decoration:none" onmouseover="this.style.color='var(--lantern)'" onmouseout="this.style.color='var(--fog)'">Scoring docs →</a>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ── MULTIPLAYER + FRIENDS SECTION ──────────────────────────── -->
+<!-- ── MULTIPLAYER SECTION ──────────────────────────── -->
 <section id="multiplayer" class="multiplayer-section" aria-labelledby="multi-heading">
 
   <div class="section-inner mp-inner">
-    <p class="section-label" style="letter-spacing:5px">Multiplayer &amp; Playing With Friends</p>
+    <p class="section-label" style="letter-spacing:5px">Multiplayer</p>
     <h2 class="section-title" id="multi-heading" style="max-width:680px">
       Real players. Ghost pros.<br><span style="color:var(--lantern)">Your round, your group, your rules.</span>
     </h2>
     <p style="font-size:15px;line-height:1.7;color:var(--fog);margin-bottom:60px;max-width:560px">
-      Invite real players, drop in ghost pros, add friends, run Scramble or stroke play. One shared leaderboard for everyone — real and ghost.
+      Invite real players, drop in ghost pros, run Scramble or stroke play. One shared leaderboard for everyone — real and ghost.
     </p>
 
     <div class="mp-grid">

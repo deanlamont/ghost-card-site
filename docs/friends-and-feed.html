@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Friends & Feed — Ghost Card Docs</title>
-<meta name="description" content="Ghost Card social features — adding friends, activity feed, friend ghost, PB ghost, head-to-head, rating trend, share badge."/>
+<title>Friends & Multiplayer — Ghost Card Docs</title>
+<meta name="description" content="Ghost Card social features — adding friends, multiplayer quick-add, PB ghost, rating trend, share badge."/>
 <link rel="icon" href="/favicon.ico" sizes="any"/><meta name="theme-color" content="#0D1426"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -169,39 +169,30 @@ footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2re
 <header class="doc-hero">
 <svg viewBox="0 0 20 22.4" width="48" height="54" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="doc-hero-ghost"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
 <p class="eyebrow">10 · Social</p>
-<h1>Friends &amp; Feed</h1>
-<p class="lead">Add friends, see their rounds, race their ghost on your leaderboard.</p>
+<h1>Friends &amp; Multiplayer</h1>
+<p class="lead">Add friends, quick-add them to your card, race your own ghost.</p>
 </header>
 <main class="doc-wrap fi fi-d1">
-<div class="doc-breadcrumb"><a href="index.html">Docs</a> <span style="color:var(--dusk)">/</span> Friends & Feed</div>
+<div class="doc-breadcrumb"><a href="index.html">Docs</a> <span style="color:var(--dusk)">/</span> Friends & Multiplayer</div>
 <h2>Adding friends</h2>
 <p>Go to the <strong>Profile</strong> tab and search by display name. Friendships are <strong>mutual</strong> — both players must add each other. Cap is <strong>20 friends</strong>. No follower counts, no likes, no algorithms.</p>
 
-<h2>The Feed</h2>
-<p>The <strong>Feed</strong> tab shows friends' recent rounds from the last 30 days (up to 50 entries). Each entry shows course, score, GC Rating, and date. Tap to expand the full scorecard.</p>
-
-<h2 id="friend-ghost">Friend ghost</h2>
-<div class="ghost-layer"><div class="gl-bar gl-cyan"></div><div class="gl-label">Friend ghost</div><div class="gl-desc">Cyan row on the leaderboard — your friend's best round at this course, hole by hole.</div></div>
-<p>Real score data. Not simulated. You're racing their actual round.</p>
-<p>The friend ghost is <strong>optional</strong>. A toggle appears during <a href="building-a-card.html#friend-ghost-toggle">card setup</a> when you have at least one accepted friend. On by default. Turn it off if you want a quieter leaderboard — just you, the pros, and your personal best.</p>
+<h2>Quick-add in multiplayer</h2>
+<p>During card setup, friends appear as <strong>quick-add chips</strong>. One tap to add a friend to the card. No typing, no searching. They're already in the field.</p>
 
 <h2 id="pb-ghost">Personal best ghost</h2>
 <div class="ghost-layer"><div class="gl-bar gl-gold"></div><div class="gl-label">YOUR BEST</div><div class="gl-desc">Gold row — your previous best at this course, tracking hole by hole.</div></div>
-<p>Beat your PB and Round Complete celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained.</p>
-<p>The PB ghost is always on. No toggle, no setup step. If you've played the course before, it's there.</p>
-
-<h2 id="h2h">Head-to-head</h2>
-<p>Auto-surfaces courses you and a friend have both played. Compares best scores side by side — no searching, no setup.</p>
+<p>That gold row on the leaderboard is the best version of you. It remembers every birdie. Every ace. Every putt you'll never hit again. It never has a bad day. It never three-putts. It just sits there, being better than you.</p>
+<p>Beat your PB and Round Complete celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained. Lose to it and the leaderboard doesn't say anything. It doesn't have to.</p>
+<p>The PB ghost is always on. No toggle, no setup step. If you've played the course before, it's there. Your past is haunting you.</p>
 
 <h2 id="rating-trend">Rating trend</h2>
 <p>Sparkline chart on History — GC Rating across your last 20 rated rounds. Green means improving, orange means declining. Best-ever rating is marked. Requires 2+ rated rounds.</p>
 
 <h2 id="share-badge">Share badge</h2>
 <p>Every completed round generates an exportable <strong>summary badge</strong> — course, date, score, division, format, GC Rating. Brand treatment: dark background, gold accents, FlatGhost icon. Export to social, messages, wherever.</p>
-<div class="doc-tags"><span class="doc-tag-cyan">New</span></div>
+<div class="doc-tags"><span class="doc-tag-gold">New</span></div>
 
-<h2>Quick-add in multiplayer</h2>
-<p>During card setup, friends appear as <strong>quick-add chips</strong>. One tap to add a friend to the card.</p>
 <div class="doc-nav-bot"><a href="horror-mode.html">← Horror Mode</a><span></span></div>
 </main>
 <footer>
