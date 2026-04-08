@@ -12,6 +12,11 @@ Ghost Card lets disc golfers:
 - Save and review full round history with hole-by-hole breakdowns
 - Submit community par corrections for any of 7,008 US disc golf courses
 - Play Horror Mode — a 50-card overlay game on top of a normal round (2+ players)
+- Add friends and see their recent rounds in an activity feed
+- Race a friend's best ghost on the live leaderboard (cyan ghost row)
+- Beat your own Personal Best ghost at each course (gold ghost row)
+- Track GC Rating trend over your last 20 rounds with a visual sparkline
+- Share round badges — exportable summary images of completed rounds
 
 ## App
 
@@ -35,6 +40,22 @@ Supports Standard events (3 rounds), Elite+ events, Majors (5 rounds), and Final
 
 A 50-card card game overlay played on top of a normal disc golf round. Requires 2+ players. Cards fall into four categories: Haunt (played on opponents), Spirit (played on yourself), Reckoning (held until round end), and Wild. Skins are tracked per hole.
 
+## Friends & Feed
+
+Mutual friendships with a 20-friend cap. Add friends by display name on the Profile tab. The Feed tab shows friends' recent rounds (last 30 days, up to 50 entries) with full scorecard expansion. Head-to-Head view compares best scores at shared courses. Friend ghosts appear as cyan rows on the live leaderboard when playing courses friends have played. Quick-add friend chips appear during card setup for multiplayer rounds.
+
+## Personal Best Ghost
+
+When playing a course you've played before, your previous best round appears as a gold "YOUR BEST" ghost row on the live leaderboard, tracking hole by hole with real score data. Round Complete shows new PB celebrations with hole-by-hole comparisons.
+
+## Rating Trend
+
+A sparkline chart on the History screen shows GC Rating movement across the last 20 rated rounds. Green trend line means improving, orange means declining. Best-ever rating is marked. Requires 2+ rated rounds.
+
+## Share Badge
+
+Every completed round generates an exportable summary badge image showing course, date, score, division, format, and GC Rating. Uses Ghost Card brand treatment (dark background, gold accents, FlatGhost icon).
+
 ## Documentation
 
 Full documentation: https://ghostcard.live/docs/
@@ -47,6 +68,7 @@ Full documentation: https://ghostcard.live/docs/
 - Par Corrections: https://ghostcard.live/docs/par-corrections.html
 - Account & Profile: https://ghostcard.live/docs/account.html
 - Horror Mode: https://ghostcard.live/docs/horror-mode.html
+- Friends & Feed: https://ghostcard.live/docs/friends-and-feed.html
 
 ## Brand
 

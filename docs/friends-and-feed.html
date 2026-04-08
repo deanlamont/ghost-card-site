@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Friends &amp; Feed — Ghost Card Docs</title>
+<meta name="description" content="Ghost Card friends system and activity feed. Add friends, see their rounds, race their ghosts on your leaderboard.">
+<link rel="canonical" href="https://ghostcard.live/docs/friends-and-feed.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
+    --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
+    --purple:#A668C4;--cyan:#7BC8C8;--lime:#8FB84A;--orange:#E88B3A;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,20,38,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
+  .nav-logo svg{width:20px;height:22px}
+  .nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:3.5px;display:flex;line-height:1}
+  .ghost-part{color:#EDE9DC}.card-part{color:#CF9120}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--lantern)}
+  .nav-links a.active{color:var(--lantern)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+  .btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
+
+  /* ── HAMBURGER ── */
+  .hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210}
+  .hamburger span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all .3s}
+  .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(9,21,37,0.98);border-bottom:1px solid var(--dusk);padding:24px 2rem 32px;z-index:199;flex-direction:column;gap:0}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:var(--fog);font-size:14px;font-weight:500;letter-spacing:2px;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(30,46,74,0.5);transition:color .2s}
+  .mobile-menu a:hover{color:var(--lantern)}
+  .mobile-menu-cta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .mobile-menu-cta a{width:100%;text-align:center;padding:12px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;display:block;border-bottom:none !important}
+  .m-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog)}
+  .m-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+  .m-primary{background:var(--harvest);border:none;color:#0D1426}
+  .m-primary:hover{background:var(--lantern)}
+  @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}}
+
+  /* ── PAGE HERO ── */
+  .page-hero{padding:130px 2rem 64px;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);border-bottom:1px solid var(--dusk)}
+  .hero-inner{max-width:760px;margin:0 auto}
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+  .breadcrumb a{color:var(--shadow);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:color .2s}
+  .breadcrumb a:hover{color:var(--lantern)}
+  .breadcrumb-sep{color:var(--shadow);font-size:12px}
+  .breadcrumb-current{color:var(--fog);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+  .doc-num-label{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:12px}
+  .page-title{font-size:clamp(26px,4.5vw,48px);font-weight:300;letter-spacing:1px;line-height:1.15;color:var(--moonlight);margin-bottom:14px}
+  .page-title em{font-style:normal;color:var(--lantern)}
+  .page-sub{font-size:15px;color:var(--fog);line-height:1.65;max-width:600px}
+
+  /* ── DOC LAYOUT ── */
+  .doc-layout{max-width:1080px;margin:0 auto;padding:72px 2rem;display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start}
+  .doc-sidebar{position:sticky;top:88px}
+  .sidebar-label{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--shadow);margin-bottom:16px}
+  .sidebar-nav{list-style:none}
+  .sidebar-nav li{margin-bottom:2px}
+  .sidebar-nav a{display:block;padding:7px 12px;border-radius:5px;font-size:13px;color:var(--fog);text-decoration:none;letter-spacing:.3px;transition:all .2s;border-left:2px solid transparent}
+  .sidebar-nav a:hover{color:var(--moonlight);border-left-color:var(--lantern);background:rgba(201,168,76,0.06)}
+  .sidebar-divider{height:1px;background:var(--dusk);margin:20px 0}
+  .sidebar-nav-docs{list-style:none}
+  .sidebar-nav-docs li{margin-bottom:2px}
+  .sidebar-nav-docs a{display:block;padding:6px 12px;border-radius:5px;font-size:12px;color:var(--shadow);text-decoration:none;transition:color .2s}
+  .sidebar-nav-docs a:hover{color:var(--fog)}
+  .sidebar-nav-docs a.current{color:var(--fog)}
+
+  /* ── DOC CONTENT ── */
+  .doc-content h2{font-size:22px;font-weight:300;letter-spacing:.8px;color:var(--moonlight);margin:52px 0 14px;padding-top:8px}
+  .doc-content h2:first-child{margin-top:0}
+  .doc-content h3{font-size:15px;font-weight:500;letter-spacing:.5px;color:var(--moonlight);margin:28px 0 10px}
+  .doc-content p{font-size:15px;color:var(--fog);line-height:1.75;margin-bottom:14px}
+  .doc-content a{color:var(--lantern);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);transition:border-color .2s}
+  .doc-content a:hover{border-bottom-color:var(--lantern)}
+
+  .step-list{list-style:none;margin:20px 0 28px}
+  .step-list li{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--dusk)}
+  .step-list li:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .step-n{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--lantern);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .step-body strong{display:block;font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:4px;letter-spacing:.3px}
+  .step-body span{font-size:14px;color:var(--fog);line-height:1.65}
+
+  .callout{background:var(--midnight);border:1px solid var(--dusk);border-left:3px solid var(--lantern);border-radius:0 8px 8px 0;padding:20px 24px;margin:24px 0}
+  .callout-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--lantern);margin-bottom:6px}
+  .callout p{font-size:14px;color:var(--fog);line-height:1.65;margin:0}
+
+  .callout-cyan{border-left-color:var(--cyan)}
+  .callout-cyan .callout-label{color:var(--cyan)}
+
+  .info-box{background:rgba(143,164,196,0.06);border:1px solid var(--dusk);border-radius:8px;padding:20px 24px;margin:24px 0}
+  .info-box p{font-size:14px;color:var(--fog);line-height:1.65;margin:0}
+
+  /* ── NAV FOOTER ── */
+  .nav-footer{display:flex;gap:1px;background:var(--dusk);border-radius:8px;overflow:hidden;margin-top:60px}
+  .nav-btn{flex:1;background:var(--deep-navy);padding:20px 24px;text-decoration:none;transition:background .2s;display:block}
+  .nav-btn:hover{background:#192844}
+  .nav-btn-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);display:block;margin-bottom:6px}
+  .nav-btn-title{font-size:14px;color:var(--moonlight);letter-spacing:.3px}
+
+  /* ── FOOTER ── */
+  footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
+  .footer-logo{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:22px;letter-spacing:7px;display:flex}
+  .footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:32px}
+  .footer-links a{color:var(--shadow);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+  .footer-links a:hover{color:var(--fog)}
+  .footer-copy{font-size:12px;color:var(--shadow);letter-spacing:1px}
+  .footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+
+  /* ── MOBILE ── */
+  @media(max-width:768px){
+    nav{padding:0 1rem}
+    .page-hero{padding:100px 1.25rem 48px}
+    .doc-layout{grid-template-columns:1fr;gap:0;padding:40px 1.25rem}
+    .doc-sidebar{display:none}
+    .nav-footer{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Docs</a>
+  </div>
+  <div class="nav-cta">
+    <a href="https://app.ghostcard.live" class="btn-nav-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="btn-primary">Sign Up</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="../index.html">Home</a>
+  <a href="index.html">Docs</a>
+  <div class="mobile-menu-cta">
+    <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="m-primary">Sign Up Free</a>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Docs</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Friends &amp; Feed</span>
+    </div>
+    <p class="doc-num-label">10 — Friends &amp; Feed</p>
+    <h1 class="page-title">Your ghost field.<br><em>Now populated.</em></h1>
+    <p class="page-sub">Add friends, see their rounds, race their ghosts on your leaderboard. The solo round just got a spectator section. They still can't slow-play hole 4.</p>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <aside class="doc-sidebar">
+    <p class="sidebar-label">On this page</p>
+    <ul class="sidebar-nav">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#adding-friends">Adding friends</a></li>
+      <li><a href="#requests">Requests &amp; limits</a></li>
+      <li><a href="#feed">The activity feed</a></li>
+      <li><a href="#h2h">Head-to-head</a></li>
+      <li><a href="#friend-ghost">Friend ghost</a></li>
+      <li><a href="#pb-ghost">Personal best ghost</a></li>
+      <li><a href="#quick-add">Quick add to card</a></li>
+      <li><a href="#rating-trend">Rating trend</a></li>
+      <li><a href="#share-badge">Share badge</a></li>
+      <li><a href="#removing">Removing friends</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <p class="sidebar-label">All docs</p>
+    <ul class="sidebar-nav-docs">
+      <li><a href="getting-started.html">01 Getting Started</a></li>
+      <li><a href="building-a-card.html">02 Building a Card</a></li>
+      <li><a href="scoring.html">03 Scoring a Round</a></li>
+      <li><a href="history.html">04 Round History</a></li>
+      <li><a href="bag-tags.html">05 Bag Tags</a></li>
+      <li><a href="tour-mode.html">06 Tour Mode</a></li>
+      <li><a href="par-corrections.html">07 Par Corrections</a></li>
+      <li><a href="account.html">08 Account &amp; Profile</a></li>
+      <li><a href="horror-mode.html">09 Horror Mode</a></li>
+      <li><a href="friends-and-feed.html" class="current">10 Friends &amp; Feed</a></li>
+    </ul>
+  </aside>
+
+  <div class="doc-content">
+
+    <h2 id="overview">Overview</h2>
+    <p>Ghost Card's friends system connects you to other players without turning the app into a social network. Add friends by username, see their recent rounds in the Feed tab, and — this is the part that matters — race their best ghost on your own leaderboard when you play the same course.</p>
+    <p>Friendships are mutual. Both players must accept. There's a 20-friend cap. The ghosts don't count toward that number.</p>
+
+    <div class="callout">
+      <p class="callout-label">Account required</p>
+      <p>Friends require a signed-in account. The Friends section lives on the Profile tab. The Feed is its own tab in the bottom navigation bar.</p>
+    </div>
+
+    <h2 id="adding-friends">Adding friends</h2>
+    <p>On the Profile tab, expand the Friends section. Type another player's display name into the search field and tap Send. The other player receives a pending request on their Profile tab.</p>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-body"><strong>Go to Profile → Friends</strong><span> — Tap the Friends section header to expand it. Your current friends, pending requests, and the search field are all here.</span></div>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-body"><strong>Enter their display name</strong><span> — Type the exact display name of the player you want to add. The search is case-insensitive but must match exactly.</span></div>
+      </li>
+      <li>
+        <div class="step-n">3</div>
+        <div class="step-body"><strong>Tap Send</strong><span> — A pending request is created. The other player will see it next time they open their Profile tab.</span></div>
+      </li>
+    </ul>
+
+    <p>You cannot friend yourself. The ghost is already you.</p>
+
+    <h2 id="requests">Requests &amp; limits</h2>
+    <p>Incoming friend requests appear at the top of the Friends section with Accept and Decline buttons. Accepting makes the friendship mutual and both players appear in each other's friend lists immediately.</p>
+
+    <div class="info-box">
+      <p>The friend cap is 20 accepted friends. Pending outgoing requests count toward this cap. If you've hit 20, you'll need to remove someone before sending a new request. The ghosts have no such limit.</p>
+    </div>
+
+    <h2 id="feed">The activity feed</h2>
+    <p>The Feed tab in the bottom navigation shows recent rounds from your accepted friends — up to 50 rounds from the last 30 days, sorted newest first. Each entry shows the friend's name, course, score to par, GC Rating, and when it was played.</p>
+    <p>Tap any round in the feed to expand the full hole-by-hole scorecard breakdown.</p>
+    <p>A small activity badge (dot) appears on the Feed tab icon when friends have played rounds since your last visit. Opening the Feed clears the badge.</p>
+
+    <h3>Activity vs. Head-to-Head</h3>
+    <p>The feed has two views, toggled at the top: Recent (default) shows the chronological activity stream. Head-to-Head shows courses where both you and a friend have played, with your best scores compared side by side.</p>
+
+    <h2 id="h2h">Head-to-head</h2>
+    <p>When you and a friend have both played the same course, the Head-to-Head view surfaces those matchups automatically. Each row shows the course name, your best score, their best score, and who has the edge.</p>
+    <p>No manual setup required. Play the same courses as your friends and the comparisons build themselves.</p>
+
+    <h2 id="friend-ghost">Friend ghost on the leaderboard</h2>
+    <p>This is where friends become opponents. When you start a round at a course where a friend has previously played, their best round at that course appears as a cyan-colored ghost row on your live leaderboard — right alongside the pro ghosts and your own score.</p>
+
+    <div class="callout callout-cyan">
+      <p class="callout-label" style="color:var(--cyan)">Cyan = Friend ghost</p>
+      <p>The friend ghost row is colored cyan on the leaderboard to distinguish it from pro ghosts (cream/gold) and your Personal Best ghost (gold). It shows their name and updates hole by hole using their actual scores from that round.</p>
+    </div>
+
+    <p>The friend ghost uses real hole-by-hole score data — not a simulated rating. If your friend shot a -3 at Shady Oaks and birdied hole 7, that exact score appears on hole 7 of your leaderboard. Beat them where it counts.</p>
+
+    <h2 id="pb-ghost">Personal best ghost — "Beat Your Ghost"</h2>
+    <p>Separate from the friend ghost, your own personal best round at the current course also appears on the leaderboard as a gold ghost row labeled "YOUR BEST." This is your previous best score at this specific course and layout.</p>
+    <p>The PB ghost tracks hole by hole, just like the friend ghost. When you finish, the Round Complete screen tells you whether you set a new personal best — and by how many strokes you beat (or lost to) your previous ghost.</p>
+
+    <div class="info-box">
+      <p>New Personal Best celebrations appear on the Round Complete screen with a full hole-by-hole comparison: holes won, holes lost, holes tied against your previous best. The ghost remembers everything.</p>
+    </div>
+
+    <h2 id="quick-add">Quick add friends to a card</h2>
+    <p>When building a card with multiple players, accepted friends appear as quick-add chips below the "Add a Real Player" button. Tap a friend's name to instantly fill the next empty player slot with their display name.</p>
+    <p>Friends who are already on the card don't appear in the quick-add list. Up to 6 friends are shown at a time.</p>
+
+    <h2 id="rating-trend">Rating trend</h2>
+    <p>At the top of the History screen, a sparkline chart shows your GC Rating trend across your last 20 rated rounds. The line color reflects your current direction — green if your most recent rating is higher than the one before it, orange if it's lower.</p>
+    <p>The chart also marks your best-ever rating with a labeled point. Hovering or tapping on any point in the sparkline shows that round's rating value. You need at least 2 rated rounds before the trend line appears.</p>
+
+    <h2 id="share-badge">Share round badge</h2>
+    <p>Every completed round has a Share button on the Round Complete screen. Tapping it generates a compact round summary badge — an image showing the course name, date, your score, division, format, and GC Rating. The badge uses the Ghost Card brand treatment (dark background, gold accents, FlatGhost icon).</p>
+    <p>After generating, the badge is saved and can be exported to share on social media, messages, or wherever you celebrate (or mourn) your rounds.</p>
+
+    <h2 id="removing">Removing friends</h2>
+    <p>In the Friends section on Profile, each accepted friend has a small remove button. Tapping it shows a confirmation prompt (Remove / Keep). Removing is immediate and permanent — both players lose access to each other's data in the feed and on the leaderboard.</p>
+    <p>The friend ghost disappears from your leaderboard on the next round. The head-to-head comparisons are gone. The disc golf still happened. The ghosts still remember.</p>
+
+    <div class="nav-footer">
+      <a href="horror-mode.html" class="nav-btn">
+        <div>
+          <span class="nav-btn-label">Previous</span>
+          <span class="nav-btn-title">← Horror Mode</span>
+        </div>
+      </a>
+      <a href="getting-started.html" class="nav-btn">
+        <div>
+          <span class="nav-btn-label">Start over</span>
+          <span class="nav-btn-title">Getting Started →</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 20 22.4" width="36" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="footer-wm"><span style="color:#EDE9DC">GHOST</span><span style="color:#CF9120">CARD</span></div>
+  </div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="index.html">Docs</a>
+  </div>
+  <p class="footer-copy">Ghost Card &copy; 2026 &middot; Haunt responsibly</p>
+  <p class="footer-tagline">HAUNT THE LEADERBOARD</p>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('hamburger');
+  var menu=document.getElementById('mobileMenu');
+  if(!btn||!menu)return;
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';
+  });
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+</body>
+</html>
