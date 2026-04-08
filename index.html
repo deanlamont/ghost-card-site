@@ -805,13 +805,19 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 /* Stage — two floating ghosts + your live score */
 .ghosts-stage{
-  position:relative;display:flex;align-items:flex-end;justify-content:center;
-  gap:48px;min-height:420px;padding-bottom:80px;
+  position:relative;display:flex;flex-direction:column;align-items:center;
+  min-height:380px;gap:0;
 }
 .ghosts-stage-bg{
   position:absolute;inset:0;
   background:radial-gradient(ellipse 70% 60% at 50% 60%, rgba(201,168,76,0.06) 0%, rgba(237,233,220,0.03) 50%, transparent 80%);
   pointer-events:none;
+}
+
+/* The two ghost columns sit in a row */
+.ghosts-row{
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:48px;position:relative;z-index:2;flex:1;
 }
 
 .ghost-col{
@@ -850,12 +856,12 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 .gc-score-cream{color:var(--cream)}
 .gc-score-gold{color:var(--lantern)}
 
-/* Your live score — appears below the ghosts with clear separation */
+/* Your live score — flows below the ghosts */
 .gc-you{
-  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;
-  padding:10px 24px;
+  margin-top:24px;padding:12px 28px;
   background:rgba(13,20,38,0.85);border:1px solid var(--dusk);border-radius:6px;
+  position:relative;z-index:2;
   opacity:0;animation:gc-you-in 0.5s ease-out 1.2s forwards;
 }
 @keyframes gc-you-in{to{opacity:1}}
@@ -863,9 +869,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 .gc-you-score{font-size:22px;font-weight:600;color:#7BC87B;letter-spacing:0.5px}
 .gc-you-thru{font-size:11px;color:var(--fog);letter-spacing:1.5px;margin-top:2px}
 
-/* Leaderboard line — horizontal, connecting the two columns */
+/* Leaderboard line — sits inside ghosts-row */
 .lb-line{
-  position:absolute;bottom:145px;left:12%;right:12%;height:1px;
+  position:absolute;bottom:60px;left:8%;right:8%;height:1px;
   background:linear-gradient(90deg,rgba(237,233,220,0.1),rgba(201,168,76,0.35),rgba(237,233,220,0.1));
   z-index:1;
 }
@@ -904,12 +910,13 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 @media(max-width:768px){
   .ghosts-inner{grid-template-columns:1fr;gap:40px}
-  .ghosts-stage{min-height:340px;gap:32px;order:2;padding-bottom:70px}
+  .ghosts-stage{min-height:auto;order:2}
+  .ghosts-row{gap:32px}
   .ghosts-text{order:1}
   .ghosts-section{padding:0}
   .gc-svg-pro{width:85px;height:96px}
   .gc-svg-pb{width:75px;height:84px}
-  .gc-you{padding:8px 20px}
+  .gc-you{margin-top:20px;padding:10px 22px}
   .gc-you-score{font-size:20px}
 }
 
@@ -1041,34 +1048,36 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     <div class="ghosts-stage" aria-hidden="true">
       <div class="ghosts-stage-bg"></div>
 
-      <!-- Leaderboard line connecting the two ghosts -->
-      <div class="lb-line"></div>
+      <div class="ghosts-row">
+        <!-- Leaderboard line connecting the two ghosts -->
+        <div class="lb-line"></div>
 
-      <!-- Pro ghost — cream, tallest -->
-      <div class="ghost-col gc-pro">
-        <div class="ghost-glow-ring gc-glow-cream"></div>
-        <svg class="gc-svg gc-svg-pro" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#EDE9DC"/>
-          <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
-          <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
-        </svg>
-        <div class="gc-label gc-label-cream">Pro Ghost</div>
-        <div class="gc-score gc-score-cream">−10</div>
+        <!-- Pro ghost — cream, tallest -->
+        <div class="ghost-col gc-pro">
+          <div class="ghost-glow-ring gc-glow-cream"></div>
+          <svg class="gc-svg gc-svg-pro" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#EDE9DC"/>
+            <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+            <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
+          </svg>
+          <div class="gc-label gc-label-cream">Pro Ghost</div>
+          <div class="gc-score gc-score-cream">−10</div>
+        </div>
+
+        <!-- Your Past — gold, the ghost of your best round -->
+        <div class="ghost-col gc-pb">
+          <div class="ghost-glow-ring gc-glow-gold"></div>
+          <svg class="gc-svg gc-svg-pb" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/>
+            <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
+            <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
+          </svg>
+          <div class="gc-label gc-label-gold">Your Past</div>
+          <div class="gc-score gc-score-gold">−2</div>
+        </div>
       </div>
 
-      <!-- Your Past — gold, the ghost of your best round -->
-      <div class="ghost-col gc-pb">
-        <div class="ghost-glow-ring gc-glow-gold"></div>
-        <svg class="gc-svg gc-svg-pb" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/>
-          <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
-          <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
-        </svg>
-        <div class="gc-label gc-label-gold">Your Past</div>
-        <div class="gc-score gc-score-gold">−2</div>
-      </div>
-
-      <!-- Your live score — fading in below the ghosts -->
+      <!-- Your live score — flows below the ghosts naturally -->
       <div class="gc-you">
         <div class="gc-you-label">You · Right Now</div>
         <div class="gc-you-score">+1</div>
