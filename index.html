@@ -779,6 +779,16 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   }
 }
 
+
+/* ── THREE GHOSTS SECTION RESPONSIVE ──────────────────────────── */
+@media(max-width:768px){
+  #friends .section-inner > div:nth-child(2){grid-template-columns:1fr !important}
+  #friends .section-inner > div:nth-child(3){grid-template-columns:repeat(2,1fr) !important}
+}
+@media(max-width:500px){
+  #friends .section-inner > div:nth-child(3){grid-template-columns:1fr !important}
+}
+
 </style>
 </head>
 <body>
@@ -794,6 +804,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
   </a>
   <nav class="nav-links" aria-label="Main navigation">
+    <a href="#tour">Tour</a>
+    <a href="#friends">Friends</a>
+    <a href="#horror">Horror</a>
     <a href="docs/index.html">Docs</a>
   </nav>
   <div class="nav-cta">
@@ -807,6 +820,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 <!-- ── MOBILE MENU ───────────────────────────────────────────── -->
 <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="#tour">Tour</a>
+  <a href="#friends">Friends</a>
+  <a href="#horror">Horror</a>
   <a href="docs/index.html">Docs</a>
   <div class="mobile-menu-cta">
     <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
@@ -835,12 +851,13 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
     <p class="hero-tagline">Real Disc Golf. Video Game Soul.</p>
     <h1 class="hero-headline" id="hero-heading">Play the pros.<br><em>On your home course.</em></h1>
-    <p class="hero-sub">Step onto any of 7,008 US courses and tee off against a full field of rated PDGA pros — as ghosts. Solo, it’s finally a round worth playing: a live leaderboard, a score that means something, Ricky Wysocki breathing down your neck on hole 12. With your crew, it becomes a tournament. String rounds together and you’re in Tour Mode — a full season, standings, and a career arc that remembers everything. The ghosts are already on the tee.</p>
+    <p class="hero-sub">Step onto any of 7,008 US courses and tee off against rated PDGA pros — as ghosts on your live leaderboard. Solo or with friends. Free.</p>
 
     <div class="hero-cta">
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Play Ghost Card free">Play Free</button>
       <button class="btn-lg btn-lo" onclick="window.location.href='docs/index.html'">See the Docs</button>
     </div>
+    <a href="#tour" style="display:inline-block;margin-top:28px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--lantern)'" onmouseout="this.style.color='var(--shadow)'">↓ See how it works</a>
 
     <!-- ── LIVE SCORE TICKER ── -->
     <div class="score-ticker" aria-hidden="true">
@@ -868,7 +885,17 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
           <div class="ticker-score under">-8</div>
           <div class="ticker-thru">14</div>
         </div>
-        <div class="ticker-row r4">
+        <div class="ticker-row r4" style="background:rgba(201,168,76,0.06)">
+          <div><span class="ticker-pos">—</span><span class="ticker-name" style="color:var(--lantern)">Your Best <span class="ghost-badge" style="color:var(--lantern);opacity:0.6">pb</span></span></div>
+          <div class="ticker-score under" style="color:var(--lantern)">-2</div>
+          <div class="ticker-thru" style="color:var(--lantern);opacity:0.6">14</div>
+        </div>
+        <div class="ticker-row" style="opacity:0;animation:row-in 0.4s ease-out 3.0s forwards;background:rgba(123,200,200,0.05)">
+          <div><span class="ticker-pos">—</span><span class="ticker-name" style="color:#7BC8C8">Jake <span class="ghost-badge" style="color:#7BC8C8;opacity:0.6">friend</span></span></div>
+          <div class="ticker-score over" style="color:#7BC8C8">+1</div>
+          <div class="ticker-thru" style="color:#7BC8C8;opacity:0.6">14</div>
+        </div>
+        <div class="ticker-row" style="opacity:0;animation:row-in 0.4s ease-out 3.3s forwards">
           <div><span class="ticker-pos">99</span><span class="ticker-name you"><span class="ticker-name-inner">You</span></span></div>
           <div class="ticker-score over">+6</div>
           <div class="ticker-thru">14</div>
@@ -956,7 +983,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       Real players. Ghost pros.<br><span style="color:var(--lantern)">Your round, your group, your rules.</span>
     </h2>
     <p style="font-size:15px;line-height:1.7;color:var(--fog);margin-bottom:60px;max-width:560px">
-      Invite real players, drop in ghost pros, run Scramble or stroke play. One live leaderboard for everyone — real and ghost.
+      Invite real players, drop in ghost pros, add friends, run Scramble or stroke play. One shared leaderboard for everyone — real and ghost.
     </p>
 
     <div class="mp-grid">
@@ -1072,6 +1099,98 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   </div>
 </section>
 
+
+<!-- ── THREE GHOSTS. ONE LEADERBOARD. ──────────────────────────── -->
+<section id="friends" style="background:linear-gradient(180deg, var(--abyss) 0%, var(--void) 100%);border-top:1px solid var(--dusk);padding:100px 2rem" aria-labelledby="ghosts-heading">
+  <div class="section-inner">
+
+    <div style="text-align:center;max-width:640px;margin:0 auto 60px">
+      <p class="section-label">Three Ghosts. One Leaderboard.</p>
+      <h2 class="section-title" id="ghosts-heading">The solo round was never really solo.</h2>
+      <p style="font-size:15px;line-height:1.7;color:var(--fog);margin-top:16px">Every leaderboard runs three ghost layers alongside you — each one color-coded, each one using real hole-by-hole score data. No simulations.</p>
+    </div>
+
+    <!-- Three ghost layer cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dusk);border:1px solid var(--dusk);border-radius:12px;overflow:hidden;margin-bottom:60px">
+
+      <div style="background:var(--deep-navy);padding:36px 28px;border-bottom:3px solid var(--cream)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <svg viewBox="0 0 20 22.4" width="28" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#EDE9DC" opacity="0.85"/>
+            <ellipse cx="7.4" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.45)"/>
+            <ellipse cx="12.6" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.45)"/>
+          </svg>
+          <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--cream)">Cream</span>
+        </div>
+        <h3 style="font-size:18px;font-weight:500;color:var(--moonlight);margin-bottom:8px">Pro Ghosts</h3>
+        <p style="font-size:13px;line-height:1.7;color:var(--fog)">134 PDGA-rated opponents. Real stats, real names. They show up on time and never ask what disc you threw.</p>
+      </div>
+
+      <div style="background:var(--deep-navy);padding:36px 28px;border-bottom:3px solid var(--lantern)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <svg viewBox="0 0 20 22.4" width="28" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C" opacity="0.9"/>
+            <ellipse cx="7.4" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.5)"/>
+            <ellipse cx="12.6" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.5)"/>
+          </svg>
+          <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lantern)">Gold</span>
+        </div>
+        <h3 style="font-size:18px;font-weight:500;color:var(--moonlight);margin-bottom:8px">Your Personal Best</h3>
+        <p style="font-size:13px;line-height:1.7;color:var(--fog)">Your previous best at this course. Real scores, hole by hole. Beat it and Round Complete celebrates with a full comparison.</p>
+      </div>
+
+      <div style="background:var(--deep-navy);padding:36px 28px;border-bottom:3px solid #7BC8C8">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <svg viewBox="0 0 20 22.4" width="28" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#7BC8C8" opacity="0.85"/>
+            <ellipse cx="7.4" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.45)"/>
+            <ellipse cx="12.6" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.45)"/>
+          </svg>
+          <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#7BC8C8">Cyan</span>
+        </div>
+        <h3 style="font-size:18px;font-weight:500;color:var(--moonlight);margin-bottom:8px">Friend Ghost</h3>
+        <p style="font-size:13px;line-height:1.7;color:var(--fog)">Your friend’s best round at this course. If they birdied hole 7, you will see it on hole 7. Real data, not simulated.</p>
+      </div>
+
+    </div>
+
+    <!-- Supporting features row -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dusk);border:1px solid var(--dusk);border-radius:10px;overflow:hidden">
+
+      <div style="background:var(--deep-navy);padding:28px 22px">
+        <h4 style="font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:6px">Friends &amp; Feed</h4>
+        <p style="font-size:12px;line-height:1.65;color:var(--fog)">Mutual friendships, 20-friend cap. Activity feed with full scorecard expansion.</p>
+        <a href="docs/friends-and-feed.html" style="display:inline-block;margin-top:10px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#7BC8C8;text-decoration:none">Docs →</a>
+      </div>
+
+      <div style="background:var(--deep-navy);padding:28px 22px">
+        <h4 style="font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:6px">Head-to-Head</h4>
+        <p style="font-size:12px;line-height:1.65;color:var(--fog)">Auto-surfaces courses you’ve both played. Best scores compared side by side.</p>
+        <a href="docs/friends-and-feed.html#h2h" style="display:inline-block;margin-top:10px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lantern);text-decoration:none">Docs →</a>
+      </div>
+
+      <div style="background:var(--deep-navy);padding:28px 22px">
+        <h4 style="font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:6px">Rating Trend</h4>
+        <p style="font-size:12px;line-height:1.65;color:var(--fog)">Sparkline chart. Last 20 rounds. <span style="color:#22c55e">Green</span> = improving. <span style="color:#E05050">Orange</span> = the ghosts are winning.</p>
+        <a href="docs/friends-and-feed.html#rating-trend" style="display:inline-block;margin-top:10px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lantern);text-decoration:none">Docs →</a>
+      </div>
+
+      <div style="background:var(--deep-navy);padding:28px 22px">
+        <h4 style="font-size:14px;font-weight:500;color:var(--moonlight);margin-bottom:6px">Share Badge</h4>
+        <p style="font-size:12px;line-height:1.65;color:var(--fog)">Exportable round summary image. Course, score, GC Rating. Brand treatment. Prove you were there.</p>
+        <a href="docs/friends-and-feed.html#share-badge" style="display:inline-block;margin-top:10px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lantern);text-decoration:none">Docs →</a>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:48px">
+      <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" style="font-size:13px;padding:12px 28px">Add Your First Friend</button>
+      <a href="docs/friends-and-feed.html" style="display:inline-block;margin-left:16px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--fog);text-decoration:none">Friends &amp; Feed docs →</a>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── BUILT FOR THE ROUND ──────────────────────────────────── -->
 <section style="background:var(--abyss);border-top:1px solid var(--dusk)" aria-labelledby="built-heading">
   <div class="section-inner">
@@ -1109,7 +1228,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
           </svg>
         </div>
         <h3 class="built-title">Live Leaderboard</h3>
-        <p class="built-body">Running +/− from par after every hole. Rankings shift in real time. No waiting.</p>
+        <p class="built-body">Running +/− from par after every hole. Three ghost layers, one leaderboard. Rankings shift in real time.</p>
         <div class="built-tags"><span class="built-tag">Hole by hole</span></div>
       </div>
 
@@ -1168,34 +1287,6 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         <a href="docs/par-corrections.html" class="built-link">How it works →</a>
       </div>
 
-      <!-- Friends & Feed — NEW -->
-      <div class="built-card" style="border-left:2px solid #7BC8C8">
-        <div class="built-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M5 20 Q5 13 6 10 Q7.5 7 9 6 Q10.5 7 12 10 Q13 13 13 20 Q11.5 18.5 10.5 20 Q9.5 18.5 8 20 Q6.5 18.5 5 20Z" fill="#7BC8C8" opacity="0.5"/>
-            <path d="M11 21 Q11 14 12 11 Q13.5 7.5 15 6.5 Q16.5 7.5 18 11 Q19 14 19 21 Q17.5 19 16.5 21 Q15.5 19 14 21 Q12.5 19 11 21Z" fill="#7BC8C8"/>
-            <ellipse cx="15" cy="9" rx="3" ry="3.8" fill="#7BC8C8"/>
-          </svg>
-        </div>
-        <h3 class="built-title">Friends &amp; Feed</h3>
-        <p class="built-body">Add friends. See their rounds. Race their ghost on your leaderboard. Head-to-head comparisons build themselves.</p>
-        <div class="built-tags"><span class="built-tag" style="background:rgba(123,200,200,0.12);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Social</span></div>
-        <a href="docs/friends-and-feed.html" class="built-link" style="color:#7BC8C8">Friends docs →</a>
-      </div>
-
-      <!-- Beat Your Ghost — NEW -->
-      <div class="built-card bc-gold">
-        <div class="built-icon">
-          <svg viewBox="0 0 20 22.4" width="28" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C" opacity="0.9"/>
-            <ellipse cx="7.4" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.5)"/>
-            <ellipse cx="12.6" cy="10.5" rx="1.4" ry="1.7" fill="rgba(0,0,0,0.5)"/>
-          </svg>
-        </div>
-        <h3 class="built-title">Beat Your Ghost</h3>
-        <p class="built-body">Your personal best at each course appears on the leaderboard. Gold row, real scores, hole by hole. The only ghost that is actually you.</p>
-        <a href="docs/friends-and-feed.html#pb-ghost" class="built-link">PB ghost docs →</a>
-      </div>
 
     </div>
   </div>
