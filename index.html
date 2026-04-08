@@ -1,1878 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ghost Card — Haunt the Leaderboard</title>
-  <meta name="description" content="Ghost Card — Free disc golf scoring app. Play against 134 ghost pros rated by real PDGA stats on any of 7,008 US courses. Horror Mode, Tour Seasons, Friends, and more." />
-  <meta property="og:title" content="Ghost Card — Real Disc Golf. Video Game Soul." />
-  <meta property="og:description" content="134 ghost pros. 7,008 courses. A 50-card horror card game. Free to play." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ghostcard.live/" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ============================================================
-       GHOST CARD — BRAND TOKENS
-       ============================================================ */
-    :root {
-      --void:       #0a0a0c;
-      --void-light: #111114;
-      --void-mid:   #18181c;
-      --void-card:  #1a1a1f;
-      --void-border:#2a2a30;
-
-      --cream:      #f5f0e8;
-      --cream-dim:  #c4bfb4;
-      --cream-muted:#8a857c;
-
-      --gold:       #cf9120;
-      --gold-dim:   #a87618;
-      --lantern:    #cf9120;
-      --harvest:    #cf9120;
-
-      --cyan:       #00e5ff;
-      --cyan-dim:   #00b8cc;
-
-      --lime:       #7fff00;
-      --lime-dim:   #5fcc00;
-
-      --purple:     #b266ff;
-      --purple-dim: #8a3fcc;
-
-      --red:        #ff4444;
-      --red-dim:    #cc2222;
-
-      --green:      #22c55e;
-
-      --font-display: 'Montserrat', sans-serif;
-      --font-body:    'Inter', sans-serif;
-
-      --max-w:      1120px;
-      --section-py:  120px;
-      --section-py-m: 72px;
-    }
-
-    /* ============================================================
-       RESET & BASE
-       ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--void);
-      color: var(--cream);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .wrap {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ============================================================
-       UTILITY
-       ============================================================ */
-    .eyebrow {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-
-    .section-head {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(28px, 4.5vw, 42px);
-      line-height: 1.15;
-      color: var(--cream);
-      margin-bottom: 16px;
-    }
-
-    .section-head em {
-      font-style: italic;
-      color: var(--cream-dim);
-    }
-
-    .section-sub {
-      font-size: 16px;
-      color: var(--cream-muted);
-      max-width: 640px;
-      line-height: 1.7;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      border-radius: 8px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
-
-    .btn-gold {
-      background: var(--gold);
-      color: var(--void);
-    }
-    .btn-gold:hover { box-shadow: 0 4px 24px rgba(207,145,32,0.35); }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--cream);
-      border: 1px solid var(--void-border);
-    }
-    .btn-ghost:hover { border-color: var(--cream-muted); background: var(--void-light); }
-
-    .btn-cyan {
-      background: var(--cyan);
-      color: var(--void);
-    }
-    .btn-cyan:hover { box-shadow: 0 4px 24px rgba(0,229,255,0.3); }
-
-    .btn-purple {
-      background: var(--purple);
-      color: #fff;
-    }
-    .btn-purple:hover { box-shadow: 0 4px 24px rgba(178,102,255,0.35); }
-
-    .doc-link {
-      font-size: 13px;
-      color: var(--cream-muted);
-      border-bottom: 1px solid var(--void-border);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .doc-link:hover { color: var(--cream); border-color: var(--cream-muted); }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .badge-new {
-      background: rgba(0,229,255,0.12);
-      color: var(--cyan);
-      border: 1px solid rgba(0,229,255,0.2);
-    }
-
-    .badge-gold {
-      background: rgba(207,145,32,0.12);
-      color: var(--gold);
-      border: 1px solid rgba(207,145,32,0.2);
-    }
-
-    .badge-purple {
-      background: rgba(178,102,255,0.12);
-      color: var(--purple);
-      border: 1px solid rgba(178,102,255,0.2);
-    }
-
-    /* Section divider */
-    .divider {
-      border: none;
-      height: 1px;
-      background: var(--void-border);
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-
-    /* ============================================================
-       TREELINE HEADER
-       ============================================================ */
-    .treeline-header {
-      position: relative;
-      overflow: hidden;
-      background: var(--void);
-    }
-
-    .treeline-photo {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    /* SVG treeline silhouette — pine trees across the bottom */
-    .treeline-photo::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 260px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 260' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='skyg' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%230a0a0c' stop-opacity='0'/%3E%3Cstop offset='.3' stop-color='%230d1426' stop-opacity='.15'/%3E%3Cstop offset='.7' stop-color='%23091220' stop-opacity='.3'/%3E%3Cstop offset='1' stop-color='%230a0a0c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1440' height='260' fill='url(%23skyg)'/%3E%3Cg fill='%23111116' opacity='.45'%3E%3Cpolygon points='0,260 15,180 30,260'/%3E%3Cpolygon points='25,260 45,165 65,260'/%3E%3Cpolygon points='55,260 72,190 89,260'/%3E%3Cpolygon points='100,260 120,150 140,260'/%3E%3Cpolygon points='130,260 148,175 166,260'/%3E%3Cpolygon points='170,260 195,140 220,260'/%3E%3Cpolygon points='210,260 228,185 246,260'/%3E%3Cpolygon points='250,260 275,145 300,260'/%3E%3Cpolygon points='290,260 308,180 326,260'/%3E%3Cpolygon points='330,260 355,155 380,260'/%3E%3Cpolygon points='375,260 392,175 409,260'/%3E%3Cpolygon points='410,260 435,138 460,260'/%3E%3Cpolygon points='450,260 468,182 486,260'/%3E%3Cpolygon points='490,260 515,148 540,260'/%3E%3Cpolygon points='535,260 552,178 569,260'/%3E%3Cpolygon points='580,260 605,142 630,260'/%3E%3Cpolygon points='620,260 638,185 656,260'/%3E%3Cpolygon points='660,260 685,152 710,260'/%3E%3Cpolygon points='700,260 718,178 736,260'/%3E%3Cpolygon points='740,260 765,135 790,260'/%3E%3Cpolygon points='785,260 802,180 819,260'/%3E%3Cpolygon points='820,260 845,148 870,260'/%3E%3Cpolygon points='865,260 882,175 899,260'/%3E%3Cpolygon points='910,260 935,140 960,260'/%3E%3Cpolygon points='950,260 968,182 986,260'/%3E%3Cpolygon points='990,260 1015,150 1040,260'/%3E%3Cpolygon points='1035,260 1052,178 1069,260'/%3E%3Cpolygon points='1080,260 1105,138 1130,260'/%3E%3Cpolygon points='1120,260 1138,185 1156,260'/%3E%3Cpolygon points='1160,260 1185,145 1210,260'/%3E%3Cpolygon points='1205,260 1222,175 1239,260'/%3E%3Cpolygon points='1250,260 1275,142 1300,260'/%3E%3Cpolygon points='1290,260 1308,180 1326,260'/%3E%3Cpolygon points='1330,260 1355,155 1380,260'/%3E%3Cpolygon points='1375,260 1392,178 1409,260'/%3E%3Cpolygon points='1410,260 1435,148 1460,260'/%3E%3C/g%3E%3Cg fill='%230e0e12' opacity='.7'%3E%3Cpolygon points='0,260 22,195 44,260'/%3E%3Cpolygon points='38,260 62,170 86,260'/%3E%3Cpolygon points='80,260 100,200 120,260'/%3E%3Cpolygon points='115,260 142,165 169,260'/%3E%3Cpolygon points='160,260 182,195 204,260'/%3E%3Cpolygon points='198,260 225,158 252,260'/%3E%3Cpolygon points='245,260 268,190 291,260'/%3E%3Cpolygon points='285,260 312,162 339,260'/%3E%3Cpolygon points='332,260 355,195 378,260'/%3E%3Cpolygon points='372,260 398,155 424,260'/%3E%3Cpolygon points='418,260 440,192 462,260'/%3E%3Cpolygon points='455,260 482,160 509,260'/%3E%3Cpolygon points='502,260 525,195 548,260'/%3E%3Cpolygon points='542,260 568,158 594,260'/%3E%3Cpolygon points='588,260 610,190 632,260'/%3E%3Cpolygon points='625,260 652,155 679,260'/%3E%3Cpolygon points='672,260 695,195 718,260'/%3E%3Cpolygon points='712,260 738,162 764,260'/%3E%3Cpolygon points='758,260 780,190 802,260'/%3E%3Cpolygon points='795,260 822,155 849,260'/%3E%3Cpolygon points='842,260 865,195 888,260'/%3E%3Cpolygon points='882,260 908,158 934,260'/%3E%3Cpolygon points='928,260 950,192 972,260'/%3E%3Cpolygon points='965,260 992,160 1019,260'/%3E%3Cpolygon points='1012,260 1035,195 1058,260'/%3E%3Cpolygon points='1052,260 1078,155 1104,260'/%3E%3Cpolygon points='1098,260 1120,190 1142,260'/%3E%3Cpolygon points='1135,260 1162,162 1189,260'/%3E%3Cpolygon points='1182,260 1205,195 1228,260'/%3E%3Cpolygon points='1222,260 1248,158 1274,260'/%3E%3Cpolygon points='1268,260 1290,190 1312,260'/%3E%3Cpolygon points='1305,260 1332,155 1359,260'/%3E%3Cpolygon points='1352,260 1375,195 1398,260'/%3E%3Cpolygon points='1392,260 1418,162 1444,260'/%3E%3C/g%3E%3Crect y='245' width='1440' height='15' fill='%230a0a0c'/%3E%3C/svg%3E");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-    }
-
-    /* Atmospheric glow above treeline */
-    .treeline-photo::after {
-      content: '';
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 200px;
-      background: radial-gradient(ellipse at center bottom, rgba(140,190,255,0.04), transparent 70%);
-      pointer-events: none;
-    }
-
-    /* ============================================================
-       NAV
-       ============================================================ */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10,10,12,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--void-border);
-    }
-
-    .nav-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-weight: 200;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      color: var(--cream);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .nav-logo span { color: var(--gold); font-weight: 200; }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--cream-muted);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--cream); }
-    .nav-links .nav-cta {
-      padding: 8px 18px;
-      border-radius: 6px;
-      background: var(--gold);
-      color: var(--void);
-      font-weight: 600;
-      font-size: 13px;
-    }
-    .nav-links .nav-cta:hover { background: #dda02a; }
-
-    .nav-mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--cream);
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 700px) {
-      .nav-links { display: none; }
-      .nav-mobile-toggle { display: block; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        background: rgba(10,10,12,0.97);
-        border-bottom: 1px solid var(--void-border);
-        padding: 20px 24px;
-        gap: 16px;
-      }
-    }
-
-    /* ============================================================
-       WHATS NEW BANNER
-       ============================================================ */
-    .whats-new {
-      background: var(--void-light);
-      border-bottom: 1px solid var(--void-border);
-      padding: 10px 0;
-      text-align: center;
-      font-size: 13px;
-      color: var(--cream-muted);
-    }
-    .whats-new strong {
-      color: var(--cyan);
-      font-weight: 600;
-    }
-    .whats-new .wn-dot {
-      display: inline-block;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--void-border);
-      margin: 0 10px;
-      vertical-align: middle;
-    }
-
-    /* ============================================================
-       HERO
-       ============================================================ */
-    .hero {
-      position: relative;
-      padding: 100px 0 80px;
-      text-align: center;
-    }
-
-    .hero-tagline {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cream-muted);
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(36px, 6vw, 64px);
-      line-height: 1.08;
-      color: var(--cream);
-      margin-bottom: 20px;
-    }
-
-    .hero-sub {
-      font-size: 17px;
-      color: var(--cream-dim);
-      max-width: 580px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
-    }
-
-    .hero-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 56px;
-    }
-
-    /* Leaderboard mock */
-    .lb-mock {
-      max-width: 480px;
-      margin: 0 auto;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 12px;
-      overflow: hidden;
-      text-align: left;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-    }
-
-    .lb-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      background: var(--void-mid);
-      border-bottom: 1px solid var(--void-border);
-      font-size: 11px;
-      color: var(--cream-muted);
-    }
-    .lb-live {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .lb-live::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: pulse-dot 2s infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .lb-cols {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      padding: 6px 16px;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--cream-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border-bottom: 1px solid var(--void-border);
-    }
-
-    .lb-row {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      align-items: center;
-      padding: 10px 16px;
-      font-size: 14px;
-      border-bottom: 1px solid rgba(42,42,48,0.5);
-      transition: background 0.2s;
-    }
-    .lb-row:last-child { border-bottom: none; }
-    .lb-row:hover { background: rgba(255,255,255,0.02); }
-
-    .lb-rank { font-weight: 600; margin-right: 8px; color: var(--cream-muted); font-size: 12px; }
-    .lb-name { font-weight: 500; }
-    .lb-ghost-tag {
-      font-size: 9px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--cream-muted);
-      margin-left: 6px;
-      opacity: 0.6;
-    }
-    .lb-score { font-weight: 700; text-align: right; padding-right: 16px; }
-    .lb-thru { text-align: right; color: var(--cream-muted); font-size: 13px; }
-
-    .lb-row--pro .lb-name { color: var(--cream-dim); }
-    .lb-row--pro .lb-score { color: var(--green); }
-
-    .lb-row--pb .lb-name { color: var(--gold); }
-    .lb-row--pb .lb-score { color: var(--gold); }
-
-    .lb-row--friend .lb-name { color: var(--cyan); }
-    .lb-row--friend .lb-score { color: var(--cyan); }
-
-    .lb-row--you {
-      background: rgba(207,145,32,0.06);
-    }
-    .lb-row--you .lb-name { color: var(--cream); font-weight: 700; }
-    .lb-row--you .lb-score { color: var(--red); }
-
-    /* ============================================================
-       HOW IT WORKS — 4 STEP STRIP
-       ============================================================ */
-    .how-it-works {
-      padding: var(--section-py) 0;
-      background: var(--void-light);
-    }
-
-    .hiw-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-
-    .hiw-card {
-      position: relative;
-      padding: 28px 24px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 12px;
-      transition: border-color 0.3s, transform 0.2s;
-    }
-    .hiw-card:hover {
-      border-color: var(--void-border);
-      transform: translateY(-2px);
-    }
-
-    .hiw-num {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 36px;
-      color: var(--gold);
-      opacity: 0.25;
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    .hiw-card h3 {
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .hiw-card p {
-      font-size: 13px;
-      color: var(--cream-muted);
-      line-height: 1.6;
-    }
-
-    .hiw-stat {
-      margin-top: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-    }
-
-    @media (max-width: 800px) {
-      .hiw-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-      .hiw-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ============================================================
-       BEAT YOUR GHOST — PB SECTION (NEW)
-       ============================================================ */
-    .beat-ghost {
-      padding: var(--section-py) 0;
-      position: relative;
-    }
-
-    .beat-ghost-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .beat-ghost-text .section-head {
-      max-width: 480px;
-    }
-
-    /* PB mini leaderboard mock */
-    .pb-mock {
-      max-width: 420px;
-      margin: 0 auto;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    }
-
-    .pb-celebration {
-      padding: 16px 20px;
-      background: linear-gradient(135deg, rgba(207,145,32,0.08), rgba(207,145,32,0.03));
-      border-bottom: 1px solid var(--void-border);
-      text-align: center;
-    }
-    .pb-celebration-title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--gold);
-      margin-bottom: 2px;
-    }
-    .pb-celebration-sub {
-      font-size: 12px;
-      color: var(--cream-muted);
-    }
-
-    .pb-comparison {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      text-align: center;
-      padding: 16px 12px;
-      gap: 8px;
-    }
-    .pb-stat-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cream-muted);
-      margin-bottom: 4px;
-    }
-    .pb-stat-value {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 1;
-    }
-    .pb-stat-value--green { color: var(--green); }
-    .pb-stat-value--red { color: var(--red); }
-    .pb-stat-value--muted { color: var(--cream-muted); }
-
-    @media (max-width: 800px) {
-      .beat-ghost-layout { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    /* ============================================================
-       FRIENDS & SOCIAL (NEW)
-       ============================================================ */
-    .friends-section {
-      padding: var(--section-py) 0;
-      background: var(--void-light);
-    }
-
-    .ghost-layers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin: 48px 0 36px;
-    }
-
-    .ghost-layer-card {
-      padding: 28px 24px;
-      border-radius: 12px;
-      border: 1px solid var(--void-border);
-      background: var(--void-card);
-      text-align: center;
-      transition: transform 0.2s, border-color 0.3s;
-    }
-    .ghost-layer-card:hover { transform: translateY(-2px); }
-
-    .ghost-layer-card--pro { border-color: rgba(196,191,180,0.15); }
-    .ghost-layer-card--pb  { border-color: rgba(207,145,32,0.2); }
-    .ghost-layer-card--friend { border-color: rgba(0,229,255,0.2); }
-
-    .gl-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-    }
-    .gl-icon--pro { background: rgba(196,191,180,0.1); color: var(--cream-dim); }
-    .gl-icon--pb  { background: rgba(207,145,32,0.1); color: var(--gold); }
-    .gl-icon--friend { background: rgba(0,229,255,0.1); color: var(--cyan); }
-
-    .gl-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .gl-label--pro { color: var(--cream-dim); }
-    .gl-label--pb  { color: var(--gold); }
-    .gl-label--friend { color: var(--cyan); }
-
-    .ghost-layer-card h3 {
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 17px;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-    .ghost-layer-card p {
-      font-size: 13px;
-      color: var(--cream-muted);
-      line-height: 1.55;
-    }
-
-    .friends-features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 36px 0;
-    }
-
-    .ff-item {
-      padding: 20px 16px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 10px;
-      text-align: center;
-    }
-    .ff-item h4 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 4px;
-    }
-    .ff-item p {
-      font-size: 12px;
-      color: var(--cream-muted);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 800px) {
-      .ghost-layers { grid-template-columns: 1fr; }
-      .friends-features { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-      .friends-features { grid-template-columns: 1fr; }
-    }
-
-    /* ============================================================
-       MULTIPLAYER & FRIENDS (UPDATED)
-       ============================================================ */
-    .multiplayer {
-      padding: var(--section-py) 0;
-    }
-
-    .mp-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-top: 48px;
-    }
-
-    .mp-card {
-      padding: 32px 28px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 12px;
-      transition: border-color 0.3s, transform 0.2s;
-    }
-    .mp-card:hover { transform: translateY(-2px); }
-
-    .mp-card-badge {
-      margin-bottom: 14px;
-    }
-
-    .mp-card h3 {
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 18px;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .mp-card p {
-      font-size: 14px;
-      color: var(--cream-muted);
-      line-height: 1.6;
-    }
-
-    .mp-card-tag {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--cream-muted);
-      letter-spacing: 0.05em;
-    }
-
-    @media (max-width: 700px) {
-      .mp-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ============================================================
-       TOUR MODE
-       ============================================================ */
-    .tour-mode {
-      padding: var(--section-py) 0;
-      background: var(--void-light);
-    }
-
-    .tour-tiers {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 40px 0;
-    }
-
-    .tour-tier {
-      padding: 24px 20px;
-      border-radius: 10px;
-      border: 1px solid var(--void-border);
-      background: var(--void-card);
-      text-align: center;
-      transition: transform 0.2s;
-    }
-    .tour-tier:hover { transform: translateY(-2px); }
-
-    .tour-tier-name {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-    .tour-tier-rounds {
-      font-size: 12px;
-      color: var(--cream-muted);
-      margin-bottom: 8px;
-    }
-    .tour-tier-pts {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 28px;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .tour-tier-label {
-      font-size: 10px;
-      color: var(--cream-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 2px;
-    }
-
-    /* Career ladder */
-    .career-ladder {
-      display: flex;
-      gap: 0;
-      margin: 40px 0 0;
-      position: relative;
-    }
-    .career-ladder::before {
-      content: '';
-      position: absolute;
-      top: 24px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--void-border);
-      z-index: 0;
-    }
-
-    .career-step {
-      flex: 1;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .career-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--void-border);
-      margin: 18px auto 12px;
-    }
-    .career-step--active .career-dot {
-      background: var(--gold);
-      box-shadow: 0 0 12px rgba(207,145,32,0.4);
-    }
-
-    .career-name {
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--cream-dim);
-    }
-    .career-step--active .career-name { color: var(--gold); }
-
-    .career-desc {
-      font-size: 11px;
-      color: var(--cream-muted);
-      margin-top: 4px;
-      padding: 0 8px;
-    }
-
-    .career-you {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--cyan);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 700px) {
-      .tour-tiers { grid-template-columns: repeat(2, 1fr); }
-      .career-ladder { flex-direction: column; gap: 12px; }
-      .career-ladder::before { display: none; }
-    }
-
-    /* ============================================================
-       HORROR MODE — CINEMATIC
-       ============================================================ */
-    .horror-mode {
-      padding: var(--section-py) 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Subtle purple atmospheric glow */
-    .horror-mode::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(178,102,255,0.06), transparent 70%);
-      pointer-events: none;
-    }
-
-    .horror-types {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 40px 0;
-    }
-
-    .horror-type {
-      padding: 24px 20px;
-      border-radius: 10px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
-    .horror-type:hover { transform: translateY(-2px); }
-
-    .horror-type--haunt {
-      background: rgba(178,102,255,0.06);
-      border: 1px solid rgba(178,102,255,0.15);
-    }
-    .horror-type--spirit {
-      background: rgba(0,229,255,0.05);
-      border: 1px solid rgba(0,229,255,0.12);
-    }
-    .horror-type--reckoning {
-      background: rgba(207,145,32,0.05);
-      border: 1px solid rgba(207,145,32,0.12);
-    }
-    .horror-type--wild {
-      background: rgba(255,68,68,0.05);
-      border: 1px solid rgba(255,68,68,0.12);
-    }
-
-    .ht-count {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 32px;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .horror-type--haunt .ht-count { color: var(--purple); }
-    .horror-type--spirit .ht-count { color: var(--cyan); }
-    .horror-type--reckoning .ht-count { color: var(--gold); }
-    .horror-type--wild .ht-count { color: var(--red); }
-
-    .ht-name {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-    .ht-desc {
-      font-size: 12px;
-      color: var(--cream-muted);
-      line-height: 1.5;
-    }
-
-    /* Example horror cards */
-    .horror-examples {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 40px 0;
-    }
-
-    .horror-card-example {
-      padding: 24px 20px;
-      border-radius: 12px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.3s;
-    }
-    .horror-card-example:hover { transform: translateY(-2px); }
-
-    .hce-type {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .hce-type--haunt { color: var(--purple); }
-    .hce-type--spirit { color: var(--cyan); }
-    .hce-type--wild { color: var(--red); }
-
-    .hce-name {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .hce-timing {
-      font-size: 11px;
-      color: var(--cream-muted);
-      margin-bottom: 8px;
-      font-style: italic;
-    }
-
-    .hce-effect {
-      font-size: 13px;
-      color: var(--cream-dim);
-      line-height: 1.55;
-      margin-bottom: 10px;
-    }
-
-    .hce-flavor {
-      font-size: 12px;
-      color: var(--cream-muted);
-      font-style: italic;
-      opacity: 0.7;
-    }
-
-    .horror-card-example--haunt { border-left: 3px solid var(--purple); }
-    .horror-card-example--spirit { border-left: 3px solid var(--cyan); }
-    .horror-card-example--wild { border-left: 3px solid var(--red); }
-
-    .horror-skins-note {
-      padding: 20px 24px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 10px;
-      font-size: 14px;
-      color: var(--cream-muted);
-      line-height: 1.6;
-      margin: 20px 0 32px;
-    }
-    .horror-skins-note strong { color: var(--cream-dim); }
-
-    @media (max-width: 800px) {
-      .horror-types { grid-template-columns: repeat(2, 1fr); }
-      .horror-examples { grid-template-columns: 1fr; }
-    }
-
-    /* ============================================================
-       BUILT FOR THE ROUND — FEATURE GRID
-       ============================================================ */
-    .feature-grid-section {
-      padding: var(--section-py) 0;
-      background: var(--void-light);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 48px;
-    }
-
-    .fg-card {
-      padding: 28px 24px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 12px;
-      transition: transform 0.2s;
-    }
-    .fg-card:hover { transform: translateY(-2px); }
-
-    .fg-card h3 {
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .fg-card p {
-      font-size: 13px;
-      color: var(--cream-muted);
-      line-height: 1.6;
-    }
-
-    .fg-tags {
-      display: flex;
-      gap: 6px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    .fg-tag {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--cream-muted);
-      border: 1px solid var(--void-border);
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 700px) {
-      .feature-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ============================================================
-       REVIEWS
-       ============================================================ */
-    .reviews {
-      padding: var(--section-py) 0;
-    }
-
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 48px;
-    }
-
-    .review-card {
-      padding: 28px 24px;
-      background: var(--void-card);
-      border: 1px solid var(--void-border);
-      border-radius: 12px;
-    }
-
-    .review-stars {
-      color: var(--gold);
-      font-size: 14px;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
-    }
-
-    .review-text {
-      font-size: 14px;
-      color: var(--cream-dim);
-      line-height: 1.7;
-      margin-bottom: 16px;
-      font-style: italic;
-    }
-    .review-text em {
-      color: var(--cream);
-      font-style: italic;
-    }
-
-    .review-author {
-      font-size: 12px;
-      color: var(--cream-muted);
-    }
-
-    @media (max-width: 700px) {
-      .reviews-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ============================================================
-       EMAIL CAPTURE (NEW)
-       ============================================================ */
-    .email-capture {
-      padding: 80px 0;
-      background: var(--void-light);
-      text-align: center;
-    }
-
-    .email-form {
-      display: flex;
-      max-width: 440px;
-      margin: 28px auto 0;
-      gap: 10px;
-    }
-    .email-form input {
-      flex: 1;
-      padding: 14px 16px;
-      border: 1px solid var(--void-border);
-      border-radius: 8px;
-      background: var(--void-card);
-      color: var(--cream);
-      font-family: var(--font-body);
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .email-form input::placeholder { color: var(--cream-muted); }
-    .email-form input:focus { border-color: var(--gold); }
-
-    .email-form button {
-      white-space: nowrap;
-    }
-
-    @media (max-width: 500px) {
-      .email-form { flex-direction: column; }
-    }
-
-    /* ============================================================
-       FINAL CTA
-       ============================================================ */
-    .final-cta {
-      padding: var(--section-py) 0;
-      text-align: center;
-    }
-
-    .final-cta p {
-      font-size: 16px;
-      color: var(--cream-muted);
-      max-width: 600px;
-      margin: 0 auto 36px;
-      line-height: 1.75;
-    }
-
-    /* ============================================================
-       FOOTER
-       ============================================================ */
-    .site-footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--void-border);
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-weight: 200;
-      font-size: 16px;
-      letter-spacing: 0.08em;
-      color: var(--cream-dim);
-      margin-bottom: 16px;
-    }
-    .footer-logo span { color: var(--gold); font-weight: 200; }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      list-style: none;
-      margin-bottom: 16px;
-    }
-    .footer-links a {
-      font-size: 13px;
-      color: var(--cream-muted);
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--cream); }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--cream-muted);
-      opacity: 0.5;
-    }
-
-    .footer-cta-group {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    /* ============================================================
-       ANIMATIONS
-       ============================================================ */
-    @media (prefers-reduced-motion: no-preference) {
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Docs — Ghost Card</title>
+<meta name="description" content="Ghost Card documentation. Ten guides covering every feature — getting started, scoring, bag tags, tour mode, horror mode, friends, and more."/>
+<link rel="canonical" href="https://ghostcard.live/docs/"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<meta name="theme-color" content="#0D1426"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
+  --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--specter:#F0E8D0;
+  --moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,20,38,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo svg{width:26px;height:29px;flex-shrink:0}
+.nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:18px;letter-spacing:4px;display:flex;line-height:1}
+.nav-wordmark .ghost-part{color:var(--cream)}
+.nav-wordmark .card-part{color:var(--harvest)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--lantern)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+.btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+.btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
+
+/* ── HAMBURGER ── */
+.hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210;flex-shrink:0}
+.hamburger span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all 0.3s ease}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(9,21,37,0.98);border-bottom:1px solid var(--dusk);padding:24px 2rem 32px;z-index:199;flex-direction:column;gap:0}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--fog);font-size:14px;font-weight:500;letter-spacing:2px;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(30,46,74,0.5);transition:color 0.2s}
+.mobile-menu a:hover{color:var(--lantern)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu-cta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.mobile-menu-cta a{width:100%;text-align:center;padding:12px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:block}
+.m-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog)}
+.m-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
+.m-primary{background:var(--harvest);border:none;color:#0D1426}
+.m-primary:hover{background:var(--lantern)}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:120px 2rem 48px;text-align:center}
+.page-hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:16px}
+.page-hero h1{font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(28px,5vw,48px);line-height:1.15;color:var(--moonlight);margin-bottom:20px;letter-spacing:0.5px}
+.page-hero h1 em{font-style:normal;color:var(--fog)}
+.page-hero p{font-size:15px;color:var(--fog);max-width:560px;margin:0 auto;line-height:1.7}
+
+/* ── DOC GRID ── */
+.doc-grid-section{padding:40px 2rem 60px;max-width:1080px;margin:0 auto}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.doc-card{display:flex;gap:18px;align-items:flex-start;padding:26px 22px;background:var(--deep-navy);border:1px solid var(--dusk);border-radius:10px;transition:transform 0.2s,border-color 0.3s}
+.doc-card:hover{transform:translateY(-2px);border-color:rgba(201,168,76,0.3)}
+.doc-num{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;color:var(--lantern);opacity:0.5;min-width:24px;padding-top:2px}
+.doc-card h3{font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:var(--moonlight);margin-bottom:5px;letter-spacing:0.2px}
+.doc-card p{font-size:13px;color:var(--fog);line-height:1.55}
+.doc-arrow{font-size:18px;color:var(--lantern);opacity:0.35;margin-left:auto;align-self:center;transition:opacity 0.2s;flex-shrink:0}
+.doc-card:hover .doc-arrow{opacity:0.8}
+.doc-badge-new{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;background:rgba(123,200,200,0.12);color:#7BC8C8;border:1px solid rgba(123,200,200,0.25);margin-left:6px;vertical-align:middle}
+@media(max-width:700px){.doc-grid{grid-template-columns:1fr}}
+
+/* ── JUMP LINKS ── */
+.jump-section{padding:20px 2rem 100px;max-width:1080px;margin:0 auto}
+.jump-section h2{font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:var(--fog);margin-bottom:18px;letter-spacing:1px;text-transform:uppercase}
+.jump-links{display:flex;flex-wrap:wrap;gap:8px}
+.jump-link{padding:6px 14px;border-radius:6px;font-size:12px;color:var(--fog);background:var(--deep-navy);border:1px solid var(--dusk);transition:color 0.2s,border-color 0.2s;letter-spacing:0.3px}
+.jump-link:hover{color:var(--moonlight);border-color:var(--fog)}
+
+/* ── FOOTER ── */
+footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
+.footer-logo{margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:10px}
+.footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:20px;letter-spacing:5px;display:flex}
+.footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:28px}
+.footer-links a{color:var(--fog);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--moonlight)}
+.footer-copy{font-size:12px;color:var(--fog);letter-spacing:1px}
+.footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+</style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAV
-       ============================================================ -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="https://ghostcard.live/" class="nav-logo">GHOST<span>CARD</span></a>
-      <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
-      <ul class="nav-links">
-        <li><a href="https://ghostcard.live/how-it-works.html">How It Works</a></li>
-        <li><a href="https://ghostcard.live/features.html">Features</a></li>
-        <li><a href="https://ghostcard.live/docs/index.html">Docs</a></li>
-        <li><a href="https://app.ghostcard.live">Log In</a></li>
-        <li><a href="https://app.ghostcard.live" class="nav-cta">Sign Up Free</a></li>
-      </ul>
-    </div>
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo" aria-label="Ghost Card home">
+    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
+  </a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="index.html">Docs</a>
   </nav>
-
-  <!-- ============================================================
-       WHAT'S NEW BANNER
-       ============================================================ -->
-  <div class="whats-new">
-    <strong>Just shipped:</strong> Horror Mode
-    <span class="wn-dot"></span>Friends &amp; Feed
-    <span class="wn-dot"></span>Beat Your Ghost
-    <span class="wn-dot"></span>Rating Trends
-    — <a href="#horror-mode" style="color:var(--cyan);text-decoration:underline;">see what's new ↓</a>
+  <div class="nav-cta">
+    <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
+    <button class="btn-primary" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <!-- ============================================================
-       HERO
-       ============================================================ -->
-  <header class="treeline-header">
-    <div class="treeline-photo"></div>
-    <section class="hero wrap" style="position:relative;z-index:1;">
-      <p class="hero-tagline">Real Disc Golf. Video Game Soul.</p>
-      <h1>134 Ghost Pros.<br>7,008 Courses.<br>Your Move.</h1>
-      <p class="hero-sub">Pick any US disc golf course. Drop in ghost opponents rated by real PDGA stats. Score your round. The leaderboard does the rest. Free to play&nbsp;— the ghosts don't charge.</p>
-      <div class="hero-buttons">
-        <a href="https://app.ghostcard.live" class="btn btn-gold">Play Free</a>
-        <a href="https://ghostcard.live/how-it-works.html" class="btn btn-ghost">See How It Works</a>
-      </div>
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="index.html">Docs</a>
+  <div class="mobile-menu-cta">
+    <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
+    <a href="https://app.ghostcard.live" class="m-primary">Sign Up Free</a>
+  </div>
+</div>
 
-      <!-- Leaderboard mock — now with 3 ghost layers -->
-      <div class="lb-mock">
-        <div class="lb-header">
-          <div class="lb-live">live · hole 14 of 18</div>
-          <div>Player&emsp;Score&emsp;Thru</div>
-        </div>
-        <div class="lb-cols">
-          <div>Player</div>
-          <div>Score</div>
-          <div>Thru</div>
-        </div>
-        <div class="lb-row lb-row--pro">
-          <div><span class="lb-rank">1</span><span class="lb-name">Paul McBeth</span><span class="lb-ghost-tag">ghost</span></div>
-          <div class="lb-score">−10</div>
-          <div class="lb-thru">14</div>
-        </div>
-        <div class="lb-row lb-row--pro">
-          <div><span class="lb-rank">2</span><span class="lb-name">Ricky Wysocki</span><span class="lb-ghost-tag">ghost</span></div>
-          <div class="lb-score">−9</div>
-          <div class="lb-thru">14</div>
-        </div>
-        <div class="lb-row lb-row--friend">
-          <div><span class="lb-rank">3</span><span class="lb-name">Your Friend Jake</span><span class="lb-ghost-tag" style="color:var(--cyan);">friend&nbsp;ghost</span></div>
-          <div class="lb-score">−3</div>
-          <div class="lb-thru">14</div>
-        </div>
-        <div class="lb-row lb-row--pb">
-          <div><span class="lb-rank">4</span><span class="lb-name">YOUR BEST</span><span class="lb-ghost-tag" style="color:var(--gold);">PB ghost</span></div>
-          <div class="lb-score">−2</div>
-          <div class="lb-thru">14</div>
-        </div>
-        <div class="lb-row lb-row--you">
-          <div><span class="lb-rank">5</span><span class="lb-name">You</span></div>
-          <div class="lb-score">−1</div>
-          <div class="lb-thru">14</div>
-        </div>
-      </div>
-    </section>
-  </header>
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <p class="page-hero-eyebrow">Documentation</p>
+  <h1>Everything you need. <em>Nothing you don't.</em></h1>
+  <p>The woods don't come with a manual. Ghost Card does. Ten guides. One for every feature. Zero upsells. The ghosts appreciate efficiency.</p>
+</section>
 
-  <!-- ============================================================
-       HOW IT WORKS — 4-STEP
-       ============================================================ -->
-  <section class="how-it-works fade-in">
-    <div class="wrap">
-      <span class="eyebrow">How It Works</span>
-      <h2 class="section-head">Four steps. <em>The ghosts handle the rest.</em></h2>
-      <div class="hiw-grid">
-        <div class="hiw-card">
-          <div class="hiw-num">01</div>
-          <h3>Pick Your Course</h3>
-          <p>7,008 US courses indexed and searchable. Community-verified par data. Spot a wrong par? Fix it.</p>
-          <div class="hiw-stat">7,008 courses</div>
-        </div>
-        <div class="hiw-card">
-          <div class="hiw-num">02</div>
-          <h3>Build Your Card</h3>
-          <p>Add real players, invite friends, drop in ghost pros. Stroke Play, Scramble, or Solo. MPO or FPO.</p>
-          <div class="hiw-stat">134 ghost pros</div>
-        </div>
-        <div class="hiw-card">
-          <div class="hiw-num">03</div>
-          <h3>Score Your Round</h3>
-          <p>One-hand input designed for the field. Running +/− from par after every hole. Leaderboard reshuffles live.</p>
-          <div class="hiw-stat">Live leaderboard</div>
-        </div>
-        <div class="hiw-card">
-          <div class="hiw-num">04</div>
-          <h3>Own Your History</h3>
-          <p>Every round saved. Full hole-by-hole breakdown. GC Rating calculated. Share your round badge.</p>
-          <div class="hiw-stat">50 rounds archived</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ── DOC GRID ── -->
+<section class="doc-grid-section">
+  <div class="doc-grid">
 
-  <hr class="divider">
+    <a href="getting-started.html" class="doc-card">
+      <div class="doc-num">01</div>
+      <div><h3>Getting Started</h3><p>Create an account, log in, and throw your first round. The ghosts are already on the tee.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-  <!-- ============================================================
-       BEAT YOUR GHOST — PERSONAL BEST (NEW)
-       ============================================================ -->
-  <section class="beat-ghost fade-in" id="beat-ghost">
-    <div class="wrap">
-      <div class="beat-ghost-layout">
-        <div class="beat-ghost-text">
-          <span class="eyebrow"><span class="badge badge-new" style="margin-right:8px;">New</span> Beat Your Ghost</span>
-          <h2 class="section-head">Your best round is watching. <em>Can you beat it?</em></h2>
-          <p class="section-sub">Your previous personal best at the current course appears as a gold ghost row on the live leaderboard — real scores, hole by hole. Not simulated. Not estimated. That was you, on that day, and now you have to beat yourself.</p>
-          <p class="section-sub" style="margin-top:14px;">Set a new personal best and the Round Complete screen celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained. The ghost noticed.</p>
-          <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
-            <a href="https://app.ghostcard.live" class="btn btn-gold">Race Your Ghost — Play Free</a>
-            <a href="https://ghostcard.live/docs/friends-and-feed.html#pb-ghost" class="doc-link" style="align-self:center;">PB Ghost docs →</a>
-          </div>
-        </div>
+    <a href="building-a-card.html" class="doc-card">
+      <div class="doc-num">02</div>
+      <div><h3>Building a Card</h3><p>Courses, players, ghost opponents, formats. Everything that goes on the scorecard before the disc leaves your hand.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-        <!-- PB celebration mock -->
-        <div class="pb-mock">
-          <div class="pb-celebration">
-            <div class="pb-celebration-title">🎉 NEW PERSONAL BEST</div>
-            <div class="pb-celebration-sub">Cedar Creek · April 8, 2026</div>
-          </div>
-          <div class="lb-cols" style="border-top:none;">
-            <div>Player</div>
-            <div>Score</div>
-            <div>Thru</div>
-          </div>
-          <div class="lb-row lb-row--you" style="background:rgba(207,145,32,0.08);">
-            <div><span class="lb-rank">—</span><span class="lb-name" style="color:var(--gold);">You (Today)</span></div>
-            <div class="lb-score" style="color:var(--green);">−4</div>
-            <div class="lb-thru">18</div>
-          </div>
-          <div class="lb-row lb-row--pb">
-            <div><span class="lb-rank">—</span><span class="lb-name">YOUR BEST (prev)</span></div>
-            <div class="lb-score">−2</div>
-            <div class="lb-thru">18</div>
-          </div>
-          <div class="pb-comparison">
-            <div>
-              <div class="pb-stat-label">Holes Won</div>
-              <div class="pb-stat-value pb-stat-value--green">8</div>
-            </div>
-            <div>
-              <div class="pb-stat-label">Holes Lost</div>
-              <div class="pb-stat-value pb-stat-value--red">4</div>
-            </div>
-            <div>
-              <div class="pb-stat-label">Holes Tied</div>
-              <div class="pb-stat-value pb-stat-value--muted">6</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <a href="scoring.html" class="doc-card">
+      <div class="doc-num">03</div>
+      <div><h3>Scoring a Round</h3><p>Hole-by-hole input, the live leaderboard, running +/− from par, and what happens when the round ends.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-  <hr class="divider">
+    <a href="history.html" class="doc-card">
+      <div class="doc-num">04</div>
+      <div><h3>Round History</h3><p>Your full archive. Every round, every hole, every decision. Saving, reviewing, filtering, and sharing.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-  <!-- ============================================================
-       FRIENDS & SOCIAL LAYER (NEW)
-       ============================================================ -->
-  <section class="friends-section fade-in" id="friends">
-    <div class="wrap">
-      <span class="eyebrow"><span class="badge badge-new" style="margin-right:8px;">New</span> Friends &amp; Social</span>
-      <h2 class="section-head">Three ghost layers. One leaderboard. <em>The solo round was never solo.</em></h2>
-      <p class="section-sub">Your leaderboard now has three ghost layers competing alongside you — each one color-coded, each one using real hole-by-hole score data. No simulations.</p>
+    <a href="bag-tags.html" class="doc-card">
+      <div class="doc-num">05</div>
+      <div><h3>Bag Tags</h3><p>30 horror-themed collectibles across four rarity tiers. How to earn them, what they mean, and how to equip one.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-      <div class="ghost-layers">
-        <div class="ghost-layer-card ghost-layer-card--pro">
-          <div class="gl-icon gl-icon--pro">👻</div>
-          <div class="gl-label gl-label--pro">Cream</div>
-          <h3>Pro Ghosts</h3>
-          <p>134 PDGA-rated opponents. Real stats. Real names. They show up on time and never ask what disc you threw.</p>
-        </div>
-        <div class="ghost-layer-card ghost-layer-card--pb">
-          <div class="gl-icon gl-icon--pb">🏆</div>
-          <div class="gl-label gl-label--pb">Gold</div>
-          <h3>Your PB Ghost</h3>
-          <p>Your previous personal best at this course. Real scores, hole by hole. Beat yourself — or watch yourself win.</p>
-        </div>
-        <div class="ghost-layer-card ghost-layer-card--friend">
-          <div class="gl-icon gl-icon--friend">👤</div>
-          <div class="gl-label gl-label--friend">Cyan</div>
-          <h3>Friend Ghost</h3>
-          <p>Your friend's best round at this course appears on your leaderboard. If they birdied hole 7, you'll see it on hole 7.</p>
-        </div>
-      </div>
+    <a href="tour-mode.html" class="doc-card">
+      <div class="doc-num">06</div>
+      <div><h3>Tour Mode</h3><p>Multi-round tournament events. Standard events, Majors, DGPT-style points, season standings.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-      <div class="friends-features">
-        <div class="ff-item">
-          <h4>Activity Feed</h4>
-          <p>See friends' recent rounds. Course, score, GC Rating. Tap to expand full scorecards.</p>
-        </div>
-        <div class="ff-item">
-          <h4>Head-to-Head</h4>
-          <p>Auto-surfaces courses you've both played. Best scores compared side by side.</p>
-        </div>
-        <div class="ff-item">
-          <h4>Quick-Add to Card</h4>
-          <p>Accepted friends appear as one-tap chips when building your card.</p>
-        </div>
-        <div class="ff-item">
-          <h4>Rating Trend</h4>
-          <p>Sparkline chart tracks your GC Rating across your last 20 rounds. Green = improving.</p>
-        </div>
-      </div>
+    <a href="par-corrections.html" class="doc-card">
+      <div class="doc-num">07</div>
+      <div><h3>Community Par Corrections</h3><p>How to fix a wrong par, what happens when you do, and why five corrections unlocks something special.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-      <p class="section-sub" style="margin-bottom:4px;">Mutual friendships only. 20-friend cap. No follower counts, no likes, no algorithms. Just rounds and who played them.</p>
-      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://app.ghostcard.live" class="btn btn-cyan">Sign Up &amp; Add Your First Friend</a>
-        <a href="https://ghostcard.live/docs/friends-and-feed.html" class="doc-link" style="align-self:center;">Friends &amp; Feed docs →</a>
-      </div>
-    </div>
-  </section>
+    <a href="account.html" class="doc-card">
+      <div class="doc-num">08</div>
+      <div><h3>Account &amp; Profile</h3><p>Sign up, sign in, reset your password, manage your username and display name. The administrative haunting.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-  <!-- ============================================================
-       MULTIPLAYER & PLAYING WITH FRIENDS (UPDATED)
-       ============================================================ -->
-  <section class="multiplayer fade-in" id="multiplayer">
-    <div class="wrap">
-      <span class="eyebrow">Multiplayer</span>
-      <h2 class="section-head">Real players. Ghost pros. <em>Your round, your rules.</em></h2>
-      <p class="section-sub">Invite real players, drop in ghost pros, run Scramble or Stroke Play. One live leaderboard for everyone — real and ghost. Five ways to build your card.</p>
+    <a href="horror-mode.html" class="doc-card">
+      <div class="doc-num">09</div>
+      <div><h3>Horror Mode</h3><p>The 50-card game overlay. Haunt, Spirit, Reckoning, Wild. Skins. How to play, how cards work, and what happens at Round Complete.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-      <div class="mp-grid">
-        <div class="mp-card">
-          <div class="mp-card-badge"><span class="badge badge-gold">Core</span></div>
-          <h3>Invite Real Players</h3>
-          <p>Invite signed-in Ghost Card users by name. One shared scorecard, one live leaderboard. Up to 4 players per card.</p>
-          <div class="mp-card-tag">Up to 4 Players</div>
-        </div>
-        <div class="mp-card">
-          <div class="mp-card-badge"><span class="badge badge-gold">Core</span></div>
-          <h3>Ghost Pros in the Mix</h3>
-          <p>Real players and ghost pros on the same card, same leaderboard. Mix and match however you want. MPO or FPO fields.</p>
-          <div class="mp-card-tag">134 Ghost Pros · MPO · FPO</div>
-        </div>
-        <div class="mp-card">
-          <div class="mp-card-badge"><span class="badge badge-gold">Format</span></div>
-          <h3>Scramble Mode</h3>
-          <p>Team format — everyone throws, best lie plays. Enter a team name. Ghost teams get horror names. A completely different game on the same course.</p>
-          <div class="mp-card-tag">Team Scoring</div>
-        </div>
-        <div class="mp-card">
-          <div class="mp-card-badge"><span class="badge badge-gold">Format</span></div>
-          <h3>Custom Tournament</h3>
-          <p>Name your tournament. 1–5 rounds, Stroke Play or Scramble, different course each round. Cumulative leaderboard updates after every round.</p>
-          <div class="mp-card-tag">1–5 Rounds · Your Name</div>
-        </div>
-        <div class="mp-card">
-          <div class="mp-card-badge"><span class="badge badge-new">New</span></div>
-          <h3>Quick-Add Friends</h3>
-          <p>Accepted friends appear as one-tap chips when building a card. No typing. No searching. Just tap and throw.</p>
-          <div class="mp-card-tag">Instant</div>
-        </div>
-        <div class="mp-card">
-          <div class="mp-card-badge"><span class="badge badge-new">New</span></div>
-          <h3>Share Round Badge</h3>
-          <p>Every completed round generates a shareable badge — course, date, score, GC Rating. Export to social, messages, wherever you celebrate (or mourn).</p>
-          <div class="mp-card-tag">Export &amp; Share</div>
-        </div>
-      </div>
+    <a href="friends-and-feed.html" class="doc-card">
+      <div class="doc-num">10</div>
+      <div><h3>Friends &amp; Feed <span class="doc-badge-new">New</span></h3><p>Add friends, see their rounds, race their ghost on your leaderboard. Personal best ghost, friend ghost, head-to-head, rating trend, and share badge.</p></div>
+      <div class="doc-arrow">→</div>
+    </a>
 
-      <div style="margin-top:32px;text-align:center;">
-        <a href="https://app.ghostcard.live" class="btn btn-gold">Build Your Card</a>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<!-- ── JUMP LINKS ── -->
+<section class="jump-section">
+  <h2>Jump to a topic</h2>
+  <div class="jump-links">
+    <a href="getting-started.html#create-account" class="jump-link">Creating an account</a>
+    <a href="building-a-card.html#ghost-opponents" class="jump-link">Ghost opponents</a>
+    <a href="building-a-card.html#field-presets" class="jump-link">Field presets</a>
+    <a href="building-a-card.html#field-difficulty" class="jump-link">Field difficulty</a>
+    <a href="scoring.html#leaderboard" class="jump-link">Live leaderboard</a>
+    <a href="scoring.html#gc-rating" class="jump-link">GC Rating</a>
+    <a href="bag-tags.html#rarity" class="jump-link">Bag tag rarities</a>
+    <a href="bag-tags.html#bone-collector" class="jump-link">Bone Collector tag</a>
+    <a href="tour-mode.html#event-types" class="jump-link">Tour event tiers</a>
+    <a href="tour-mode.html#points" class="jump-link">Points structure</a>
+    <a href="horror-mode.html#card-types" class="jump-link">Horror card types</a>
+    <a href="horror-mode.html#haunt" class="jump-link">Haunt cards</a>
+    <a href="horror-mode.html#reckoning" class="jump-link">Reckoning cards</a>
+    <a href="horror-mode.html#skins" class="jump-link">Skins game</a>
+    <a href="friends-and-feed.html#friend-ghost" class="jump-link">Friend ghost</a>
+    <a href="friends-and-feed.html#pb-ghost" class="jump-link">Personal best ghost</a>
+    <a href="friends-and-feed.html#h2h" class="jump-link">Head-to-head</a>
+    <a href="friends-and-feed.html#rating-trend" class="jump-link">Rating trend</a>
+    <a href="friends-and-feed.html#share-badge" class="jump-link">Share badge</a>
+    <a href="par-corrections.html#submit" class="jump-link">Submitting a correction</a>
+    <a href="history.html#save" class="jump-link">Saving a round</a>
+    <a href="account.html#reset" class="jump-link">Password reset</a>
+  </div>
+</section>
 
-  <!-- ============================================================
-       TOUR MODE & CAREER
-       ============================================================ -->
-  <section class="tour-mode fade-in" id="tour-mode">
-    <div class="wrap">
-      <span class="eyebrow">Tour Mode &amp; Career Story</span>
-      <h2 class="section-head">10 events. One season. <em>The ghosts keep standings.</em></h2>
-      <p class="section-sub">A full DGPT-style season. Regular events, Elite+, a Major worth 1.5×, and a Season Finale worth double. Ghost pros compete in the standings alongside you. Your career arc runs underneath it all.</p>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 20 22.4" width="30" height="34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+    <div class="footer-wm"><span style="color:#EDE9DC">GHOST</span><span style="color:#CF9120">CARD</span></div>
+  </div>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="../index.html">Home</a>
+    <a href="index.html">Docs</a>
+  </nav>
+  <p class="footer-copy">Ghost Card &copy; 2026 &bull; <a href="https://ghostcard.live" style="color:var(--shadow);text-decoration:none">ghostcard.live</a></p>
+  <p class="footer-tagline">Haunt the Leaderboard</p>
+</footer>
 
-      <div class="tour-tiers">
-        <div class="tour-tier">
-          <div class="tour-tier-name">Regular</div>
-          <div class="tour-tier-rounds">3 rounds</div>
-          <div class="tour-tier-pts">100</div>
-          <div class="tour-tier-label">pts for 1st</div>
-        </div>
-        <div class="tour-tier">
-          <div class="tour-tier-name">Elite+</div>
-          <div class="tour-tier-rounds">3 rounds · 1.25×</div>
-          <div class="tour-tier-pts">125</div>
-          <div class="tour-tier-label">pts for 1st</div>
-        </div>
-        <div class="tour-tier">
-          <div class="tour-tier-name">Major</div>
-          <div class="tour-tier-rounds">5 rounds · 1.5×</div>
-          <div class="tour-tier-pts">150</div>
-          <div class="tour-tier-label">pts for 1st</div>
-        </div>
-        <div class="tour-tier">
-          <div class="tour-tier-name">Season Finale</div>
-          <div class="tour-tier-rounds">5 rounds · 2×</div>
-          <div class="tour-tier-pts">200</div>
-          <div class="tour-tier-label">pts for 1st</div>
-        </div>
-      </div>
-
-      <!-- Career Ladder -->
-      <div class="career-ladder">
-        <div class="career-step career-step--active">
-          <div class="career-dot"></div>
-          <div class="career-name">Newcomer</div>
-          <div class="career-desc">Season 1. The leaderboard doesn't know your name yet.</div>
-          <div class="career-you">You are here</div>
-        </div>
-        <div class="career-step">
-          <div class="career-dot"></div>
-          <div class="career-name">Contender</div>
-          <div class="career-desc">First top-5 finish. The ghosts start taking notice.</div>
-        </div>
-        <div class="career-step">
-          <div class="career-dot"></div>
-          <div class="career-name">Veteran</div>
-          <div class="career-desc">Season wins on record. The field adjusts.</div>
-        </div>
-        <div class="career-step">
-          <div class="career-dot"></div>
-          <div class="career-name">Legend</div>
-          <div class="career-desc">The ghost card is yours to lose.</div>
-        </div>
-      </div>
-
-      <div style="margin-top:40px;text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://app.ghostcard.live" class="btn btn-gold">Start Your Season</a>
-        <a href="https://ghostcard.live/docs/tour-mode.html" class="doc-link" style="align-self:center;">Tour Mode docs →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       HORROR MODE — CINEMATIC (NEW TREATMENT)
-       ============================================================ -->
-  <section class="horror-mode fade-in" id="horror-mode">
-    <div class="wrap" style="position:relative;z-index:1;">
-      <span class="eyebrow"><span class="badge badge-purple" style="margin-right:8px;">Multiplayer</span> Horror Mode</span>
-      <h2 class="section-head">A card game. Inside your round. <em>Against your friends.</em></h2>
-      <p class="section-sub">50 cards. 4 types. One card per hole. You lose a hole, you draw. You play a card, someone throws non-dominant hand on the next tee. The disc golf still counts.</p>
-
-      <!-- 4 card types -->
-      <div class="horror-types">
-        <div class="horror-type horror-type--haunt">
-          <div class="ht-count">20</div>
-          <div class="ht-name">Haunt</div>
-          <div class="ht-desc">Played on opponents. Penalties, forced shots, stolen cards.</div>
-        </div>
-        <div class="horror-type horror-type--spirit">
-          <div class="ht-count">15</div>
-          <div class="ht-name">Spirit</div>
-          <div class="ht-desc">Played on yourself. Mulligans, lie improvements, draw bonuses.</div>
-        </div>
-        <div class="horror-type horror-type--reckoning">
-          <div class="ht-count">10</div>
-          <div class="ht-name">Reckoning</div>
-          <div class="ht-desc">Held until the end. Score adjustments that detonate at Round Complete.</div>
-        </div>
-        <div class="horror-type horror-type--wild">
-          <div class="ht-count">5</div>
-          <div class="ht-name">Wild</div>
-          <div class="ht-desc">Played anytime. Mirror, cancel, copy, or amplify. The chaos variable.</div>
-        </div>
-      </div>
-
-      <!-- Example cards — cinematic showcase -->
-      <div class="horror-examples">
-        <div class="horror-card-example horror-card-example--haunt">
-          <div class="hce-type hce-type--haunt">Haunt</div>
-          <div class="hce-name">The Possession</div>
-          <div class="hce-timing">Before tee shot</div>
-          <div class="hce-effect">Target must throw their next shot with their non-dominant hand.</div>
-          <div class="hce-flavor">"Something else is in control now."</div>
-        </div>
-        <div class="horror-card-example horror-card-example--spirit">
-          <div class="hce-type hce-type--spirit">Spirit</div>
-          <div class="hce-name">Ghost Walk</div>
-          <div class="hce-timing">After any shot</div>
-          <div class="hce-effect">Mulligan — re-throw your last shot from the same lie at no penalty.</div>
-          <div class="hce-flavor">"This moment gets a second chance."</div>
-        </div>
-        <div class="horror-card-example horror-card-example--wild">
-          <div class="hce-type hce-type--wild">Wild</div>
-          <div class="hce-name">The Mirror</div>
-          <div class="hce-timing">After a card is played on you</div>
-          <div class="hce-effect">Reflect the card played on you back at the player who played it.</div>
-          <div class="hce-flavor">"What you send out comes back."</div>
-        </div>
-      </div>
-
-      <div class="horror-skins-note">
-        <strong>Skins run alongside.</strong> Each hole has a skin worth 1 point. Ties carry over. Several Reckoning cards interact directly with your skins total — the card game and the skins game feed into each other at Round Complete.
-      </div>
-
-      <div style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://app.ghostcard.live" class="btn btn-purple">Enable Horror Mode — Play Free</a>
-        <a href="https://ghostcard.live/docs/horror-mode.html" class="doc-link" style="align-self:center;">Horror Mode docs →</a>
-      </div>
-      <p style="text-align:center;font-size:12px;color:var(--cream-muted);margin-top:12px;"><strong>2+ players</strong> required · optional but lethal</p>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================================================
-       BUILT FOR THE ROUND — FEATURE GRID
-       ============================================================ -->
-  <section class="feature-grid-section fade-in">
-    <div class="wrap">
-      <span class="eyebrow">Built for the Round</span>
-      <h2 class="section-head">Every piece of the game. <em>None of the fluff.</em></h2>
-
-      <div class="feature-grid">
-        <div class="fg-card">
-          <h3>134 Ghost Pros</h3>
-          <p>Rated by real PDGA scores. They play statistically, show up on time, and never ask what disc you threw.</p>
-          <div class="fg-tags"><span class="fg-tag">MPO</span><span class="fg-tag">FPO</span></div>
-        </div>
-        <div class="fg-card">
-          <h3>Live Leaderboard</h3>
-          <p>Running +/− from par after every hole. Rankings shift in real time. Three ghost layers — pro, PB, friend.</p>
-          <div class="fg-tags"><span class="fg-tag">Hole by hole</span></div>
-        </div>
-        <div class="fg-card">
-          <h3>30 Bag Tags</h3>
-          <p>Horror-themed collectibles earned in-round. Four rarity tiers. Never purchased. The Legendary ones are survived, not unlocked.</p>
-          <div class="fg-tags"><span class="fg-tag">Common</span><span class="fg-tag">Uncommon</span><span class="fg-tag">Rare</span><span class="fg-tag">Legendary</span></div>
-          <a href="https://ghostcard.live/docs/bag-tags.html" class="doc-link" style="display:inline-block;margin-top:10px;">See all 30 →</a>
-        </div>
-        <div class="fg-card">
-          <h3>GC Rating</h3>
-          <p>How you scored relative to the ghost pros. Not a handicap — a mirror. Lives on your profile.</p>
-          <a href="https://ghostcard.live/docs/scoring.html" class="doc-link" style="display:inline-block;margin-top:10px;">How it's calculated →</a>
-        </div>
-        <div class="fg-card">
-          <h3>Round Archive &amp; Rating Trend</h3>
-          <p>Every round saved, every hole documented. Sparkline tracks your GC Rating across your last 20 rounds. Share your badge.</p>
-          <div class="fg-tags"><span class="fg-tag">50 rounds</span><span class="fg-tag">Share badge</span></div>
-          <a href="https://ghostcard.live/docs/history.html" class="doc-link" style="display:inline-block;margin-top:10px;">About the archive →</a>
-        </div>
-        <div class="fg-card">
-          <h3>Community Par Fixes</h3>
-          <p>Wrong par? Fix it. Submit 5 corrections and unlock the Bone Collector bag tag. 7,008 courses, community-maintained.</p>
-          <div class="fg-tags"><span class="fg-tag">7,008 courses</span></div>
-          <a href="https://ghostcard.live/docs/par-corrections.html" class="doc-link" style="display:inline-block;margin-top:10px;">How it works →</a>
-        </div>
-      </div>
-
-      <div style="margin-top:12px;text-align:center;">
-        <p style="font-size:13px;color:var(--cream-muted);">9 docs. Every feature explained. No surprises. <a href="https://ghostcard.live/docs/index.html" class="doc-link">Read the docs →</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       REVIEWS
-       ============================================================ -->
-  <section class="reviews fade-in">
-    <div class="wrap">
-      <span class="eyebrow">Definitely Real Reviews</span>
-      <h2 class="section-head">Five stars. <em>From people who may or may not exist.</em></h2>
-
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Ghost Gannon Buhr birdied hole 1 while I was still explaining why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had <em>accepted my life.</em>"</p>
-          <p class="review-author">Chad, 41 · Owns 340 discs, uses 7</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Ghost Joey Buckets drained a 60-footer on hole 12. I was six feet away and missed. My playing partner said 'at least you're consistent.' <em>I have not recovered.</em>"</p>
-          <p class="review-author">Recovering, slowly · Tennessee</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"A group of eleven people was camped on hole 4. I opened Ghost Card. The ghosts played through immediately. <em>The ghosts understand me in a way real people don't.</em>"</p>
-          <p class="review-author">Solo player · Always · Everywhere</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================================================
-       EMAIL CAPTURE (NEW)
-       ============================================================ -->
-  <section class="email-capture fade-in">
-    <div class="wrap">
-      <span class="eyebrow">Stay Haunted</span>
-      <h2 class="section-head">The ghosts send updates. <em>Occasionally.</em></h2>
-      <p class="section-sub" style="margin:0 auto;">Season announcements, new features, and whatever the ghosts decide is important. No spam. We're too busy playing.</p>
-      <form class="email-form" id="email-form" action="https://formsubmit.co/ghostcardapp@proton.me" method="POST">
-        <input type="hidden" name="_subject" value="Ghost Card — New Subscriber" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://ghostcard.live/" />
-        <input type="hidden" name="_template" value="box" />
-        <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required />
-        <button class="btn btn-gold" type="submit">Subscribe</button>
-      </form>
-      <p id="email-note" style="font-size:12px;color:var(--cream-muted);margin-top:10px;opacity:0.6;">No spam. Unsubscribe anytime. The ghosts respect boundaries.</p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FINAL CTA
-       ============================================================ -->
-  <section class="final-cta fade-in">
-    <div class="wrap">
-      <h2 class="section-head">The ghosts tee off at dawn. <em>You in?</em></h2>
-      <p>Ghost Card is free to play. No downloads. No Bluetooth speaker. No guy explaining for six minutes why he throws a Destroyer on a 200-foot par 3. Just you, a disc, and the entire collected scoring average of everyone who's better than you — rendered as a silent, patient ghost.</p>
-      <a href="https://app.ghostcard.live" class="btn btn-gold">Start Haunting — It's Free</a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-logo">GHOST<span>CARD</span></div>
-      <ul class="footer-links">
-        <li><a href="https://ghostcard.live/">Home</a></li>
-        <li><a href="https://ghostcard.live/how-it-works.html">How It Works</a></li>
-        <li><a href="https://ghostcard.live/features.html">Features</a></li>
-        <li><a href="https://ghostcard.live/docs/index.html">Docs</a></li>
-      </ul>
-      <p class="footer-copy">Ghost Card © 2026 · <a href="https://ghostcard.live">ghostcard.live</a> · Haunt the Leaderboard</p>
-      <div class="footer-cta-group">
-        <a href="https://app.ghostcard.live" class="btn btn-ghost" style="padding:10px 20px;font-size:13px;">Log In</a>
-        <a href="https://app.ghostcard.live" class="btn btn-gold" style="padding:10px 20px;font-size:13px;">Sign Up Free</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============================================================
-       SCROLL ANIMATION
-       ============================================================ -->
-  <script>
-    // Intersection Observer for fade-in animations
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.08 });
-
-      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    }
-  </script>
+<script>
+(function(){
+  var btn=document.getElementById('hamburger');
+  var menu=document.getElementById('mobileMenu');
+  if(!btn||!menu)return;
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';
+  });
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!btn.contains(e.target))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
 </body>
 </html>
