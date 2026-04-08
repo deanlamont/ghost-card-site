@@ -806,7 +806,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 /* Stage — two floating ghosts + your live score */
 .ghosts-stage{
   position:relative;display:flex;align-items:flex-end;justify-content:center;
-  gap:48px;min-height:380px;padding-bottom:20px;
+  gap:48px;min-height:420px;padding-bottom:80px;
 }
 .ghosts-stage-bg{
   position:absolute;inset:0;
@@ -850,20 +850,22 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 .gc-score-cream{color:var(--cream)}
 .gc-score-gold{color:var(--lantern)}
 
-/* Your live score — appears below the ghosts */
+/* Your live score — appears below the ghosts with clear separation */
 .gc-you{
   position:absolute;bottom:0;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;
+  padding:10px 24px;
+  background:rgba(13,20,38,0.85);border:1px solid var(--dusk);border-radius:6px;
   opacity:0;animation:gc-you-in 0.5s ease-out 1.2s forwards;
 }
 @keyframes gc-you-in{to{opacity:1}}
-.gc-you-label{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--fog);margin-bottom:2px}
-.gc-you-score{font-size:16px;font-weight:600;color:#7BC87B;letter-spacing:0.5px}
-.gc-you-thru{font-size:10px;color:var(--shadow);letter-spacing:1px;margin-top:1px}
+.gc-you-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--moonlight);margin-bottom:3px}
+.gc-you-score{font-size:22px;font-weight:600;color:#7BC87B;letter-spacing:0.5px}
+.gc-you-thru{font-size:11px;color:var(--fog);letter-spacing:1.5px;margin-top:2px}
 
 /* Leaderboard line — horizontal, connecting the two columns */
 .lb-line{
-  position:absolute;bottom:105px;left:12%;right:12%;height:1px;
+  position:absolute;bottom:145px;left:12%;right:12%;height:1px;
   background:linear-gradient(90deg,rgba(237,233,220,0.1),rgba(201,168,76,0.35),rgba(237,233,220,0.1));
   z-index:1;
 }
@@ -902,11 +904,13 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 @media(max-width:768px){
   .ghosts-inner{grid-template-columns:1fr;gap:40px}
-  .ghosts-stage{min-height:300px;gap:32px;order:2}
+  .ghosts-stage{min-height:340px;gap:32px;order:2;padding-bottom:70px}
   .ghosts-text{order:1}
   .ghosts-section{padding:0}
   .gc-svg-pro{width:85px;height:96px}
   .gc-svg-pb{width:75px;height:84px}
+  .gc-you{padding:8px 20px}
+  .gc-you-score{font-size:20px}
 }
 
 </style>
