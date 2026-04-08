@@ -803,14 +803,14 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   padding:100px 2rem;position:relative;z-index:2;
 }
 
-/* Stage — the three floating ghosts */
+/* Stage — two floating ghosts + your live score */
 .ghosts-stage{
   position:relative;display:flex;align-items:flex-end;justify-content:center;
-  gap:32px;min-height:380px;padding-bottom:20px;
+  gap:48px;min-height:380px;padding-bottom:20px;
 }
 .ghosts-stage-bg{
   position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 60% at 50% 60%, rgba(123,200,200,0.06) 0%, rgba(201,168,76,0.04) 40%, transparent 80%);
+  background:radial-gradient(ellipse 70% 60% at 50% 60%, rgba(201,168,76,0.06) 0%, rgba(237,233,220,0.03) 50%, transparent 80%);
   pointer-events:none;
 }
 
@@ -819,47 +819,52 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   opacity:0;transform:translateY(20px);
 }
 .gc-pro{animation:gc-rise 0.6s ease-out 0.3s forwards}
-.gc-pb{animation:gc-rise 0.6s ease-out 0.6s forwards}
-.gc-friend{animation:gc-rise 0.6s ease-out 0.9s forwards}
+.gc-pb{animation:gc-rise 0.6s ease-out 0.7s forwards}
 @keyframes gc-rise{to{opacity:1;transform:translateY(0)}}
 
 .ghost-glow-ring{
-  position:absolute;width:120px;height:120px;border-radius:50%;
+  position:absolute;width:140px;height:140px;border-radius:50%;
   top:50%;left:50%;transform:translate(-50%,-50%);
   pointer-events:none;z-index:1;
 }
-.gc-glow-cream{background:radial-gradient(ellipse,rgba(237,233,220,0.12) 0%,transparent 70%);animation:glow-breathe 3.5s ease-in-out infinite}
-.gc-glow-gold{background:radial-gradient(ellipse,rgba(201,168,76,0.14) 0%,transparent 70%);animation:glow-breathe 4s ease-in-out 0.5s infinite}
-.gc-glow-cyan{background:radial-gradient(ellipse,rgba(123,200,200,0.12) 0%,transparent 70%);animation:glow-breathe 3.8s ease-in-out 1s infinite}
+.gc-glow-cream{background:radial-gradient(ellipse,rgba(237,233,220,0.14) 0%,transparent 70%);animation:glow-breathe 3.5s ease-in-out infinite}
+.gc-glow-gold{background:radial-gradient(ellipse,rgba(201,168,76,0.16) 0%,transparent 70%);animation:glow-breathe 4s ease-in-out 0.5s infinite}
 @keyframes glow-breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.7}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}}
 
 .gc-svg{position:relative;z-index:2}
-.gc-svg-pro{width:80px;height:90px;filter:drop-shadow(0 0 18px rgba(237,233,220,0.3));animation:ghost-hover1 4.5s ease-in-out infinite}
-.gc-svg-pb{width:68px;height:77px;filter:drop-shadow(0 0 18px rgba(201,168,76,0.35));animation:ghost-hover2 5s ease-in-out 0.4s infinite}
-.gc-svg-friend{width:62px;height:70px;filter:drop-shadow(0 0 18px rgba(201,168,76,0.2));animation:ghost-hover3 4.2s ease-in-out 0.8s infinite}
+.gc-svg-pro{width:100px;height:112px;filter:drop-shadow(0 0 22px rgba(237,233,220,0.3));animation:ghost-hover1 4.5s ease-in-out infinite}
+.gc-svg-pb{width:88px;height:99px;filter:drop-shadow(0 0 22px rgba(201,168,76,0.35));animation:ghost-hover2 5s ease-in-out 0.4s infinite}
 @keyframes ghost-hover1{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes ghost-hover2{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes ghost-hover3{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
 .gc-label{
-  margin-top:14px;font-size:10px;font-weight:600;letter-spacing:2px;
+  margin-top:14px;font-size:11px;font-weight:600;letter-spacing:2.5px;
   text-transform:uppercase;
 }
 .gc-label-cream{color:var(--cream)}
 .gc-label-gold{color:var(--lantern)}
-.gc-label-cyan{color:#7BC8C8}
 
 .gc-score{
-  margin-top:4px;font-size:18px;font-weight:500;letter-spacing:1px;
+  margin-top:4px;font-size:22px;font-weight:500;letter-spacing:1px;
 }
 .gc-score-cream{color:var(--cream)}
 .gc-score-gold{color:var(--lantern)}
-.gc-score-cyan{color:#7BC8C8}
 
-/* Leaderboard line — horizontal, connecting the three columns */
+/* Your live score — appears below the ghosts */
+.gc-you{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;
+  opacity:0;animation:gc-you-in 0.5s ease-out 1.2s forwards;
+}
+@keyframes gc-you-in{to{opacity:1}}
+.gc-you-label{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--fog);margin-bottom:2px}
+.gc-you-score{font-size:16px;font-weight:600;color:#7BC87B;letter-spacing:0.5px}
+.gc-you-thru{font-size:10px;color:var(--shadow);letter-spacing:1px;margin-top:1px}
+
+/* Leaderboard line — horizontal, connecting the two columns */
 .lb-line{
-  position:absolute;bottom:85px;left:15%;right:15%;height:1px;
-  background:linear-gradient(90deg,rgba(237,233,220,0.15),rgba(201,168,76,0.3),rgba(123,200,200,0.15));
+  position:absolute;bottom:105px;left:12%;right:12%;height:1px;
+  background:linear-gradient(90deg,rgba(237,233,220,0.1),rgba(201,168,76,0.35),rgba(237,233,220,0.1));
   z-index:1;
 }
 
@@ -897,9 +902,11 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
 @media(max-width:768px){
   .ghosts-inner{grid-template-columns:1fr;gap:40px}
-  .ghosts-stage{min-height:280px;gap:20px;order:2}
+  .ghosts-stage{min-height:300px;gap:32px;order:2}
   .ghosts-text{order:1}
   .ghosts-section{padding:0}
+  .gc-svg-pro{width:85px;height:96px}
+  .gc-svg-pb{width:75px;height:84px}
 }
 
 </style>
@@ -1026,14 +1033,14 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 <section class="ghosts-section" id="ghosts" aria-labelledby="ghosts-heading">
   <div class="ghosts-inner">
 
-    <!-- Left: the ghost stage -->
+    <!-- Left: two ghosts + your live score -->
     <div class="ghosts-stage" aria-hidden="true">
       <div class="ghosts-stage-bg"></div>
 
-      <!-- Leaderboard line connecting the ghosts -->
+      <!-- Leaderboard line connecting the two ghosts -->
       <div class="lb-line"></div>
 
-      <!-- Pro ghost — cream, tallest position -->
+      <!-- Pro ghost — cream, tallest -->
       <div class="ghost-col gc-pro">
         <div class="ghost-glow-ring gc-glow-cream"></div>
         <svg class="gc-svg gc-svg-pro" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
@@ -1045,7 +1052,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         <div class="gc-score gc-score-cream">−10</div>
       </div>
 
-      <!-- PB ghost — gold, middle position -->
+      <!-- Your Past — gold, the ghost of your best round -->
       <div class="ghost-col gc-pb">
         <div class="ghost-glow-ring gc-glow-gold"></div>
         <svg class="gc-svg gc-svg-pb" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg">
@@ -1053,20 +1060,15 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
           <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
           <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
         </svg>
-        <div class="gc-label gc-label-gold">Your Best</div>
+        <div class="gc-label gc-label-gold">Your Past</div>
         <div class="gc-score gc-score-gold">−2</div>
       </div>
 
-      <!-- Your Past — faded gold, the ghost of who you were -->
-      <div class="ghost-col gc-friend">
-        <div class="ghost-glow-ring gc-glow-gold" style="opacity:0.35"></div>
-        <svg class="gc-svg gc-svg-friend" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg" style="opacity:0.45">
-          <path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/>
-          <ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
-          <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.5)"/>
-        </svg>
-        <div class="gc-label gc-label-gold" style="opacity:0.45">Your Past</div>
-        <div class="gc-score gc-score-gold" style="opacity:0.45">+4</div>
+      <!-- Your live score — fading in below the ghosts -->
+      <div class="gc-you">
+        <div class="gc-you-label">You · Right Now</div>
+        <div class="gc-you-score">+1</div>
+        <div class="gc-you-thru">THRU 14</div>
       </div>
     </div>
 
@@ -1074,7 +1076,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     <div class="ghosts-text">
       <p class="ghosts-label">Your Past Is Haunting You.</p>
       <h2 class="ghosts-title" id="ghosts-heading">Every round you've ever played<br>is still out there.</h2>
-      <p class="ghosts-desc">Ghost Card tracks your personal best at every course, hole by hole. That gold row on the leaderboard is the best version of you — and it remembers every birdie. Every ace. Every putt you'll never hit again. Beat it and the app celebrates. Lose to it and, well. You know what you did last Tuesday.</p>
+      <p class="ghosts-desc">That gold ghost on the leaderboard is you — from your best day. It remembers every birdie. Every ace. Every putt you'll never hit again. And right now, on hole 15, it's three strokes ahead of you. Some ghosts you can't outrun.</p>
 
       <div class="ghosts-layers">
         <div class="gl-row gl-row-1">
@@ -1083,11 +1085,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         </div>
         <div class="gl-row gl-row-2">
           <div class="gl-dot" style="background:var(--lantern)"></div>
-          <div class="gl-info"><span class="gl-name" style="color:var(--lantern)">Your Personal Best</span><span class="gl-detail">The gold ghost. Your best round at this course, hole by hole. It never has a bad day. It never three-putts. It just sits there on the leaderboard, being better than you.</span></div>
-        </div>
-        <div class="gl-row gl-row-3">
-          <div class="gl-dot" style="background:var(--lantern);opacity:0.4"></div>
-          <div class="gl-info"><span class="gl-name" style="color:var(--lantern);opacity:0.55">Your Worst Nightmare</span><span class="gl-detail">You. From three months ago. Still on the leaderboard. Still ahead of you on hole 12. Some ghosts you can't outrun.</span></div>
+          <div class="gl-info"><span class="gl-name" style="color:var(--lantern)">Your Past</span><span class="gl-detail">Your best round at this course. Hole by hole. It never has a bad day. It never three-putts. It just sits there on the leaderboard, waiting for you to catch up.</span></div>
         </div>
       </div>
 
