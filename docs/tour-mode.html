@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tour Mode — Ghost Card Docs</title>
+<meta name="description" content="Ghost Card Tour Mode — a 10-event season with DGPT-style points, standings, career tiers, and narrative arc."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/><meta name="theme-color" content="#0D1426"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
+  --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--specter:#F0E8D0;
+  --moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--lantern);text-decoration:none;transition:color 0.2s}
+a:hover{color:var(--moonlight)}
+::selection{background:rgba(201,168,76,0.25);color:var(--moonlight)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,20,38,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-wm{font-weight:200;font-size:18px;letter-spacing:4px;display:flex;line-height:1}
+.nav-wm .gp{color:var(--cream)}.nav-wm .cp{color:var(--harvest)}
+.nav-lk{display:flex;align-items:center;gap:2rem}
+.nav-lk a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+.nav-lk a:hover{color:var(--lantern)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-g{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:inherit;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+.btn-g:hover{border-color:var(--lantern);color:var(--lantern)}
+.btn-p{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:inherit;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+.btn-p:hover{background:var(--lantern);border-color:var(--lantern)}
+.ham{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210;flex-shrink:0}
+.ham span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all 0.3s ease}
+.ham.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mmenu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(9,21,37,0.98);border-bottom:1px solid var(--dusk);padding:24px 2rem 32px;z-index:199;flex-direction:column}
+.mmenu.open{display:flex}
+.mmenu a{color:var(--fog);font-size:14px;font-weight:500;letter-spacing:2px;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(30,46,74,0.5);transition:color 0.2s}
+.mmenu a:hover{color:var(--lantern)}
+.mmenu-cta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.mmenu-cta a{width:100%;text-align:center;padding:12px;border-radius:6px;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;display:block;text-decoration:none}
+.mm-g{background:transparent;border:1px solid var(--dusk);color:var(--fog)}
+.mm-p{background:var(--harvest);color:#0D1426;border:none}
+@media(max-width:768px){.nav-lk,.nav-cta{display:none}.ham{display:flex}}
+
+/* ── DOC HERO (sub-pages) ── */
+.doc-hero{position:relative;padding:100px 2rem 48px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);border-bottom:1px solid var(--dusk);overflow:hidden}
+.doc-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,var(--void));pointer-events:none}
+.doc-hero-ghost{filter:drop-shadow(0 0 20px rgba(240,232,208,0.25));animation:ghost-float 4s ease-in-out infinite;margin-bottom:16px}
+@keyframes ghost-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.doc-hero .eyebrow{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:14px}
+.doc-hero h1{font-weight:300;font-size:clamp(26px,5vw,40px);letter-spacing:0.5px;color:var(--moonlight);margin-bottom:10px;line-height:1.15}
+.doc-hero .lead{font-size:15px;color:var(--fog);line-height:1.7;max-width:540px;margin:0 auto}
+
+/* ── DOC CONTENT ── */
+.doc-wrap{max-width:720px;margin:0 auto;padding:48px 2rem 80px}
+.doc-breadcrumb{font-size:12px;color:var(--shadow);margin-bottom:32px;letter-spacing:0.5px}
+.doc-breadcrumb a{color:var(--shadow);text-decoration:none}
+.doc-breadcrumb a:hover{color:var(--lantern)}
+
+.doc-wrap h2{font-weight:500;font-size:20px;letter-spacing:0.3px;color:var(--moonlight);margin:52px 0 16px;padding-top:20px;position:relative}
+.doc-wrap h2::before{content:'';position:absolute;top:0;left:0;width:40px;height:2px;background:linear-gradient(to right,var(--lantern),transparent)}
+.doc-wrap h3{font-weight:500;font-size:15px;color:var(--lantern);margin:28px 0 8px;letter-spacing:0.3px}
+.doc-wrap p{font-size:14px;color:var(--fog);line-height:1.8;margin-bottom:16px}
+.doc-wrap ul,.doc-wrap ol{margin:0 0 20px 0;padding-left:20px;font-size:14px;color:var(--fog);line-height:1.8}
+.doc-wrap li{margin-bottom:8px;padding-left:4px}
+.doc-wrap li::marker{color:var(--lantern)}
+.doc-wrap strong{color:var(--moonlight);font-weight:500}
+.doc-wrap code{background:var(--deep-navy);border:1px solid var(--dusk);padding:2px 7px;border-radius:4px;font-size:13px;color:var(--lantern);font-family:'Inter',monospace}
+
+/* Callout — matches the ticker board aesthetic */
+.callout{background:rgba(4,10,24,0.72);border:1px solid rgba(30,46,74,0.8);border-left:3px solid var(--lantern);border-radius:8px;padding:20px 22px;margin:28px 0;font-size:13px;color:var(--fog);line-height:1.7;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.callout strong{color:var(--lantern);font-weight:600}
+.callout.callout-purple{border-left-color:#A668C4}
+.callout.callout-purple strong{color:#A668C4}
+
+/* Feature pills (like built-tags from landing) */
+.doc-tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 20px}
+.doc-tag{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:var(--shadow)}
+.doc-tag-gold{background:rgba(207,145,32,0.1);border-color:rgba(207,145,32,0.3);color:var(--harvest)}
+.doc-tag-cyan{background:rgba(123,200,200,0.12);border-color:rgba(123,200,200,0.3);color:#7BC8C8}
+
+/* Points table (tour mode) */
+.pts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dusk);border:1px solid var(--dusk);border-radius:8px;overflow:hidden;margin:24px 0}
+.pts-cell{background:var(--deep-navy);padding:18px 16px;text-align:center}
+.pts-name{font-size:13px;font-weight:500;color:var(--moonlight);margin-bottom:4px}
+.pts-detail{font-size:11px;color:var(--shadow);letter-spacing:0.5px;margin-bottom:8px}
+.pts-val{font-size:22px;font-weight:300;color:var(--lantern);letter-spacing:1px}
+.pts-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);margin-top:2px}
+@media(max-width:500px){.pts-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Career tiers (visual) */
+.tier-row{display:flex;align-items:center;gap:16px;padding:14px 18px;margin:8px 0;border-radius:8px;background:var(--deep-navy);border:1px solid var(--dusk)}
+.tier-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tier-name{font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;min-width:80px}
+.tier-desc{font-size:13px;color:var(--fog)}
+
+/* Card type rows (horror mode) */
+.card-type{display:flex;align-items:center;gap:14px;padding:12px 16px;margin:8px 0;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)}
+.card-pip{width:32px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
+.pip-h{background:rgba(166,104,196,0.2);color:#A668C4;border:1px solid rgba(166,104,196,0.4)}
+.pip-s{background:rgba(123,200,200,0.15);color:#7BC8C8;border:1px solid rgba(123,200,200,0.3)}
+.pip-r{background:rgba(201,168,76,0.15);color:#C9A84C;border:1px solid rgba(201,168,76,0.3)}
+.pip-w{background:rgba(224,80,80,0.15);color:#E05050;border:1px solid rgba(224,80,80,0.3)}
+.card-type-name{font-size:14px;font-weight:500;color:var(--moonlight)}
+.card-type-desc{font-size:12px;color:var(--fog);margin-left:auto;text-align:right;max-width:220px;line-height:1.4}
+
+/* Ghost layers (scoring page) */
+.ghost-layer{display:flex;align-items:center;gap:12px;padding:10px 14px;margin:6px 0;border-radius:6px;background:var(--deep-navy);border:1px solid var(--dusk)}
+.gl-bar{width:4px;height:28px;border-radius:2px;flex-shrink:0}
+.gl-cream{background:var(--cream)}
+.gl-gold{background:var(--lantern)}
+.gl-cyan{background:#7BC8C8}
+.gl-label{font-size:13px;font-weight:500;color:var(--moonlight);min-width:120px}
+.gl-desc{font-size:12px;color:var(--fog)}
+
+/* Rarity tiers (bag tags) */
+.rarity-row{display:flex;align-items:center;gap:14px;padding:12px 16px;margin:6px 0;border-radius:6px;background:var(--deep-navy);border:1px solid var(--dusk)}
+.rarity-gem{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.rarity-common .rarity-gem{background:var(--fog)}
+.rarity-uncommon .rarity-gem{background:#5DC87A}
+.rarity-rare .rarity-gem{background:var(--lantern)}
+.rarity-legendary .rarity-gem{background:var(--harvest);box-shadow:0 0 8px rgba(207,145,32,0.4)}
+.rarity-name{font-size:13px;font-weight:600;letter-spacing:1px;color:var(--moonlight);min-width:100px}
+.rarity-desc{font-size:12px;color:var(--fog)}
+
+/* Step list (getting started) */
+.step-list{counter-reset:step;list-style:none;padding:0;margin:24px 0}
+.step-list li{counter-increment:step;display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(30,46,74,0.3)}
+.step-list li:last-child{border-bottom:none}
+.step-list li::before{content:counter(step);font-size:13px;font-weight:600;color:var(--lantern);background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+
+/* Prev/Next nav */
+.doc-nav-bot{display:flex;justify-content:space-between;margin-top:64px;padding-top:28px;border-top:1px solid var(--dusk);gap:16px;flex-wrap:wrap}
+.doc-nav-bot a{font-size:13px;font-weight:500;letter-spacing:1px;color:var(--fog);text-decoration:none;transition:color 0.2s;padding:8px 0}
+.doc-nav-bot a:hover{color:var(--lantern)}
+
+/* ── FOOTER ── */
+footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
+.ftr-logo{margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:10px}
+.ftr-wm{font-weight:200;font-size:20px;letter-spacing:5px;display:flex}
+.ftr-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:28px}
+.ftr-links a{color:var(--fog);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+.ftr-links a:hover{color:var(--moonlight)}
+.ftr-copy{font-size:12px;color:var(--fog);letter-spacing:1px}
+.ftr-tag{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+
+/* ── FADE IN ── */
+.fi{opacity:0;transform:translateY(12px);animation:fadeIn 0.5s ease-out forwards}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+.fi-d1{animation-delay:0.1s}.fi-d2{animation-delay:0.2s}.fi-d3{animation-delay:0.3s}
+
+@media(max-width:640px){.doc-hero{padding:90px 1.25rem 36px}.doc-wrap{padding:32px 1.25rem 60px}}</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo"><svg viewBox="0 0 20 22.4" width="26" height="29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg><div class="nav-wm"><span class="gp">GHOST</span><span class="cp">CARD</span></div></a>
+  <div class="nav-lk"><a href="index.html">Docs</a></div>
+  <div class="nav-cta"><button class="btn-g" onclick="window.location.href='https://app.ghostcard.live'">Login</button><button class="btn-p" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button></div>
+  <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="mmenu" id="mm">
+  <a href="index.html">Docs</a>
+  <div class="mmenu-cta"><a href="https://app.ghostcard.live" class="mm-g">Login</a><a href="https://app.ghostcard.live" class="mm-p">Sign Up Free</a></div>
+</div>
+<header class="doc-hero">
+<svg viewBox="0 0 20 22.4" width="48" height="54" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="doc-hero-ghost"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
+<p class="eyebrow">06 · Season Play</p>
+<h1>Tour Mode</h1>
+<p class="lead">A full season. A career on the line. Ten events, DGPT-calibrated points, and a narrative that remembers everything.</p>
+</header>
+<main class="doc-wrap fi fi-d1">
+<div class="doc-breadcrumb"><a href="index.html">Docs</a> <span style="color:var(--dusk)">/</span> Tour Mode</div>
+<h2>How it works</h2>
+<p>Tour Mode is a <strong>10-event season</strong> played across any courses you choose. Each event consists of multiple rounds. Ghost pros compete in the standings alongside you.</p>
+
+<h2 id="event-types">Event types</h2>
+<div class="pts-grid">
+<div class="pts-cell"><div class="pts-name">Regular</div><div class="pts-detail">3 rounds</div><div class="pts-val">100</div><div class="pts-label">pts for 1st</div></div>
+<div class="pts-cell"><div class="pts-name">Elite+</div><div class="pts-detail">3 rounds · 1.25×</div><div class="pts-val">125</div><div class="pts-label">pts for 1st</div></div>
+<div class="pts-cell"><div class="pts-name">Major</div><div class="pts-detail">5 rounds · 1.5×</div><div class="pts-val">150</div><div class="pts-label">pts for 1st</div></div>
+<div class="pts-cell"><div class="pts-name">Finale</div><div class="pts-detail">5 rounds · 2×</div><div class="pts-val">200</div><div class="pts-label">pts for 1st</div></div>
+</div>
+<p>Events 1–5 are Regular. Event 6 is Elite+. Event 7 is the Major. Events 8–9 are Regular. Event 10 is the Season Finale.</p>
+
+<h2 id="points">Points structure</h2>
+<p>Points are <strong>DGPT-calibrated</strong>. The scale drops through 30th place. Everyone who finishes earns at least 1 point. Higher-tier events multiply the entire table.</p>
+
+<h2>Season standings</h2>
+<p>Cumulative points across all events. The standings screen shows your position, total points, and how you compare to ghost pros.</p>
+
+<h2>Career arc</h2>
+<p>Your career runs across seasons. Three tiers:</p>
+<div class="tier-row"><div class="tier-dot" style="background:#8FA4C4"></div><div class="tier-name" style="color:#8FA4C4">Rookie</div><div class="tier-desc">First seasons. The field doesn't know your name yet.</div></div>
+<div class="tier-row"><div class="tier-dot" style="background:#C9A84C"></div><div class="tier-name" style="color:#C9A84C">Veteran</div><div class="tier-desc">2+ season wins. The field adjusts for you now.</div></div>
+<div class="tier-row"><div class="tier-dot" style="background:#EDE8C0;box-shadow:0 0 8px rgba(237,232,192,0.3)"></div><div class="tier-name" style="color:#EDE8C0">Legend</div><div class="tier-desc">5+ championships. The ghosts stop following. They watch.</div></div>
+<p>Narrative moments appear at milestones: first event, first top-10, first win, entering the Major, winning the season, and tier promotions.</p>
+
+<h2>Starting a season</h2>
+<p>Tap the <strong>Tour</strong> tab and follow onboarding. Choose your name, hometown, and play style — Bomber, Technical, or Scrambler. The career narrative begins from there.</p>
+<div class="doc-nav-bot"><a href="bag-tags.html">← Bag Tags</a><a href="par-corrections.html">Par Corrections →</a></div>
+</main>
+<footer>
+  <div class="ftr-logo"><svg viewBox="0 0 20 22.4" width="30" height="34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg><div class="ftr-wm"><span style="color:#EDE9DC">GHOST</span><span style="color:#CF9120">CARD</span></div></div>
+  <nav class="ftr-links"><a href="../index.html">Home</a><a href="index.html">Docs</a></nav>
+  <p class="ftr-copy">Ghost Card &copy; 2026 &bull; <a href="https://ghostcard.live" style="color:var(--shadow);text-decoration:none">ghostcard.live</a></p>
+  <p class="ftr-tag">Haunt the Leaderboard</p>
+</footer>
+<script>
+(function(){var b=document.getElementById('ham'),m=document.getElementById('mm');if(!b||!m)return;function c(){m.classList.remove('open');b.classList.remove('open');b.setAttribute('aria-expanded','false');document.body.style.overflow='';}b.addEventListener('click',function(){var o=m.classList.toggle('open');b.classList.toggle('open',o);b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',c);});document.addEventListener('click',function(e){if(!m.contains(e.target)&&!b.contains(e.target))c();});document.addEventListener('keydown',function(e){if(e.key==='Escape')c();});})();
+</script>
+</body>
+</html>
