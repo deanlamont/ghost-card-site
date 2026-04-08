@@ -1,452 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Features — Ghost Card</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --void:#0D1426;--deep-navy:#142035;--dusk:#1E2E4A;--midnight:#091525;--abyss:#040A18;
-    --lantern:#C9A84C;--harvest:#CF9120;--cream:#EDE9DC;--moonlight:#E8EDF6;--fog:#8FA4C4;--shadow:#546082;
-  }
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight);min-height:100vh;overflow-x:hidden}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,20,38,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--dusk);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
-  .nav-logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none}
-  .nav-logo svg{width:20px;height:22px}
-  .nav-wordmark{font-family:'Inter',sans-serif;font-weight:200;font-size:13px;letter-spacing:3.5px;display:flex;line-height:1}
-  .ghost-part{color:#EDE9DC}.card-part{color:#CF9120}
-  .nav-links{display:flex;align-items:center;gap:2rem}
-  .nav-links a{color:var(--fog);font-size:13px;font-weight:500;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;transition:color .2s}
-  .nav-links a:hover,.nav-links a.active{color:var(--lantern)}
-  .nav-cta{display:flex;gap:12px;align-items:center}
-  .btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s}
-  .btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
-  .btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s}
-  .btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
-  .page-hero{padding:140px 2rem 80px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,#0D1C38 0%,#080F22 55%,var(--abyss) 100%);border-bottom:1px solid var(--dusk)}
-  .page-label{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lantern);margin-bottom:14px}
-  .page-title{font-size:clamp(28px,5vw,56px);font-weight:300;letter-spacing:1.5px;line-height:1.15;color:var(--moonlight);margin-bottom:14px}
-  .page-title em{font-style:normal;color:var(--lantern)}
-  .page-sub{font-size:clamp(14px,1.8vw,18px);color:var(--fog);line-height:1.6;max-width:520px;margin:0 auto}
-  .page-body{max-width:1080px;margin:0 auto;padding:80px 2rem}
-  .divider{height:2px;background:linear-gradient(90deg,var(--abyss),var(--dusk) 50%,var(--abyss))}
-  footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2rem 40px;text-align:center}
-  .footer-logo{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;gap:6px}
-  .footer-wm{font-family:'Inter',sans-serif;font-weight:200;font-size:22px;letter-spacing:7px;display:flex}
-  .footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:32px}
-  .footer-links a{color:var(--shadow);font-size:13px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
-  .footer-links a:hover{color:var(--fog)}
-  .footer-copy{font-size:12px;color:var(--shadow);letter-spacing:1px}
-  .footer-tagline{font-size:11px;color:var(--lantern);letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features — Ghost Card</title>
+  <meta name="description" content="Every Ghost Card feature: 134 ghost pros, Horror Mode, Tour Mode, Friends & Feed, Bag Tags, and more. Free disc golf scoring app." />
 
-  .features-full{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--dusk);margin-bottom:80px}
-  .feat-card{background:var(--deep-navy);padding:40px 32px;transition:background .2s;display:flex;flex-direction:column}
-  .feat-card:hover{background:#192844}
-  .feat-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-  .feat-title{font-size:20px;font-weight:400;letter-spacing:.5px;color:var(--moonlight);margin-bottom:10px}
-  .feat-body{font-size:14px;line-height:1.75;color:var(--fog);flex:1}
-  .feat-footer{margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .feat-tag{display:inline-block;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--lantern);font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
-  .feat-doc-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--shadow);text-decoration:none;transition:color .2s}
-  .feat-doc-link:hover{color:var(--lantern)}
-  .feat-doc-link::after{content:'→';font-size:12px}
-  .rarity-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-  .r{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-  .rc{background:rgba(84,96,130,0.2);color:#546082}
-  .ru{background:rgba(143,164,196,0.2);color:#8FA4C4}
-  .rr{background:rgba(201,168,76,0.2);color:#C9A84C}
-  .rl{background:rgba(207,145,32,0.2);color:#CF9120}
-  .cta-band{background:var(--deep-navy);border:1px solid var(--dusk);border-radius:12px;padding:48px;text-align:center;margin-top:80px}
-  .cta-band h2{font-size:28px;font-weight:300;letter-spacing:1px;color:var(--moonlight);margin-bottom:10px}
-  .cta-band p{font-size:15px;color:var(--fog);margin-bottom:28px}
-  .btn-xl{padding:14px 36px;border-radius:8px;font-family:"Inter",sans-serif;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .25s;border:none;background:var(--harvest);color:#0D1426}
-  .btn-xl:hover{background:var(--lantern);transform:translateY(-1px)}
-  .btn-docs{display:inline-block;margin-top:16px;padding:10px 24px;border:1px solid var(--dusk);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--fog);text-decoration:none;transition:all .2s}
-  .btn-docs:hover{border-color:var(--lantern);color:var(--lantern)}
-  @media(max-width:640px){
-    nav{padding:0 1rem}
-    .nav-links{display:none}
-    .page-body{padding:60px 1.25rem}
-    .features-full{grid-template-columns:1fr}
-    .cta-band{padding:32px 20px}
-    .page-hero{padding:100px 1.25rem 60px}
-  }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  /* ── HAMBURGER MOBILE MENU ───────────────────────────────── */
-  .hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210}
-  .hamburger span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all 0.3s ease}
-  .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-  .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-  .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(9,21,37,0.98);border-bottom:1px solid var(--dusk);padding:24px 2rem 32px;z-index:199;flex-direction:column;gap:0}
-  .mobile-menu.open{display:flex}
-  .mobile-menu a{color:var(--fog);font-size:14px;font-weight:500;letter-spacing:2px;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(30,46,74,0.5);transition:color 0.2s}
-  .mobile-menu a:hover{color:var(--lantern)}
-  .mobile-menu a:last-of-type{border-bottom:none}
-  .mobile-menu-cta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-  .mobile-menu-cta a{width:100%;text-align:center;padding:12px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:block;border-bottom:none !important}
-  .m-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog)}
-  .m-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
-  .m-primary{background:var(--harvest);border:none;color:#0D1426}
-  .m-primary:hover{background:var(--lantern)}
-  @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}}
-</style>
+  <style>
+    :root {
+      --void:       #0a0a0c;
+      --void-light: #111114;
+      --void-mid:   #18181c;
+      --void-card:  #1a1a1f;
+      --void-border:#2a2a30;
+      --cream:      #f5f0e8;
+      --cream-dim:  #c4bfb4;
+      --cream-muted:#8a857c;
+      --gold:       #cf9120;
+      --gold-dim:   #a87618;
+      --cyan:       #00e5ff;
+      --purple:     #b266ff;
+      --red:        #ff4444;
+      --green:      #22c55e;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --max-w: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--void);
+      color: var(--cream);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,12,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--void-border);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 200; font-size: 18px;
+      letter-spacing: 0.08em; color: var(--cream);
+    }
+    .nav-logo span { color: var(--gold); font-weight: 200; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--cream-muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-links .nav-cta {
+      padding: 8px 18px; border-radius: 6px; background: var(--gold);
+      color: var(--void); font-weight: 600; font-size: 13px;
+    }
+    .nav-links .nav-cta:hover { background: #dda02a; }
+    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 24px; cursor: pointer; }
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 60px; left: 0; right: 0; background: rgba(10,10,12,0.97);
+        border-bottom: 1px solid var(--void-border); padding: 20px 24px; gap: 16px;
+      }
+    }
+
+    /* HERO */
+    .page-hero {
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+    .page-hero-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(32px, 5vw, 52px); line-height: 1.1;
+      color: var(--cream); margin-bottom: 20px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--cream-dim); }
+    .page-hero p {
+      font-size: 16px; color: var(--cream-muted); max-width: 680px;
+      margin: 0 auto; line-height: 1.7;
+    }
+
+    /* FEATURE CARDS */
+    .features-grid {
+      padding: 40px 0 120px;
+    }
+    .fg-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .fg-card {
+      padding: 36px 32px;
+      background: var(--void-card);
+      border: 1px solid var(--void-border);
+      border-radius: 14px;
+      transition: transform 0.2s, border-color 0.3s;
+    }
+    .fg-card:hover { transform: translateY(-2px); }
+    .fg-card--wide { grid-column: 1 / -1; }
+
+    .fg-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .fg-badge--core { background: rgba(207,145,32,0.1); color: var(--gold); border: 1px solid rgba(207,145,32,0.2); }
+    .fg-badge--format { background: rgba(196,191,180,0.08); color: var(--cream-muted); border: 1px solid var(--void-border); }
+    .fg-badge--mode { background: rgba(178,102,255,0.1); color: var(--purple); border: 1px solid rgba(178,102,255,0.2); }
+    .fg-badge--new { background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.2); }
+    .fg-badge--season { background: rgba(207,145,32,0.1); color: var(--gold); border: 1px solid rgba(207,145,32,0.2); }
+
+    .fg-card h3 {
+      font-family: var(--font-body); font-weight: 600; font-size: 20px;
+      color: var(--cream); margin-bottom: 10px;
+    }
+    .fg-card p {
+      font-size: 14px; color: var(--cream-muted); line-height: 1.7;
+    }
+    .fg-card p strong { color: var(--cream-dim); font-weight: 600; }
+
+    .fg-tags {
+      display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
+    }
+    .fg-tag {
+      font-size: 10px; font-weight: 600; color: var(--cream-muted);
+      border: 1px solid var(--void-border); padding: 4px 10px; border-radius: 5px;
+    }
+    .fg-tag--gold { color: var(--gold); border-color: rgba(207,145,32,0.25); }
+    .fg-tag--cyan { color: var(--cyan); border-color: rgba(0,229,255,0.2); }
+    .fg-tag--purple { color: var(--purple); border-color: rgba(178,102,255,0.2); }
+    .fg-tag--red { color: var(--red); border-color: rgba(255,68,68,0.2); }
+
+    .fg-link {
+      display: inline-block; margin-top: 12px;
+      font-size: 13px; color: var(--cream-muted);
+      border-bottom: 1px solid var(--void-border); padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .fg-link:hover { color: var(--cream); border-color: var(--cream-muted); }
+
+    /* Horror card type mini-badges */
+    .horror-types-row {
+      display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
+    }
+    .ht-mini {
+      padding: 5px 12px; border-radius: 6px;
+      font-size: 11px; font-weight: 600;
+    }
+    .ht-mini--haunt { background: rgba(178,102,255,0.1); color: var(--purple); }
+    .ht-mini--spirit { background: rgba(0,229,255,0.08); color: var(--cyan); }
+    .ht-mini--reckoning { background: rgba(207,145,32,0.1); color: var(--gold); }
+    .ht-mini--wild { background: rgba(255,68,68,0.08); color: var(--red); }
+
+    /* Tour tier mini row */
+    .tour-mini {
+      display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;
+    }
+    .tour-mini-tier {
+      padding: 8px 14px; border-radius: 8px;
+      background: var(--void-mid); border: 1px solid var(--void-border);
+      text-align: center;
+    }
+    .tour-mini-tier strong {
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 13px; color: var(--cream);
+    }
+    .tour-mini-tier span {
+      font-size: 11px; color: var(--cream-muted);
+    }
+
+    @media (max-width: 700px) {
+      .fg-grid { grid-template-columns: 1fr; }
+      .fg-card--wide { grid-column: auto; }
+    }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      padding: 100px 0; text-align: center;
+      border-top: 1px solid var(--void-border);
+    }
+    .bottom-cta h2 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(24px, 4vw, 36px); line-height: 1.2;
+      color: var(--cream); margin-bottom: 16px;
+    }
+    .bottom-cta p {
+      font-size: 15px; color: var(--cream-muted); max-width: 600px;
+      margin: 0 auto 32px; line-height: 1.7;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 8px;
+      font-family: var(--font-body); font-size: 15px; font-weight: 600;
+      border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-gold { background: var(--gold); color: var(--void); }
+    .btn-gold:hover { box-shadow: 0 4px 24px rgba(207,145,32,0.35); }
+    .btn-ghost {
+      background: transparent; color: var(--cream);
+      border: 1px solid var(--void-border); margin-left: 12px;
+    }
+    .btn-ghost:hover { border-color: var(--cream-muted); background: var(--void-light); }
+
+    /* FOOTER */
+    .site-footer {
+      padding: 40px 0; border-top: 1px solid var(--void-border); text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-weight: 200; font-size: 16px;
+      letter-spacing: 0.08em; color: var(--cream-dim); margin-bottom: 16px;
+    }
+    .footer-logo span { color: var(--gold); font-weight: 200; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; list-style: none; margin-bottom: 16px; }
+    .footer-links a { font-size: 13px; color: var(--cream-muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy { font-size: 12px; color: var(--cream-muted); opacity: 0.5; }
+    .footer-attr { font-size: 11px; color: var(--cream-muted); opacity: 0.35; margin-top: 8px; }
+    .footer-attr a { text-decoration: underline; }
+
+    /* ANIMATIONS */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+      .fade-in.visible { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo">
-    <svg viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
-    <div class="nav-wordmark"><span class="ghost-part">GHOST</span><span class="card-part">CARD</span></div>
-  </a>
-  <div class="nav-links">
-    <a href="how-it-works.html">How It Works</a>
-    <a href="features.html" class="active">Features</a>
-    <a href="docs/index.html">Docs</a>
-  </div>
-  <div class="nav-cta">
-    <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
-    <button class="btn-primary" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button>
-  </div>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
 
-<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
-  <a href="index.html">Home</a>
-  <a href="how-it-works.html">How It Works</a>
-  <a href="features.html">Features</a>
-  <a href="docs/index.html">Docs</a>
-  <div class="mobile-menu-cta">
-    <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
-    <a href="https://app.ghostcard.live" class="m-primary">Sign Up Free</a>
-  </div>
-</div>
-
-<div class="page-hero">
-  <p class="page-label">Features</p>
-  <h1 class="page-title">Everything you need.<br><em>Nothing that's going to make a slideshow about it.</em></h1>
-  <p class="page-sub">No synergy. No ecosystem. No guy explaining his disc selection for four minutes on the tee pad while you die inside. Just the features of a disc golf game that actually earned the word — including a full DGPT-style season, a 50-card horror card game, and 134 ghost pros who will never make you wait on the tee.</p>
-</div>
-
-<div class="page-body">
-  <div class="features-full">
-
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Solo vs. Pro Field</h3>
-      <p class="feat-body">Real PDGA ratings. Ghost opponents score based on actual stats. When Ricky beats you by 11 it's not personal. It's just what happens when you invite a monster to your card. He doesn't even know your name. The ghosts do.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Core Feature</span>
-        <a href="docs/building-a-card.html#ghost-opponents" class="feat-doc-link">Ghost opponents</a>
-      </div>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="https://ghostcard.live/index.html" class="nav-logo">GHOST<span>CARD</span></a>
+      <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="https://ghostcard.live/how-it-works.html">How It Works</a></li>
+        <li><a href="https://ghostcard.live/features.html">Features</a></li>
+        <li><a href="https://ghostcard.live/docs/index.html">Docs</a></li>
+        <li><a href="https://app.ghostcard.live">Log In</a></li>
+        <li><a href="https://app.ghostcard.live" class="nav-cta">Sign Up Free</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#C9A84C" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <h3 class="feat-title">Multiplayer Scoring</h3>
-      <p class="feat-body">Real players, ghost pros, mix freely. Your dad and a ghost Paul McBeth is fine. Eight strangers blocking hole 3 who refuse to let you through is not fine. Ghost Card cannot help you with those people. The app has limits. So do we.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Multiplayer</span>
-        <a href="docs/building-a-card.html#real-players" class="feat-doc-link">How multiplayer works</a>
+  <!-- HERO -->
+  <section class="page-hero wrap">
+    <p class="page-hero-eyebrow">Features</p>
+    <h1>Everything you need. <em>Nothing that's going to make a slideshow about it.</em></h1>
+    <p>No synergy. No ecosystem. No guy explaining his disc selection for four minutes on the tee pad while you die inside. Just the features of a disc golf game that actually earned the word — including a full DGPT-style season, a 50-card horror card game, and 134 ghost pros who will never make you wait on the tee.</p>
+  </section>
+
+  <!-- FEATURES GRID -->
+  <section class="features-grid wrap fade-in">
+    <div class="fg-grid">
+
+      <!-- Solo vs Pro Field -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--core">Core Feature</span>
+        <h3>Solo vs. Pro Field</h3>
+        <p>Real PDGA ratings. Ghost opponents score based on actual stats. When Ricky beats you by 11 it's not personal. It's just what happens when you invite a monster to your card. He doesn't even know your name. The ghosts do.</p>
+        <a href="https://ghostcard.live/docs/building-a-card.html#ghost-opponents" class="fg-link">Ghost opponents →</a>
       </div>
-    </div>
 
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15 9H22L16.5 13.5L18.5 21L12 17L5.5 21L7.5 13.5L2 9H9L12 2Z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-      <h3 class="feat-title">Horror Bag Tags</h3>
-      <p class="feat-body">30 collectible tags across four rarity tiers. Every one earned in-round — never purchased, never gifted. The Haunting doesn't care about your feelings. The Bone Collector is patient. The Wraith only appears once. The ghosts have a filing system and zero mercy.</p>
-      <div class="rarity-row"><span class="r rc">Common</span><span class="r ru">Uncommon</span><span class="r rr">Rare</span><span class="r rl">Legendary</span></div>
-      <div class="feat-footer" style="margin-top:12px">
-        <a href="docs/bag-tags.html" class="feat-doc-link">Full bag tags guide</a>
+      <!-- Multiplayer Scoring -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--core">Multiplayer</span>
+        <h3>Multiplayer Scoring</h3>
+        <p>Real players, ghost pros, mix freely. Your dad and a ghost Paul McBeth is fine. Eight strangers blocking hole 3 who refuse to let you through is not fine. Ghost Card cannot help you with those people. The app has limits. So do we.</p>
+        <a href="https://ghostcard.live/docs/building-a-card.html#real-players" class="fg-link">How multiplayer works →</a>
       </div>
-    </div>
 
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3 class="feat-title">Live Leaderboard</h3>
-      <p class="feat-body">Live standings after every hole. Like the third act of every horror film — you know something bad is coming, you just don't know which hole. It's hole 7. It's always hole 7. The ghosts already know.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Tour Mode</span>
-        <a href="docs/scoring.html#leaderboard" class="feat-doc-link">How scoring works</a>
-      </div>
-    </div>
-
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8" stroke="#C9A84C" stroke-width="1.5"/><path d="M21 21l-4.35-4.35" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <h3 class="feat-title">Course Search</h3>
-      <p class="feat-body">7,008 US courses. Par data verified where we have it, community-corrected where we don't. Fix a wrong par, earn the Bone Collector tag. Five corrections and you're the reason the course plays right. The ghosts remember who did the work. Everyone else just complained about hole 4.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">7,008 Courses</span>
-        <a href="docs/par-corrections.html" class="feat-doc-link">Par corrections</a>
-      </div>
-    </div>
-
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <h3 class="feat-title">Round History</h3>
-      <p class="feat-body">Full archive. Every round, every hole, every catastrophic decision. The ghosts logged it the moment it happened. Share your badge. Use it as evidence. Review what went wrong at hole 7 at 2am. The answer is always hole 7.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Full Archive</span>
-        <a href="docs/history.html" class="feat-doc-link">History docs</a>
-      </div>
-    </div>
-
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="#C9A84C" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="#C9A84C" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="#C9A84C" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="#C9A84C" stroke-width="1.5"/></svg></div>
-      <h3 class="feat-title">Scramble</h3>
-      <p class="feat-body">Everyone throws, group plays from the best disc. One team score per hole. Enter a team name — it goes on the scorecard, the leaderboard, and the results card with your player names listed underneath. Ghost opponents scramble too, sorted into teams. Good for when your dad is on the card and the horror movie has a "we survive together" moment.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Game Format</span>
-        <a href="docs/building-a-card.html#formats" class="feat-doc-link">Format guide</a>
-      </div>
-    </div>
-
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4 H16 Q18 4 18 8 Q18 13 12 15 Q6 13 6 8 Q6 4 8 4Z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M6 7 Q3 7 3 10 Q3 12 6 12" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><path d="M18 7 Q21 7 21 10 Q21 12 18 12" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="10" y="15" width="4" height="4" fill="#C9A84C" opacity="0.7"/><rect x="7" y="19" width="10" height="2" rx="1" fill="#C9A84C"/></svg></div>
-      <h3 class="feat-title">Custom Tournament</h3>
-      <p class="feat-body">Name your tournament. Pick 1–5 rounds, Stroke Play or Scramble, up to 4 players. Choose a different course before each round starts — two rounds at Cedar Beach, two at Mossy Bluff, whatever you want. Ghost pro teams get horror-themed names that randomise per tournament. Cumulative leaderboard updates after every round. The Uekman Classic is a real thing now.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Multi-Round</span>
-        <a href="docs/tour-mode.html" class="feat-doc-link">Tournament docs</a>
-      </div>
-    </div>
-
-    <div class="feat-card" style="border-top:3px solid var(--lantern);background:#101B2E">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 20V10M12 20V4M6 20v-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <h3 class="feat-title">Tour Mode &amp; Career Story</h3>
-      <p class="feat-body">A full 10-event season — Regular events, Elite+, a Major, and a Season Finale worth double points. DGPT-calibrated points structure. Standings update after every event. Ghost opponents compete in the standings alongside real players.</p>
-      <p class="feat-body" style="margin-top:10px">Your career narrative runs underneath it. First season you're nobody. Win events, win seasons, and the story changes. By Season 5 the field has heard of you. The ghost card is yours to lose — or defend.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0">
-        <div style="background:rgba(143,164,196,0.08);border:1px solid rgba(143,164,196,0.2);border-radius:6px;padding:10px 12px">
-          <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--fog);margin-bottom:3px">Regular / Elite+</div>
-          <div style="font-size:13px;color:var(--moonlight)">3 rounds · 100–125 pts</div>
+      <!-- Bag Tags -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--core">Collectibles</span>
+        <h3>Horror Bag Tags</h3>
+        <p>30 collectible tags across four rarity tiers. Every one earned in-round — never purchased, never gifted. The Haunting doesn't care about your feelings. The Bone Collector is patient. The Wraith only appears once. The ghosts have a filing system and zero mercy.</p>
+        <div class="fg-tags">
+          <span class="fg-tag">Common</span>
+          <span class="fg-tag">Uncommon</span>
+          <span class="fg-tag fg-tag--gold">Rare</span>
+          <span class="fg-tag fg-tag--gold">Legendary</span>
         </div>
-        <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:6px;padding:10px 12px">
-          <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--lantern);margin-bottom:3px">Major / Finale</div>
-          <div style="font-size:13px;color:var(--moonlight)">5 rounds · 150–200 pts</div>
+        <a href="https://ghostcard.live/docs/bag-tags.html" class="fg-link">Full bag tags guide →</a>
+      </div>
+
+      <!-- Live Leaderboard -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--core">Core Feature</span>
+        <h3>Live Leaderboard</h3>
+        <p>Live standings after every hole. Three ghost layers — pro ghosts (cream), your personal best (gold), your friend (cyan). Like the third act of every horror film — you know something bad is coming, you just don't know which hole. It's hole 7. It's always hole 7.</p>
+        <a href="https://ghostcard.live/docs/scoring.html#leaderboard" class="fg-link">How scoring works →</a>
+      </div>
+
+      <!-- Course Search -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--core">Core Feature</span>
+        <h3>Course Search</h3>
+        <p>7,008 US courses. Par data verified where we have it, community-corrected where we don't. Fix a wrong par, earn the Bone Collector tag. Five corrections and you're the reason the course plays right. The ghosts remember who did the work. Everyone else just complained about hole 4.</p>
+        <div class="fg-tags"><span class="fg-tag">7,008 Courses</span></div>
+        <a href="https://ghostcard.live/docs/par-corrections.html" class="fg-link">Par corrections →</a>
+      </div>
+
+      <!-- Round History -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--core">Core Feature</span>
+        <h3>Round History</h3>
+        <p>Full archive. Every round, every hole, every catastrophic decision. The ghosts logged it the moment it happened. Share your badge. Use it as evidence. Review what went wrong at hole 7 at 2am. The answer is always hole 7.</p>
+        <div class="fg-tags"><span class="fg-tag">Full Archive</span></div>
+        <a href="https://ghostcard.live/docs/history.html" class="fg-link">History docs →</a>
+      </div>
+
+      <!-- Scramble -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--format">Game Format</span>
+        <h3>Scramble</h3>
+        <p>Everyone throws, group plays from the best disc. One team score per hole. Enter a team name — it goes on the scorecard, the leaderboard, and the results card with your player names listed underneath. Ghost opponents scramble too, sorted into teams. Good for when your dad is on the card and the horror movie has a "we survive together" moment.</p>
+        <a href="https://ghostcard.live/docs/building-a-card.html#formats" class="fg-link">Format guide →</a>
+      </div>
+
+      <!-- Custom Tournament -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--format">Multi-Round</span>
+        <h3>Custom Tournament</h3>
+        <p>Name your tournament. Pick 1–5 rounds, Stroke Play or Scramble, up to 4 players. Choose a different course before each round starts — two rounds at Cedar Beach, two at Mossy Bluff, whatever you want. Ghost pro teams get horror-themed names that randomise per tournament. Cumulative leaderboard updates after every round. The Uekman Classic is a real thing now.</p>
+        <a href="https://ghostcard.live/docs/tour-mode.html" class="fg-link">Tournament docs →</a>
+      </div>
+
+      <!-- Tour Mode & Career Story — WIDE -->
+      <div class="fg-card fg-card--wide">
+        <span class="fg-badge fg-badge--season">Season Mode</span>
+        <h3>Tour Mode &amp; Career Story</h3>
+        <p>A full 10-event season — Regular events, Elite+, a Major, and a Season Finale worth double points. DGPT-calibrated points structure. Standings update after every event. Ghost opponents compete in the standings alongside real players.</p>
+        <p style="margin-top:10px;">Your career narrative runs underneath it. First season you're nobody. Win events, win seasons, and the story changes. By Season 5 the field has heard of you. The ghost card is yours to lose — or defend.</p>
+        <div class="tour-mini">
+          <div class="tour-mini-tier"><strong>Regular</strong><span>3 rds · 100 pts</span></div>
+          <div class="tour-mini-tier"><strong>Elite+</strong><span>3 rds · 125 pts</span></div>
+          <div class="tour-mini-tier"><strong>Major</strong><span>5 rds · 150 pts</span></div>
+          <div class="tour-mini-tier"><strong>Finale</strong><span>5 rds · 200 pts</span></div>
         </div>
+        <a href="https://ghostcard.live/docs/tour-mode.html" class="fg-link">Tour mode docs →</a>
       </div>
-      <div class="feat-footer">
-        <span class="feat-tag">Season Mode</span>
-        <a href="docs/tour-mode.html" class="feat-doc-link">Tour mode docs</a>
+
+      <!-- Horror Mode — WIDE -->
+      <div class="fg-card fg-card--wide">
+        <span class="fg-badge fg-badge--mode">Horror Mode · Multiplayer · 2+ Players</span>
+        <h3>Horror Mode — The Card Game</h3>
+        <p>A 50-card card game overlay that rides on top of any multiplayer round. Enable it at card build and a full horror deck enters the round alongside your scorecard. Cards are drawn, played, and resolved in real time — during the round, on the course, hole by hole.</p>
+        <p style="margin-top:10px;">Four card types: <strong>Haunt</strong> your opponents, play <strong>Spirit</strong> cards on yourself, hold <strong>Reckoning</strong> cards until the final hole, burn <strong>Wild</strong> cards when things get desperate. Skins run alongside. Whatever happened on hole 9 stays on hole 9.</p>
+        <div class="horror-types-row">
+          <span class="ht-mini ht-mini--haunt">Haunt</span>
+          <span class="ht-mini ht-mini--spirit">Spirit</span>
+          <span class="ht-mini ht-mini--reckoning">Reckoning</span>
+          <span class="ht-mini ht-mini--wild">Wild</span>
+        </div>
+        <a href="https://ghostcard.live/docs/horror-mode.html" class="fg-link">Horror mode docs →</a>
       </div>
+
+      <!-- Friends & Activity Feed — NEW -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--new">New · Social</span>
+        <h3>Friends &amp; Activity Feed</h3>
+        <p>Add friends by username, see their recent rounds in a dedicated Feed tab. The feed shows course, score, GC Rating, and full scorecard breakdowns on tap. Head-to-Head view auto-surfaces courses you have both played and compares your best scores side by side.</p>
+        <p style="margin-top:10px;">Mutual friendships only. 20-friend cap. No follower counts, no likes, no algorithms. Just rounds and who played them. The ghosts do not do engagement metrics.</p>
+        <a href="https://ghostcard.live/docs/friends-and-feed.html" class="fg-link">Friends docs →</a>
+      </div>
+
+      <!-- Beat Your Ghost — NEW -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--new">New · Leaderboard</span>
+        <h3>Beat Your Ghost — Personal Best</h3>
+        <p>Your previous best round at the current course appears as a gold ghost row on the live leaderboard — labeled YOUR BEST and tracking hole by hole with real score data. Not simulated. Not estimated. That was you, on that day, and now you have to beat yourself.</p>
+        <p style="margin-top:10px;">Set a new personal best and the Round Complete screen celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained. The ghost noticed.</p>
+        <a href="https://ghostcard.live/docs/friends-and-feed.html#pb-ghost" class="fg-link">PB ghost docs →</a>
+      </div>
+
+      <!-- Friend Ghost — NEW -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--new">New · Friend Ghost</span>
+        <h3>Friend Ghost on Your Leaderboard</h3>
+        <p>When you play a course a friend has played before, their best round appears as a cyan ghost row on your live leaderboard — right next to the pro ghosts and your PB ghost. Real hole-by-hole score data. If they birdied hole 7, you will see it on hole 7.</p>
+        <p style="margin-top:10px;">Three ghost layers on one leaderboard: pro ghosts (cream), your personal best (gold), your friend (cyan). The solo round was never really solo.</p>
+        <a href="https://ghostcard.live/docs/friends-and-feed.html#friend-ghost" class="fg-link">Friend ghost docs →</a>
+      </div>
+
+      <!-- Rating Trend & Share Badge — NEW -->
+      <div class="fg-card">
+        <span class="fg-badge fg-badge--new">New · Analytics</span>
+        <h3>Rating Trend &amp; Share Badge</h3>
+        <p>A sparkline chart on the History screen tracks your GC Rating across your last 20 rated rounds. Green line means you are getting better. Orange means the ghosts are winning. Your best-ever rating is marked. Tap any point to see the number.</p>
+        <p style="margin-top:10px;">Every completed round generates a shareable badge image — course, date, score, GC Rating, the whole resume. Export it. Post it. Prove you were there. The ghosts do not need to prove anything.</p>
+        <a href="https://ghostcard.live/docs/friends-and-feed.html#rating-trend" class="fg-link">Rating trend docs →</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="feat-card" style="border-top:3px solid #A668C4;background:#0E0818">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#A668C4" stroke-width="1.5"/><path d="M7 9h2l1 3 2-5 1 4 1-2h3" stroke="#A668C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div style="display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:4px;background:rgba(166,104,196,0.12);border:1px solid rgba(166,104,196,0.3);color:#A668C4;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase">Multiplayer · 2+ Players</div>
-      <h3 class="feat-title">Horror Mode — The Card Game</h3>
-      <p class="feat-body">A 50-card card game overlay that rides on top of any multiplayer round. Enable it at card build and a full horror deck enters the round alongside your scorecard. Cards are drawn, played, and resolved in real time — during the round, on the course, hole by hole.</p>
-      <p class="feat-body" style="margin-top:10px">Four card types: <strong style="color:#A668C4">Haunt</strong> your opponents, play <strong style="color:#7BC8C8">Spirit</strong> cards on yourself, hold <strong style="color:#C9A84C">Reckoning</strong> cards until the final hole, burn <strong style="color:#E05050">Wild</strong> cards when things get desperate. Skins run alongside. Whatever happened on hole 9 stays on hole 9.</p>
-      <div class="rarity-row" style="margin-top:14px">
-        <span class="r" style="background:rgba(166,104,196,0.2);color:#A668C4">Haunt</span>
-        <span class="r" style="background:rgba(0,208,210,0.15);color:#7BC8C8">Spirit</span>
-        <span class="r" style="background:rgba(201,168,76,0.2);color:#C9A84C">Reckoning</span>
-        <span class="r" style="background:rgba(224,80,80,0.2);color:#E05050">Wild</span>
-      </div>
-      <div class="feat-footer" style="margin-top:12px">
-        <span class="feat-tag" style="background:rgba(166,104,196,0.1);border-color:rgba(166,104,196,0.3);color:#A668C4">Horror Mode</span>
-        <a href="docs/horror-mode.html" class="feat-doc-link">Horror mode docs</a>
-      </div>
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <div class="wrap">
+      <h2>Still reading? The ghosts are impressed.</h2>
+      <p>Most people get scared off by hole 3. You made it to the feature list. Ricky finished his round 20 minutes ago. Adam Hammes is just standing there. Waiting. And someone on hole 9 just played The Possession on their playing partner.</p>
+      <a href="https://app.ghostcard.live" class="btn btn-gold">Start Haunting</a>
+      <a href="https://ghostcard.live/docs/index.html" class="btn btn-ghost">Read the docs</a>
     </div>
+  </section>
 
-  </div>
-
-
-    <!-- ── NEW: Friends & Feed ── -->
-    <div class="feat-card" style="border-top:3px solid #7BC8C8;background:#0A1820">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 20 Q5 13 6 10 Q7.5 7 9 6 Q10.5 7 12 10 Q13 13 13 20 Q11.5 18.5 10.5 20 Q9.5 18.5 8 20 Q6.5 18.5 5 20Z" fill="#7BC8C8" opacity="0.5"/><ellipse cx="9" cy="8.5" rx="3" ry="3.8" fill="#7BC8C8" opacity="0.5"/><path d="M11 21 Q11 14 12 11 Q13.5 7.5 15 6.5 Q16.5 7.5 18 11 Q19 14 19 21 Q17.5 19 16.5 21 Q15.5 19 14 21 Q12.5 19 11 21Z" fill="#7BC8C8"/><ellipse cx="15" cy="9" rx="3" ry="3.8" fill="#7BC8C8"/><ellipse cx="13.8" cy="8.5" rx="1" ry="1.2" fill="none" stroke="#0A1820" stroke-width="0.9"/><ellipse cx="16.2" cy="8.5" rx="1" ry="1.2" fill="none" stroke="#0A1820" stroke-width="0.9"/></svg></div>
-      <div style="display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:4px;background:rgba(123,200,200,0.1);border:1px solid rgba(123,200,200,0.3);color:#7BC8C8;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase">New</div>
-      <h3 class="feat-title">Friends &amp; Activity Feed</h3>
-      <p class="feat-body">Add friends by username, see their recent rounds in a dedicated Feed tab. The feed shows course, score, GC Rating, and full scorecard breakdowns on tap. Head-to-Head view auto-surfaces courses you have both played and compares your best scores side by side.</p>
-      <p class="feat-body" style="margin-top:10px">Mutual friendships only. 20-friend cap. No follower counts, no likes, no algorithms. Just rounds and who played them. The ghosts do not do engagement metrics.</p>
-      <div class="feat-footer">
-        <span class="feat-tag" style="background:rgba(123,200,200,0.1);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Social</span>
-        <a href="docs/friends-and-feed.html" class="feat-doc-link">Friends docs</a>
-      </div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-logo">GHOST<span>CARD</span></div>
+      <ul class="footer-links">
+        <li><a href="https://ghostcard.live/index.html">Home</a></li>
+        <li><a href="https://ghostcard.live/how-it-works.html">How It Works</a></li>
+        <li><a href="https://ghostcard.live/features.html">Features</a></li>
+        <li><a href="https://ghostcard.live/docs/index.html">Docs</a></li>
+      </ul>
+      <p class="footer-copy">Ghost Card © 2026 · Haunt responsibly</p>
+      <p class="footer-attr">Forest silhouettes by <a href="https://www.vecteezy.com">Vecteezy.com</a></p>
     </div>
+  </footer>
 
-    <!-- ── NEW: Personal Best Ghost ── -->
-    <div class="feat-card" style="border-top:3px solid var(--lantern)">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Beat Your Ghost — Personal Best</h3>
-      <p class="feat-body">Your previous best round at the current course appears as a gold ghost row on the live leaderboard — labeled YOUR BEST and tracking hole by hole with real score data. Not simulated. Not estimated. That was you, on that day, and now you have to beat yourself.</p>
-      <p class="feat-body" style="margin-top:10px">Set a new personal best and the Round Complete screen celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained. The ghost noticed.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Leaderboard</span>
-        <a href="docs/friends-and-feed.html#pb-ghost" class="feat-doc-link">PB ghost docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Friend Ghost on Leaderboard ── -->
-    <div class="feat-card" style="border-top:3px solid #7BC8C8;background:#0A1820">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#7BC8C8"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Friend Ghost on Your Leaderboard</h3>
-      <p class="feat-body">When you play a course a friend has played before, their best round appears as a cyan ghost row on your live leaderboard — right next to the pro ghosts and your PB ghost. Real hole-by-hole score data. If they birdied hole 7, you will see it on hole 7.</p>
-      <p class="feat-body" style="margin-top:10px">Three ghost layers on one leaderboard: pro ghosts (cream), your personal best (gold), your friend (cyan). The solo round was never really solo.</p>
-      <div class="feat-footer">
-        <span class="feat-tag" style="background:rgba(123,200,200,0.1);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Friend Ghost</span>
-        <a href="docs/friends-and-feed.html#friend-ghost" class="feat-doc-link">Friend ghost docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Rating Trend & Share Badge ── -->
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="3,17 7,10 12,13 17,6 21,8" stroke="#8FA4C4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="17" r="1.5" fill="#8FA4C4"/><circle cx="7" cy="10" r="1.5" fill="#8FA4C4"/><circle cx="12" cy="13" r="1.5" fill="#8FA4C4"/><circle cx="17" cy="6" r="1.5" fill="#8FA4C4"/><circle cx="21" cy="8" r="1.5" fill="#8FA4C4"/></svg></div>
-      <h3 class="feat-title">Rating Trend &amp; Share Badge</h3>
-      <p class="feat-body">A sparkline chart on the History screen tracks your GC Rating across your last 20 rated rounds. Green line means you are getting better. Orange means the ghosts are winning. Your best-ever rating is marked. Tap any point to see the number.</p>
-      <p class="feat-body" style="margin-top:10px">Every completed round generates a shareable badge image — course, date, score, GC Rating, the whole resume. Export it. Post it. Prove you were there. The ghosts do not need to prove anything.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Analytics</span>
-        <a href="docs/friends-and-feed.html#rating-trend" class="feat-doc-link">Rating trend docs</a>
-      </div>
-    </div>
-
-
-    <!-- ── NEW: Friends & Feed ── -->
-    <div class="feat-card" style="border-top:3px solid #7BC8C8;background:#0A1820">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 20 Q5 13 6 10 Q7.5 7 9 6 Q10.5 7 12 10 Q13 13 13 20 Q11.5 18.5 10.5 20 Q9.5 18.5 8 20 Q6.5 18.5 5 20Z" fill="#7BC8C8" opacity="0.5"/><ellipse cx="9" cy="8.5" rx="3" ry="3.8" fill="#7BC8C8" opacity="0.5"/><path d="M11 21 Q11 14 12 11 Q13.5 7.5 15 6.5 Q16.5 7.5 18 11 Q19 14 19 21 Q17.5 19 16.5 21 Q15.5 19 14 21 Q12.5 19 11 21Z" fill="#7BC8C8"/><ellipse cx="15" cy="9" rx="3" ry="3.8" fill="#7BC8C8"/><ellipse cx="13.8" cy="8.5" rx="1" ry="1.2" fill="none" stroke="#0A1820" stroke-width="0.9"/><ellipse cx="16.2" cy="8.5" rx="1" ry="1.2" fill="none" stroke="#0A1820" stroke-width="0.9"/></svg></div>
-      <div style="display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:4px;background:rgba(123,200,200,0.1);border:1px solid rgba(123,200,200,0.3);color:#7BC8C8;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase">New</div>
-      <h3 class="feat-title">Friends &amp; Activity Feed</h3>
-      <p class="feat-body">Add friends by username, see their recent rounds in a dedicated Feed tab. The feed shows course, score, GC Rating, and full scorecard breakdowns on tap. Head-to-Head view auto-surfaces courses you have both played and compares your best scores side by side.</p>
-      <p class="feat-body" style="margin-top:10px">Mutual friendships only. 20-friend cap. No follower counts, no likes, no algorithms. Just rounds and who played them. The ghosts do not do engagement metrics.</p>
-      <div class="feat-footer">
-        <span class="feat-tag" style="background:rgba(123,200,200,0.1);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Social</span>
-        <a href="docs/friends-and-feed.html" class="feat-doc-link">Friends docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Personal Best Ghost ── -->
-    <div class="feat-card" style="border-top:3px solid var(--lantern)">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Beat Your Ghost — Personal Best</h3>
-      <p class="feat-body">Your previous best round at the current course appears as a gold ghost row on the live leaderboard — labeled YOUR BEST and tracking hole by hole with real score data. Not simulated. Not estimated. That was you, on that day, and now you have to beat yourself.</p>
-      <p class="feat-body" style="margin-top:10px">Set a new personal best and the Round Complete screen celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained. The ghost noticed.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Leaderboard</span>
-        <a href="docs/friends-and-feed.html#pb-ghost" class="feat-doc-link">PB ghost docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Friend Ghost on Leaderboard ── -->
-    <div class="feat-card" style="border-top:3px solid #7BC8C8;background:#0A1820">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#7BC8C8"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Friend Ghost on Your Leaderboard</h3>
-      <p class="feat-body">When you play a course a friend has played before, their best round appears as a cyan ghost row on your live leaderboard — right next to the pro ghosts and your PB ghost. Real hole-by-hole score data. If they birdied hole 7, you will see it on hole 7.</p>
-      <p class="feat-body" style="margin-top:10px">Three ghost layers on one leaderboard: pro ghosts (cream), your personal best (gold), your friend (cyan). The solo round was never really solo.</p>
-      <div class="feat-footer">
-        <span class="feat-tag" style="background:rgba(123,200,200,0.1);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Friend Ghost</span>
-        <a href="docs/friends-and-feed.html#friend-ghost" class="feat-doc-link">Friend ghost docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Rating Trend & Share Badge ── -->
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="3,17 7,10 12,13 17,6 21,8" stroke="#8FA4C4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="17" r="1.5" fill="#8FA4C4"/><circle cx="7" cy="10" r="1.5" fill="#8FA4C4"/><circle cx="12" cy="13" r="1.5" fill="#8FA4C4"/><circle cx="17" cy="6" r="1.5" fill="#8FA4C4"/><circle cx="21" cy="8" r="1.5" fill="#8FA4C4"/></svg></div>
-      <h3 class="feat-title">Rating Trend &amp; Share Badge</h3>
-      <p class="feat-body">A sparkline chart on the History screen tracks your GC Rating across your last 20 rated rounds. Green line means you are getting better. Orange means the ghosts are winning. Your best-ever rating is marked. Tap any point to see the number.</p>
-      <p class="feat-body" style="margin-top:10px">Every completed round generates a shareable badge image — course, date, score, GC Rating, the whole resume. Export it. Post it. Prove you were there. The ghosts do not need to prove anything.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Analytics</span>
-        <a href="docs/friends-and-feed.html#rating-trend" class="feat-doc-link">Rating trend docs</a>
-      </div>
-    </div>
-
-
-    <!-- ── NEW: Friends & Feed ── -->
-    <div class="feat-card" style="border-top:3px solid #7BC8C8;background:#0A1820">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 20 Q5 13 6 10 Q7.5 7 9 6 Q10.5 7 12 10 Q13 13 13 20 Q11.5 18.5 10.5 20 Q9.5 18.5 8 20 Q6.5 18.5 5 20Z" fill="#7BC8C8" opacity="0.5"/><ellipse cx="9" cy="8.5" rx="3" ry="3.8" fill="#7BC8C8" opacity="0.5"/><path d="M11 21 Q11 14 12 11 Q13.5 7.5 15 6.5 Q16.5 7.5 18 11 Q19 14 19 21 Q17.5 19 16.5 21 Q15.5 19 14 21 Q12.5 19 11 21Z" fill="#7BC8C8"/><ellipse cx="15" cy="9" rx="3" ry="3.8" fill="#7BC8C8"/><ellipse cx="13.8" cy="8.5" rx="1" ry="1.2" fill="none" stroke="#0A1820" stroke-width="0.9"/><ellipse cx="16.2" cy="8.5" rx="1" ry="1.2" fill="none" stroke="#0A1820" stroke-width="0.9"/></svg></div>
-      <div style="display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:4px;background:rgba(123,200,200,0.1);border:1px solid rgba(123,200,200,0.3);color:#7BC8C8;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase">New</div>
-      <h3 class="feat-title">Friends &amp; Activity Feed</h3>
-      <p class="feat-body">Add friends by username, see their recent rounds in a dedicated Feed tab. The feed shows course, score, GC Rating, and full scorecard breakdowns on tap. Head-to-Head view auto-surfaces courses you have both played and compares your best scores side by side.</p>
-      <p class="feat-body" style="margin-top:10px">Mutual friendships only. 20-friend cap. No follower counts, no likes, no algorithms. Just rounds and who played them. The ghosts do not do engagement metrics.</p>
-      <div class="feat-footer">
-        <span class="feat-tag" style="background:rgba(123,200,200,0.1);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Social</span>
-        <a href="docs/friends-and-feed.html" class="feat-doc-link">Friends docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Personal Best Ghost ── -->
-    <div class="feat-card" style="border-top:3px solid var(--lantern)">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#C9A84C"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Beat Your Ghost — Personal Best</h3>
-      <p class="feat-body">Your previous best round at the current course appears as a gold ghost row on the live leaderboard — labeled YOUR BEST and tracking hole by hole with real score data. Not simulated. Not estimated. That was you, on that day, and now you have to beat yourself.</p>
-      <p class="feat-body" style="margin-top:10px">Set a new personal best and the Round Complete screen celebrates with a full comparison: holes won, holes lost, holes tied, strokes gained. The ghost noticed.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Leaderboard</span>
-        <a href="docs/friends-and-feed.html#pb-ghost" class="feat-doc-link">PB ghost docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Friend Ghost on Leaderboard ── -->
-    <div class="feat-card" style="border-top:3px solid #7BC8C8;background:#0A1820">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 20 22.4" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#7BC8C8"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg></div>
-      <h3 class="feat-title">Friend Ghost on Your Leaderboard</h3>
-      <p class="feat-body">When you play a course a friend has played before, their best round appears as a cyan ghost row on your live leaderboard — right next to the pro ghosts and your PB ghost. Real hole-by-hole score data. If they birdied hole 7, you will see it on hole 7.</p>
-      <p class="feat-body" style="margin-top:10px">Three ghost layers on one leaderboard: pro ghosts (cream), your personal best (gold), your friend (cyan). The solo round was never really solo.</p>
-      <div class="feat-footer">
-        <span class="feat-tag" style="background:rgba(123,200,200,0.1);border-color:rgba(123,200,200,0.3);color:#7BC8C8">Friend Ghost</span>
-        <a href="docs/friends-and-feed.html#friend-ghost" class="feat-doc-link">Friend ghost docs</a>
-      </div>
-    </div>
-
-    <!-- ── NEW: Rating Trend & Share Badge ── -->
-    <div class="feat-card">
-      <div class="feat-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="3,17 7,10 12,13 17,6 21,8" stroke="#8FA4C4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="17" r="1.5" fill="#8FA4C4"/><circle cx="7" cy="10" r="1.5" fill="#8FA4C4"/><circle cx="12" cy="13" r="1.5" fill="#8FA4C4"/><circle cx="17" cy="6" r="1.5" fill="#8FA4C4"/><circle cx="21" cy="8" r="1.5" fill="#8FA4C4"/></svg></div>
-      <h3 class="feat-title">Rating Trend &amp; Share Badge</h3>
-      <p class="feat-body">A sparkline chart on the History screen tracks your GC Rating across your last 20 rated rounds. Green line means you are getting better. Orange means the ghosts are winning. Your best-ever rating is marked. Tap any point to see the number.</p>
-      <p class="feat-body" style="margin-top:10px">Every completed round generates a shareable badge image — course, date, score, GC Rating, the whole resume. Export it. Post it. Prove you were there. The ghosts do not need to prove anything.</p>
-      <div class="feat-footer">
-        <span class="feat-tag">Analytics</span>
-        <a href="docs/friends-and-feed.html#rating-trend" class="feat-doc-link">Rating trend docs</a>
-      </div>
-    </div>
-
-  <div class="cta-band">
-    <h2>Still reading? The ghosts are impressed.</h2>
-    <p>Most people get scared off by hole 3. You made it to the feature list. Ricky finished his round 20 minutes ago. Adam Hammes is just standing there. Waiting. And someone on hole 9 just played The Possession on their playing partner.</p>
-    <button class="btn-xl" onclick="window.location.href='https://app.ghostcard.live'">Start Haunting</button>
-    <br>
-    <a href="docs/index.html" class="btn-docs">Read the docs</a>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-logo">
-    <svg viewBox="0 0 20 22.4" width="36" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>
-    <div class="footer-wm"><span style="color:#EDE9DC">GHOST</span><span style="color:#CF9120">CARD</span></div>
-  </div>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="how-it-works.html">How It Works</a>
-    <a href="features.html">Features</a>
-    <a href="docs/index.html">Docs</a>
-  </div>
-  <p class="footer-copy">Ghost Card © 2026 • Haunt responsibly</p>
-  <p class="footer-tagline">HAUNT THE LEADERBOARD</p>
-  <p style="margin-top:20px;font-size:10px;color:#546082;letter-spacing:.5px;opacity:0.6">Forest silhouettes by <a href="https://www.vecteezy.com" target="_blank" rel="noopener" style="color:#546082;text-decoration:underline;text-underline-offset:2px">Vecteezy.com</a></p>
-</footer>
-
-<script>
-(function(){
-  var btn=document.getElementById('hamburger');
-  var menu=document.getElementById('mobileMenu');
-  if(!btn||!menu)return;
-  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-  btn.addEventListener('click',function(){
-    var open=menu.classList.toggle('open');
-    btn.classList.toggle('open',open);
-    btn.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
-  document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!btn.contains(e.target))close();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
-})();
-</script>
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.05 });
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+  </script>
 </body>
 </html>
