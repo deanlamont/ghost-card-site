@@ -920,8 +920,75 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   .gc-you-score{font-size:20px}
 }
 
+/* ── A24 BREATHING SECTIONS ──────────────────────────────── */
+.a24-breath{
+  position:relative;height:40vh;min-height:260px;
+  background:linear-gradient(180deg, var(--abyss) 0%, #060e1c 40%, var(--abyss) 100%);
+  overflow:hidden;
+}
+.a24-breath::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
+  background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAADLCAYAAACPmo7nAAEAAElEQVR42uydd5wdZfX/31tnd5JJuwOhd4beBQRUQEGQJhZQvogNpAmIKIINRARBLGCjiCICgoAiC9C4gHRxAemhzgWSSm+zd9vvjnPObZ6+72Zvs3WQ3eT6vV13ZvXvfZe6/fOee5bxddMkHWZd1dn');
+  background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;
+  opacity:0.12;
+}
+
+/* ── HERO STAGGER (A24 pacing) ──────────────────────────── */
+.hero-tagline{
+  opacity:0;animation:a24-rise 1.8s cubic-bezier(0.25,0.1,0.25,1) 0.4s forwards;
+}
+.hero-headline{
+  opacity:0;animation:a24-rise 2s cubic-bezier(0.25,0.1,0.25,1) 1.0s forwards;
+}
+.hero-sub{
+  opacity:0;animation:a24-rise 2s cubic-bezier(0.25,0.1,0.25,1) 1.8s forwards;
+}
+.hero-cta{
+  opacity:0;animation:a24-rise 1.6s cubic-bezier(0.25,0.1,0.25,1) 2.6s forwards;
+}
+
+@keyframes a24-rise{
+  0%{opacity:0;transform:translateY(12px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+/* ── FIELD REPORTS SECTION ───────────────────────────────── */
+.field-reports{
+  background:radial-gradient(ellipse 80% 60% at 50% 30%, #0a0f1e 0%, var(--abyss) 100%);
+  border-top:1px solid rgba(30,46,74,0.4);
+  padding:100px 2rem;
+}
+.fr-inner{max-width:740px;margin:0 auto}
+.fr-label{
+  font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;
+  color:var(--shadow);margin-bottom:14px;text-align:center;
+}
+.fr-title{
+  font-size:clamp(20px,3vw,30px);font-weight:300;letter-spacing:1px;
+  color:var(--fog);margin-bottom:56px;text-align:center;line-height:1.4;
+}
+.fr-grid{display:flex;flex-direction:column;gap:48px}
+.fr-card{
+  position:relative;
+  padding:32px 36px;
+  border-left:1px solid rgba(201,168,76,0.15);
+  background:rgba(255,255,255,0.01);
+}
+.fr-card::before{
+  content:'';position:absolute;left:-1px;top:0;width:1px;height:100%;
+  background:linear-gradient(to bottom, rgba(201,168,76,0.0) 0%, rgba(201,168,76,0.3) 40%, rgba(201,168,76,0.0) 100%);
+}
+.fr-body{
+  font-size:15px;line-height:1.85;color:var(--moonlight);font-weight:300;
+  font-style:italic;margin-bottom:14px;
+}
+.fr-byline{
+  font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--shadow);
+}
+
 </style>
-</head>
+
 <body>
 
 <!-- ── NAV ──────────────────────────────────────────────────── -->
@@ -988,7 +1055,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
       <button class="btn-lg btn-lp" onclick="window.location.href='https://app.ghostcard.live'" aria-label="Play Ghost Card free">Play Free</button>
       <button class="btn-lg btn-lo" onclick="window.location.href='docs/index.html'">See the Docs</button>
     </div>
-    <a href="#tour" style="display:inline-block;margin-top:28px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--lantern)'" onmouseout="this.style.color='var(--shadow)'">↓ See how it works</a>
+    <a href="#tour" style="display:inline-block;margin-top:28px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--shadow);text-decoration:none;transition:color 0.2s;opacity:0;animation:a24-rise 1.4s cubic-bezier(0.25,0.1,0.25,1) 3.2s forwards" onmouseover="this.style.color='var(--lantern)'" onmouseout="this.style.color='var(--shadow)'">↓ See how it works</a>
 
     <!-- ── LIVE SCORE TICKER ── -->
     <div class="score-ticker" aria-hidden="true">
@@ -1118,6 +1185,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
   </div>
 </section>
+
+<!-- ── A24 BREATH — the forest between sections ──────────── -->
+<div class="a24-breath" aria-hidden="true"></div>
 
 <!-- ── MULTIPLAYER SECTION ──────────────────────────── -->
 <section id="multiplayer" class="multiplayer-section" aria-labelledby="multi-heading">
@@ -1410,6 +1480,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
   </div>
 </section>
+<!-- ── A24 BREATH ──────────────────────────────────────────── -->
+<div class="a24-breath" aria-hidden="true"></div>
+
 <!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
 <section style="background:var(--midnight);border-top:1px solid var(--dusk);padding:90px 2rem" aria-labelledby="reviews-heading">
   <div style="max-width:1080px;margin:0 auto">
@@ -1434,6 +1507,41 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
         <div class="review-stars">★★★★★</div>
         <p class="review-quote">"A group of eleven people was camped on hole 4. I opened Ghost Card. The ghosts played through immediately. <em>The ghosts understand me in a way real people don't.</em>"</p>
         <div class="review-byline">Solo player · Always · Everywhere</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── A24 BREATH ──────────────────────────────────────────── -->
+<div class="a24-breath" aria-hidden="true"></div>
+
+<!-- ── FIELD REPORTS — A24 micro-fiction ──────────────────── -->
+<section class="field-reports" aria-labelledby="fr-heading">
+  <div class="fr-inner">
+    <p class="fr-label">Field Reports</p>
+    <h2 class="fr-title" id="fr-heading">Dispatches from rounds that happened.<br>Probably.</h2>
+
+    <div class="fr-grid">
+
+      <div class="fr-card">
+        <p class="fr-body">"I played Idlewild alone on a Tuesday. All 18 holes, nothing unusual. When I got back to the car, there was a second scorecard on my dashboard. Same course. Same holes. Better scores. I hadn't opened the app."</p>
+        <div class="fr-byline">Anonymous · Idlewild, Burlington KY</div>
+      </div>
+
+      <div class="fr-card">
+        <p class="fr-body">"The app told me I was playing against Adam Hammes. I figured it was simulated. Then on hole 14, a disc landed ten feet from the pin. I was the only one on the course. I checked the leaderboard. He'd just birdied."</p>
+        <div class="fr-byline">Unverified · Cedar Hills, MO</div>
+      </div>
+
+      <div class="fr-card">
+        <p class="fr-body">"There's a course near my house. Five stars. 7,200 feet. 24 holes. No address on the map. No reviews. No other rounds logged. I drove there anyway. The baskets were already up. I played all 24. The app saved the round. When I went back the next Tuesday, the road wasn't there."</p>
+        <div class="fr-byline">Redacted · Location withheld</div>
+      </div>
+
+      <div class="fr-card">
+        <p class="fr-body">"I lost a Champion Destroyer on hole 12 in 2019. Deep in the tree line, never found it. Last month I opened my bag before a round and it was sitting on top. Same scuffs. Same ink on the rim. The flight numbers were different."</p>
+        <div class="fr-byline">D. Lamont · Burns Park, AR</div>
       </div>
 
     </div>
@@ -1498,7 +1606,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   /* ── Stars ──────────────────────────────────────────────── */
   function initStars(){
     stars=[];
-    const n=Math.floor(W*H/3800)+55;
+    const n=Math.floor(W*H/7600)+28;
     for(let i=0;i<n;i++){
       stars.push({
         x:Math.random()*W,
@@ -1564,7 +1672,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
     if(t>=nextShot){
       spawnShoot();
-      nextShot=t+(shoots.length<2?rb(3000,8000):rb(6000,12000));
+      nextShot=t+(shoots.length<2?rb(6000,14000):rb(10000,20000));
     }
     drawShoots();
     requestAnimationFrame(draw);
