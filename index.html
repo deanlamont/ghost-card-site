@@ -920,18 +920,97 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   .gc-you-score{font-size:20px}
 }
 
-/* ── A24 BREATHING SECTIONS ──────────────────────────────── */
-.a24-breath{
-  position:relative;height:40vh;min-height:260px;
+/* ── A24 TREELINE DIVIDERS (photo PNG — matches hero) ──── */
+.a24-treeline{
+  position:relative;height:220px;
   background:linear-gradient(180deg, var(--abyss) 0%, #060e1c 40%, var(--abyss) 100%);
   overflow:hidden;
 }
-.a24-breath::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
-  background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAADLCAYAAACPmo7nAAEAAElEQVR42uydd5wdZfX/31tnd5JJuwOhd4beBQRUQEGQJhZQvogNpAmIKIINRARBLGCjiCICgoAiC9C4gHRxAemhzgWSSm+zd9vvjnPObZ6+72Zvs3WQ3eT6vV13ZvXvfZe6/fOee5bxddMkHWZd1dn');
+.a24-treeline::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:220px;z-index:1;
+  background-image:url('treeline.png');
   background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;
-  opacity:0.12;
+  opacity:0.85;
 }
+.a24-treeline::after{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to bottom,
+    rgba(4,10,24,1.0) 0%,
+    transparent 25%,
+    transparent 60%,
+    rgba(4,10,24,1.0) 100%
+  );
+}
+@media(max-width:640px){.a24-treeline{height:140px}}
+
+/* ── A24 CINEMATIC INTERSTITIAL — the bold one ───────────── */
+.a24-cinema{
+  position:relative;
+  min-height:70vh;
+  background:radial-gradient(ellipse 80% 60% at 50% 20%, #0D1C38 0%, #060e1c 50%, #020610 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;padding:80px 2rem;text-align:center;
+}
+.a24-cinema-treeline{
+  position:absolute;bottom:0;left:0;right:0;
+  height:200px;z-index:1;
+  background-image:url('treeline.png');
+  background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;
+  opacity:0.6;
+}
+.a24-cinema-treeline::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    rgba(2,6,16,1.0) 0%,
+    transparent 35%,
+    transparent 70%,
+    rgba(2,6,16,0.8) 100%
+  );
+}
+.a24-cinema-copy{
+  position:relative;z-index:2;
+  max-width:520px;
+}
+.a24-cinema-line{
+  font-family:'Inter',sans-serif;font-weight:200;
+  font-size:clamp(24px,5vw,48px);
+  letter-spacing:6px;text-transform:uppercase;
+  color:var(--cream);line-height:1.4;
+  opacity:0;
+  animation:a24-cinema-in 3.5s cubic-bezier(0.25,0.1,0.25,1) 0.5s forwards;
+}
+.a24-cinema-sub{
+  font-family:'Inter',sans-serif;font-weight:300;
+  font-size:12px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--shadow);margin-top:24px;
+  opacity:0;
+  animation:a24-cinema-in 2.5s cubic-bezier(0.25,0.1,0.25,1) 2.5s forwards;
+}
+@keyframes a24-cinema-in{
+  0%{opacity:0;letter-spacing:12px}
+  60%{opacity:0.4}
+  100%{opacity:1;letter-spacing:inherit}
+}
+/* Moon glow behind cinema text */
+.a24-cinema::before{
+  content:'';position:absolute;
+  top:15%;left:50%;transform:translateX(-50%);
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(ellipse, rgba(237,232,192,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* ── FIELD REPORTS FILM GRAIN ────────────────────────────── */
+.field-reports::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  pointer-events:none;
+  z-index:0;
+}
+.field-reports{position:relative}
+.fr-inner{position:relative;z-index:1}
 
 /* ── HERO STAGGER (A24 pacing) ──────────────────────────── */
 .hero-tagline{
@@ -1128,7 +1207,7 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
             <ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/>
           </svg>
           <div class="gc-label gc-label-cream">Pro Ghost</div>
-          <div class="gc-score gc-score-cream">−10</div>
+          <div class="gc-score gc-score-cream">−3</div>
         </div>
 
         <!-- Your Past — gold, the ghost of your best round -->
@@ -1186,8 +1265,8 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   </div>
 </section>
 
-<!-- ── A24 BREATH — the forest between sections ──────────── -->
-<div class="a24-breath" aria-hidden="true"></div>
+<!-- ── A24 TREELINE DIVIDER (photo PNG) ───────────────────── -->
+<div class="a24-treeline" aria-hidden="true"></div>
 
 <!-- ── MULTIPLAYER SECTION ──────────────────────────── -->
 <section id="multiplayer" class="multiplayer-section" aria-labelledby="multi-heading">
@@ -1480,8 +1559,8 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
   </div>
 </section>
-<!-- ── A24 BREATH ──────────────────────────────────────────── -->
-<div class="a24-breath" aria-hidden="true"></div>
+<!-- ── A24 TREELINE DIVIDER (photo PNG) ───────────────────── -->
+<div class="a24-treeline" aria-hidden="true"></div>
 
 <!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
 <section style="background:var(--midnight);border-top:1px solid var(--dusk);padding:90px 2rem" aria-labelledby="reviews-heading">
@@ -1513,8 +1592,6 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   </div>
 </section>
 
-<!-- ── A24 BREATH ──────────────────────────────────────────── -->
-<div class="a24-breath" aria-hidden="true"></div>
 
 <!-- ── FIELD REPORTS — A24 micro-fiction ──────────────────── -->
 <section class="field-reports" aria-labelledby="fr-heading">
@@ -1547,6 +1624,15 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     </div>
   </div>
 </section>
+
+<!-- ── A24 CINEMATIC INTERSTITIAL — the bold one ──────────── -->
+<div class="a24-cinema" aria-hidden="true">
+  <div class="a24-cinema-copy">
+    <div class="a24-cinema-line">The course<br>at the end<br>of the road</div>
+    <div class="a24-cinema-sub">Five stars. No address. No other rounds logged.</div>
+  </div>
+  <div class="a24-cinema-treeline"></div>
+</div>
 
 <!-- ── FINAL CTA ──────────────────────────────────────────────── -->
 <section>
