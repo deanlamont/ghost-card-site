@@ -661,6 +661,9 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
     .review-grid{grid-template-columns:1fr}
   }
 
+.review-grid-2x2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:700px){.review-grid-2x2{grid-template-columns:1fr}}
+
 
   /* ── TOUR CINEMATIC ────────────────────────────────────────── */
   .tour-section{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 70% at 60% 50%,#1a1200 0%,#0d1020 40%,var(--abyss) 100%);border-top:1px solid var(--dusk)}
@@ -920,87 +923,6 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   .gc-you-score{font-size:20px}
 }
 
-/* ── A24 TREELINE DIVIDERS (photo PNG — matches hero) ──── */
-.a24-treeline{
-  position:relative;height:220px;
-  background:linear-gradient(180deg, var(--abyss) 0%, #060e1c 40%, var(--abyss) 100%);
-  overflow:hidden;
-}
-.a24-treeline::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:220px;z-index:1;
-  background-image:url('treeline.png');
-  background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;
-  opacity:0.85;
-}
-.a24-treeline::after{
-  content:'';position:absolute;inset:0;z-index:2;
-  background:linear-gradient(to bottom,
-    rgba(4,10,24,1.0) 0%,
-    transparent 25%,
-    transparent 60%,
-    rgba(4,10,24,1.0) 100%
-  );
-}
-@media(max-width:640px){.a24-treeline{height:140px}}
-
-/* ── A24 CINEMATIC INTERSTITIAL — the bold one ───────────── */
-.a24-cinema{
-  position:relative;
-  min-height:70vh;
-  background:radial-gradient(ellipse 80% 60% at 50% 20%, #0D1C38 0%, #060e1c 50%, #020610 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  overflow:hidden;padding:80px 2rem;text-align:center;
-}
-.a24-cinema-treeline{
-  position:absolute;bottom:0;left:0;right:0;
-  height:200px;z-index:1;
-  background-image:url('treeline.png');
-  background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;
-  opacity:0.6;
-}
-.a24-cinema-treeline::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,
-    rgba(2,6,16,1.0) 0%,
-    transparent 35%,
-    transparent 70%,
-    rgba(2,6,16,0.8) 100%
-  );
-}
-.a24-cinema-copy{
-  position:relative;z-index:2;
-  max-width:520px;
-}
-.a24-cinema-line{
-  font-family:'Inter',sans-serif;font-weight:200;
-  font-size:clamp(24px,5vw,48px);
-  letter-spacing:6px;text-transform:uppercase;
-  color:var(--cream);line-height:1.4;
-  opacity:0;
-  animation:a24-cinema-in 3.5s cubic-bezier(0.25,0.1,0.25,1) 0.5s forwards;
-}
-.a24-cinema-sub{
-  font-family:'Inter',sans-serif;font-weight:300;
-  font-size:12px;letter-spacing:4px;text-transform:uppercase;
-  color:var(--shadow);margin-top:24px;
-  opacity:0;
-  animation:a24-cinema-in 2.5s cubic-bezier(0.25,0.1,0.25,1) 2.5s forwards;
-}
-@keyframes a24-cinema-in{
-  0%{opacity:0;letter-spacing:12px}
-  60%{opacity:0.4}
-  100%{opacity:1;letter-spacing:inherit}
-}
-/* Moon glow behind cinema text */
-.a24-cinema::before{
-  content:'';position:absolute;
-  top:15%;left:50%;transform:translateX(-50%);
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(ellipse, rgba(237,232,192,0.08) 0%, transparent 70%);
-  pointer-events:none;
-}
-
 /* ── FIELD REPORTS FILM GRAIN ────────────────────────────── */
 .field-reports::before{
   content:'';position:absolute;inset:0;
@@ -1037,35 +959,6 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
   border-top:1px solid rgba(30,46,74,0.4);
   padding:100px 2rem;
 }
-.fr-inner{max-width:740px;margin:0 auto}
-.fr-label{
-  font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;
-  color:var(--shadow);margin-bottom:14px;text-align:center;
-}
-.fr-title{
-  font-size:clamp(20px,3vw,30px);font-weight:300;letter-spacing:1px;
-  color:var(--fog);margin-bottom:56px;text-align:center;line-height:1.4;
-}
-.fr-grid{display:flex;flex-direction:column;gap:48px}
-.fr-card{
-  position:relative;
-  padding:32px 36px;
-  border-left:1px solid rgba(201,168,76,0.15);
-  background:rgba(255,255,255,0.01);
-}
-.fr-card::before{
-  content:'';position:absolute;left:-1px;top:0;width:1px;height:100%;
-  background:linear-gradient(to bottom, rgba(201,168,76,0.0) 0%, rgba(201,168,76,0.3) 40%, rgba(201,168,76,0.0) 100%);
-}
-.fr-body{
-  font-size:15px;line-height:1.85;color:var(--moonlight);font-weight:300;
-  font-style:italic;margin-bottom:14px;
-}
-.fr-byline{
-  font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
-  color:var(--shadow);
-}
-
 </style>
 </head>
 <body>
@@ -1264,9 +1157,6 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
   </div>
 </section>
-
-<!-- ── A24 TREELINE DIVIDER (photo PNG) ───────────────────── -->
-<div class="a24-treeline" aria-hidden="true"></div>
 
 <!-- ── MULTIPLAYER SECTION ──────────────────────────── -->
 <section id="multiplayer" class="multiplayer-section" aria-labelledby="multi-heading">
@@ -1559,80 +1449,37 @@ body{font-family:'Inter',sans-serif;background:var(--void);color:var(--moonlight
 
   </div>
 </section>
-<!-- ── A24 TREELINE DIVIDER (photo PNG) ───────────────────── -->
-<div class="a24-treeline" aria-hidden="true"></div>
-
-<!-- ── SOCIAL PROOF ───────────────────────────────────────────── -->
-<section style="background:var(--midnight);border-top:1px solid var(--dusk);padding:90px 2rem" aria-labelledby="reviews-heading">
-  <div style="max-width:1080px;margin:0 auto">
-    <p class="section-label" style="margin-bottom:12px">Definitely Real Reviews</p>
-    <h2 class="section-title" id="reviews-heading" style="margin-bottom:48px">Five stars.<br>From people who may or may not exist.</h2>
-
-    <div class="review-grid" role="list">
-
-      <div class="review-card" role="listitem">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"Ghost Gannon Buhr birdied hole 1 while I was still explaining why I throw a Nuke OS on a 180-foot par 3. By hole 6 I had <em>accepted my life.</em>"</p>
-        <div class="review-byline">Chad, 41 · Owns 340 discs, uses 7</div>
-      </div>
-
-      <div class="review-card" role="listitem">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"Ghost Joey Buckets drained a 60-footer on hole 12. I was six feet away and missed. My playing partner said 'at least you're consistent.' <em>I have not recovered.</em>"</p>
-        <div class="review-byline">Recovering, slowly · Tennessee</div>
-      </div>
-
-      <div class="review-card" role="listitem">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"A group of eleven people was camped on hole 4. I opened Ghost Card. The ghosts played through immediately. <em>The ghosts understand me in a way real people don't.</em>"</p>
-        <div class="review-byline">Solo player · Always · Everywhere</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ── FIELD REPORTS — A24 micro-fiction ──────────────────── -->
+<!-- ── FIELD REPORTS — A24 micro-fiction, review-card grid ─── -->
 <section class="field-reports" aria-labelledby="fr-heading">
-  <div class="fr-inner">
-    <p class="fr-label">Field Reports</p>
-    <h2 class="fr-title" id="fr-heading">Dispatches from rounds that happened.<br>Probably.</h2>
+  <div class="fr-inner" style="max-width:1080px;margin:0 auto">
+    <p class="section-label" style="margin-bottom:12px">Field Reports</p>
+    <h2 class="section-title" id="fr-heading" style="margin-bottom:48px">Dispatches from rounds that happened.<br>Probably.</h2>
 
-    <div class="fr-grid">
+    <div class="review-grid review-grid-2x2" role="list">
 
-      <div class="fr-card">
-        <p class="fr-body">"I played Idlewild alone on a Tuesday. All 18 holes, nothing unusual. When I got back to the car, there was a second scorecard on my dashboard. Same course. Same holes. Better scores. I hadn't opened the app."</p>
-        <div class="fr-byline">Anonymous · Idlewild, Burlington KY</div>
+      <div class="review-card" role="listitem">
+        <p class="review-quote">"I played Idlewild alone on a Tuesday. All 18 holes, nothing unusual. When I got back to the car, there was a second scorecard on my dashboard. Same course. Same holes. Better scores. <em>I hadn't opened the app.</em>"</p>
+        <div class="review-byline">Anonymous · Idlewild, Burlington KY</div>
       </div>
 
-      <div class="fr-card">
-        <p class="fr-body">"The app told me I was playing against Adam Hammes. I figured it was simulated. Then on hole 14, a disc landed ten feet from the pin. I was the only one on the course. I checked the leaderboard. He'd just birdied."</p>
-        <div class="fr-byline">Unverified · Cedar Hills, MO</div>
+      <div class="review-card" role="listitem">
+        <p class="review-quote">"The app told me I was playing against Adam Hammes. I figured it was simulated. Then on hole 14, a disc landed ten feet from the pin. I was the only one on the course. I checked the leaderboard. <em>He'd just birdied.</em>"</p>
+        <div class="review-byline">Unverified · Cedar Hills, MO</div>
       </div>
 
-      <div class="fr-card">
-        <p class="fr-body">"There's a course near my house. Five stars. 7,200 feet. 24 holes. No address on the map. No reviews. No other rounds logged. I drove there anyway. The baskets were already up. I played all 24. The app saved the round. When I went back the next Tuesday, the road wasn't there."</p>
-        <div class="fr-byline">Redacted · Location withheld</div>
+      <div class="review-card" role="listitem">
+        <p class="review-quote">"There's a course near my house. Five stars. 7,200 feet. 24 holes. No address on the map. No reviews. No other rounds logged. I drove there anyway. The baskets were already up. I played all 24. The app saved the round. <em>When I went back the next Tuesday, the road wasn't there.</em>"</p>
+        <div class="review-byline">Redacted · Location withheld</div>
       </div>
 
-      <div class="fr-card">
-        <p class="fr-body">"I lost a Champion Destroyer on hole 12 in 2019. Deep in the tree line, never found it. Last month I opened my bag before a round and it was sitting on top. Same scuffs. Same ink on the rim. The flight numbers were different."</p>
-        <div class="fr-byline">D. Lamont · Burns Park, AR</div>
+      <div class="review-card" role="listitem">
+        <p class="review-quote">"I lost a Champion Destroyer on hole 12 in 2019. Deep in the tree line, never found it. Last month I opened my bag before a round and it was sitting on top. Same scuffs. Same ink on the rim. <em>The flight numbers were different.</em>"</p>
+        <div class="review-byline">D. Lamont · Burns Park, AR</div>
       </div>
 
     </div>
   </div>
 </section>
-
-<!-- ── A24 CINEMATIC INTERSTITIAL — the bold one ──────────── -->
-<div class="a24-cinema" aria-hidden="true">
-  <div class="a24-cinema-copy">
-    <div class="a24-cinema-line">The course<br>at the end<br>of the road</div>
-    <div class="a24-cinema-sub">Five stars. No address. No other rounds logged.</div>
-  </div>
-  <div class="a24-cinema-treeline"></div>
-</div>
 
 <!-- ── FINAL CTA ──────────────────────────────────────────────── -->
 <section>
