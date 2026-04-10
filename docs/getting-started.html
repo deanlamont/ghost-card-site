@@ -29,8 +29,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,20,38,0.9
 .nav-cta{display:flex;gap:12px;align-items:center}
 .btn-g{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:inherit;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
 .btn-g:hover{border-color:var(--lantern);color:var(--lantern)}
-.btn-p{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:inherit;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
-.btn-p:hover{background:var(--lantern);border-color:var(--lantern)}
+.btn-p{display:inline-block;background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:inherit;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;line-height:1.2}
+.btn-p:hover{background:var(--lantern);border-color:var(--lantern);color:#0D1426}
 .ham{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;z-index:210;flex-shrink:0}
 .ham span{display:block;width:100%;height:2px;background:var(--fog);border-radius:2px;transition:all 0.3s ease}
 .ham.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
@@ -159,12 +159,12 @@ footer{background:var(--abyss);border-top:1px solid var(--dusk);padding:60px 2re
 <nav>
   <a href="../index.html" class="nav-logo"><svg viewBox="0 0 20 22.4" width="26" height="29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg><div class="nav-wm"><span class="gp">GHOST</span><span class="cp">CARD</span></div></a>
   <div class="nav-lk"><a href="index.html">Docs</a></div>
-  <div class="nav-cta"><button class="btn-g" onclick="window.location.href='https://app.ghostcard.live'">Login</button><button class="btn-p" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button></div>
+  <div class="nav-cta"><a href="https://app.ghostcard.live/" class="btn-p" aria-label="Launch the Ghost Card app">Launch the App →</a></div>
   <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 <div class="mmenu" id="mm">
   <a href="index.html">Docs</a>
-  <div class="mmenu-cta"><a href="https://app.ghostcard.live" class="mm-g">Login</a><a href="https://app.ghostcard.live" class="mm-p">Sign Up Free</a></div>
+  <div class="mmenu-cta"><a href="https://app.ghostcard.live/" class="mm-p">Launch the App →</a></div>
 </div>
 <header class="doc-hero">
 <svg viewBox="0 0 20 22.4" width="48" height="54" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="doc-hero-ghost"><path d="M10 1.5 C5.3 1.5, 2 5.2, 2 9.8 L2 19 Q4.2 21.2, 6.3 19 Q8.4 16.8, 10 19 Q11.6 21.2, 13.7 19 Q15.8 16.8, 18 19 L18 9.8 C18 5.2, 14.7 1.5, 10 1.5 Z" fill="#F0E8D0"/><ellipse cx="7.4" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/><ellipse cx="12.6" cy="10.5" rx="1.7" ry="2.1" fill="rgba(0,0,0,0.45)"/></svg>

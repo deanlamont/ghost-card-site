@@ -29,8 +29,9 @@
   .nav-cta{display:flex;gap:12px;align-items:center}
   .btn-nav-ghost{background:transparent;border:1px solid var(--dusk);color:var(--fog);padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
   .btn-nav-ghost:hover{border-color:var(--lantern);color:var(--lantern)}
-  .btn-primary{background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+  .btn-primary{display:inline-block;background:var(--harvest);border:1px solid var(--harvest);color:#0D1426;padding:8px 18px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;line-height:1.2}
   .btn-primary:hover{background:var(--lantern);border-color:var(--lantern)}
+  a.btn-primary:hover{color:#0D1426}
 
   /* HERO / 404 SCENE */
   .scene{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 2rem 320px;text-align:center}
@@ -122,8 +123,7 @@
     <a href="/docs/index.html">Docs</a>
   </div>
   <div class="nav-cta">
-    <button class="btn-nav-ghost" onclick="window.location.href='https://app.ghostcard.live'">Login</button>
-    <button class="btn-primary" onclick="window.location.href='https://app.ghostcard.live'">Sign Up</button>
+    <a href="https://app.ghostcard.live/" class="btn-primary" aria-label="Launch the Ghost Card app">Launch the App →</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -136,8 +136,7 @@
   <a href="features.html">Features</a>
   <a href="docs/index.html">Docs</a>
   <div class="mobile-menu-cta">
-    <a href="https://app.ghostcard.live" class="m-ghost">Login</a>
-    <a href="https://app.ghostcard.live" class="m-primary">Sign Up Free</a>
+    <a href="https://app.ghostcard.live/" class="m-primary">Launch the App →</a>
   </div>
 </div>
 
