@@ -252,6 +252,9 @@ a.btn-lg{color:inherit}
     .mobile-login-bar .mlb-signup{
       background:var(--harvest);color:#0D1426;border:none;
     }
+    /* Reserve space at the bottom of the page so the sticky bar
+       doesn't cover the footer tagline. */
+    footer{padding-bottom:calc(40px + 72px + env(safe-area-inset-bottom, 0px))}
   }
 
 /* ── MOBILE ────────────────────────────────────────────────── */
