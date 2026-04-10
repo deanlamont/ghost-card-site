@@ -41,13 +41,14 @@ GitHub: github.com/deanlamont/ghost-card, github.com/deanlamont/ghost-card-site
 These rules are permanent. Never redesign, replace, or "improve" any of these elements.
 
 ### Logo Lockup
-- `FlatGhost` / `SimpleGhost` SVG + "Ghost" (cream, Montserrat weight 200) + "Card" (gold `#cf9120`)
+- `FlatGhost` / `SimpleGhost` SVG + "Ghost" (cream `#EDE9DC`, Inter weight 200) + "Card" (gold `#cf9120`, Inter weight 200)
 - Never replace the ghost SVG component or alter the wordmark typography.
+- Both wordmark halves are solid fills, not outlined/stroked. The "ghostly" look comes from Inter weight 200 at wide letter-spacing (hero: 10px, nav: 4px), not from a stroke.
 
 ### Typography
 - **UI text:** Inter — all body copy, buttons, labels, headers within the app.
-- **Logo only:** Montserrat weight 200 for the "Ghost" wordmark.
-- No other fonts.
+- **Logo wordmark:** Inter weight 200 at wide letter-spacing. No separate display font — the thin weight + tracking does the work.
+- No other fonts anywhere in the marketing site or app.
 
 ### Colors
 - Brand constants: `CYAN`, `LIME`, `GOLD`, `ORANGE`
@@ -66,6 +67,12 @@ These rules are permanent. Never redesign, replace, or "improve" any of these el
 - Horror-themed throughout. Deadpan horror comedy with small-town disc golf energy.
 - "Chet" is the canonical everyman voice archetype for app copy.
 - Solo play is free. App messaging must **never** make solo players feel bad for playing alone.
+
+### Taglines
+Two canonical taglines, each with a distinct role. **Never delete, swap, or "unify" them.**
+- **Product positioning (hero only):** `Real Disc Golf. Video Game Soul.` — used exactly once, in the homepage hero (`index.html` hero-tagline). This is the "what it is" line for disc golf players landing on the site.
+- **Brand hook (social + footer):** `Haunt the Leaderboard` — used in OG meta tags, Twitter card, the rendered `og-image.png`, and the site footer. This is the memorable line used anywhere the site appears outside its own hero (link unfurls, social previews, footer echo).
+- If a new surface needs a tagline, pick the one that matches its function: positioning on-site, brand hook off-site.
 
 ## Features Built (Current State)
 
