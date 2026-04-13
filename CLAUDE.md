@@ -106,8 +106,6 @@ Two canonical taglines, each with a distinct role. **Never delete, swap, or "uni
 ### Friends & Social System
 - **Friends list** — mutual friendships, 20-friend cap, add by scorecard name
 - **Friend requests** — incoming/outgoing management, accept/decline
-- **Activity Feed** — recent rounds from friends (course, score, GC Rating, tap to expand)
-- **Head-to-Head** — auto-surfaces shared courses, compares best scores
 - **Quick-Add to Card** — accepted friends appear as one-tap chips in round setup
 - **Friend Ghost on Leaderboard** — friend's best round appears as cyan ghost row
 
@@ -119,13 +117,14 @@ Two canonical taglines, each with a distinct role. **Never delete, swap, or "uni
 - **FinishedScreen celebration** — "NEW PERSONAL BEST" with holes won/lost/tied breakdown
 
 ### GC Rating & Analytics
-- **Round rating** calculated as: `1000 + (SSA - total_strokes) * 10 / hole_count * 18`
-- **GC Rating hero callout** on FinishedScreen — "THIS ROUND RATED 917", color-coded (gold >=1000 / lime >=980 / cyan below), shows dash when no SSA
-- **RatingSparkline** — SVG chart on History screen, last 20 rated rounds, hover interaction, dashed cyan average line, gold dot for best, x-axis date labels
+- **Field position** displayed on FinishedScreen as `TOP X% OF FIELD` — where the player finished in the 134-pro ghost field
+- Color tiers: ≤10% = LIME ("You are the ghost now.") / ≤25% = CYAN ("They're starting to notice you.") / ≤50% = GOLD ("Respectable. The ghosts agree.") / >50% = MUTED ("They've seen worse. Barely.")
+- `gc_rating` database field currently stores `null` — field position is calculated real-time from `user_position` and `field_size`
+- **Field Position Trend sparkline** — SVG chart on History screen, inverted (UP = better finish), last 20 positioned rounds, shows most recent / best / average TOP % with tier label below
 
 ### Round Share Badge
 - **Canvas-rendered badge** (1080x1920 Instagram story format)
-- Course, date, score, GC Rating, ghost opponents beaten, notable holes (aces/eagles), birdie/par/bogey pills, Horror Mode indicator
+- Course, date, score, field position (TOP X%), ghost opponents beaten, notable holes (aces/eagles), birdie/par/bogey pills, Horror Mode indicator
 - **Web Share API** on mobile → native share sheet; download fallback on desktop
 - Treeline silhouette, scanline overlay, horror aesthetic
 

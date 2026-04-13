@@ -42,7 +42,7 @@ A 50-card card game overlay played on top of a normal disc golf round. Requires 
 
 ## Friends & Feed
 
-Mutual friendships with a 20-friend cap. Add friends by display name on the Profile tab. The Feed tab shows friends' recent rounds (last 30 days, up to 50 entries) with full scorecard expansion. Head-to-Head view compares best scores at shared courses. Friend ghosts appear as cyan rows on the live leaderboard when playing courses friends have played. Quick-add friend chips appear during card setup for multiplayer rounds.
+Mutual friendships with a 20-friend cap. Add friends by display name on the Profile tab. Friend ghosts appear as cyan rows on the live leaderboard when playing courses friends have played. Quick-add friend chips appear during card setup for multiplayer rounds.
 
 ## Personal Best Ghost
 
